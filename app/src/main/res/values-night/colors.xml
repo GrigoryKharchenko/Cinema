@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_color">#1C2028</color>
+    <color name="text_color">#FFFFFF</color>
+    <color name="hint_text_color">#B5B5C9</color>
+    <color name="selected_dot_color">#B5B5C9</color>
+    <color name="default_dot_color">#FFFFFF</color>
+    <color name="splash_color">#272727</color>
+</resources>

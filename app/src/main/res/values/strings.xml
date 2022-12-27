@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Cinema</string>
+
+    <!-- WelcomeFragment-->
+    <string name="welcome_title">Skillcinema</string>
+    <string name="welcome_sKip">Пропустить</string>
+    <string name="welcome_premiere">Узнавай\nо премьерах</string>
+    <string name="welcome_create_collection">Создавай\nколлекции</string>
+    <string name="welcome_share_friends">Делись\nс друзьями</string>
 </resources>
