@@ -8,7 +8,10 @@ import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import kinopoisk.cinema.CinemaApp
 import kinopoisk.cinema.di.module.ActivityModule
+import kinopoisk.cinema.di.module.DispatcherModule
 import kinopoisk.cinema.di.module.FragmentModule
+import kinopoisk.cinema.di.module.RepositoryModule
+import kinopoisk.cinema.di.module.RetrofitModule
 import kinopoisk.cinema.di.module.ViewModelModule
 import javax.inject.Singleton
 
@@ -19,7 +22,10 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ActivityModule::class,
         ViewModelModule::class,
-        FragmentModule::class
+        FragmentModule::class,
+        RetrofitModule::class,
+        RepositoryModule::class,
+        DispatcherModule::class
     ]
 )
 interface AppComponent : AndroidInjector<CinemaApp> {

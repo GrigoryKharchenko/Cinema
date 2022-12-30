@@ -1,10 +1,21 @@
 <resources>
     <string name="app_name">Cinema</string>
+    <string name="unknown">Неизвестно</string>
 
-    <!-- WelcomeFragment-->
+    <!-- WelcomeFragment -->
     <string name="welcome_title">Skillcinema</string>
     <string name="welcome_sKip">Пропустить</string>
     <string name="welcome_premiere">Узнавай\nо премьерах</string>
     <string name="welcome_create_collection">Создавай\nколлекции</string>
     <string name="welcome_share_friends">Делись\nс друзьями</string>
+
+    <!-- HomeFragment -->
+    <string name="home_all">Все</string>
+    <string name="home_show_all">Показать все</string>
+    <string name="home_premieres">Премьеры</string>
+    <string name="home_popular">Популярное</string>
+    <string name="home_top">Топ-250</string>
+    <string name="home_serials">Сериалы</string>
+    <string name="home_random">Рандом</string>
+    <string name="home_error">Извините, что-то пошло не так.\nМы работаем над тем, чтобы\nисправить это как можно скорее.</string>
 </resources>
