@@ -6,4 +6,6 @@
     <color name="selected_dot_color">#B5B5C9</color>
     <color name="default_dot_color">#FFFFFF</color>
     <color name="splash_color">#272727</color>
+    <color name="default_bottom_navigation_bar_icon_color">#B5B5C9</color>
+    <color name="selected_bottom_navigation_bar_icon_color">#3D3BFF</color>
 </resources>

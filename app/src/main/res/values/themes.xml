@@ -19,6 +19,13 @@
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
+    <style name="BottomNavigationBar">
+        <item name="itemRippleColor">@color/selected_bottom_navigation_bar_icon_color</item>
+        <item name="itemIconTint">@color/selector_bottom_navigation_bar</item>
+        <item name="labelVisibilityMode">unlabeled</item>
+        <item name="android:background">@drawable/navigation_bar_background</item>
+    </style>
+
     <style name="WhiteBackgroundLayout">
         <item name="android:background">@color/background_color</item>
     </style>
@@ -35,5 +42,9 @@
 
     <style name="Text.HintGray">
         <item name="android:textColor">@color/hint_text_color</item>
+    </style>
+
+    <style name="Text.HintGray.Ripple">
+        <item name="android:background">@drawable/click_text_ripple_effect</item>
     </style>
 </resources>

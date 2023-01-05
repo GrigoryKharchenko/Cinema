@@ -1,4 +1,4 @@
-package kinopoisk.cinema.presentation.screen.welcome
+package kinopoisk.cinema.presentation.main
 
 import android.content.Context
 import android.os.Bundle
@@ -6,23 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
-import kinopoisk.cinema.databinding.FragmentWelcomeBinding
+import kinopoisk.cinema.databinding.FragmentMainBinding
 import kinopoisk.cinema.extension.replaceFragment
-import kinopoisk.cinema.presentation.main.MainFragment
+import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
+import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
+import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
-class WelcomeFragment : Fragment(), HasAndroidInjector {
+class MainFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    private var _binding: FragmentWelcomeBinding? = null
+    private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -37,22 +39,34 @@ class WelcomeFragment : Fragment(), HasAndroidInjector {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWelcomeBinding.inflate(layoutInflater)
+        _binding = FragmentMainBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
+        replaceFragment<HomeFragment>(R.id.fragmentContainer)
     }
 
     private fun initUi() {
         with(binding) {
-            viewPager.adapter = WelcomeViewPager()
-            TabLayoutMediator(tabLayout, viewPager) { _, _ ->
-            }.attach()
-            tvSkip.setOnClickListener {
-                replaceFragment<MainFragment>(R.id.container)
+            bottomNavigation.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.homePage -> {
+                        replaceFragment<HomeFragment>(R.id.fragmentContainer)
+                        true
+                    }
+                    R.id.searchPage -> {
+                        replaceFragment<SearchFragment>(R.id.fragmentContainer)
+                        true
+                    }
+                    R.id.profilePage -> {
+                        replaceFragment<ProfileFragment>(R.id.fragmentContainer)
+                        true
+                    }
+                    else -> throw IllegalStateException("Bottom Navigation has’t got this fragment")
+                }
             }
         }
     }

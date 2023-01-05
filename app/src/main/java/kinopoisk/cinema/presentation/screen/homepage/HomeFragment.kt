@@ -1,4 +1,4 @@
-package kinopoisk.cinema.presentation.screen.welcome
+package kinopoisk.cinema.presentation.screen.homepage
 
 import android.content.Context
 import android.os.Bundle
@@ -6,24 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.lifecycle.ViewModelProvider
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import kinopoisk.cinema.R
-import kinopoisk.cinema.databinding.FragmentWelcomeBinding
-import kinopoisk.cinema.extension.replaceFragment
-import kinopoisk.cinema.presentation.main.MainFragment
+import kinopoisk.cinema.databinding.FragmentHomeBinding
+import kinopoisk.cinema.di.ViewModelFactory
 import javax.inject.Inject
 
-class WelcomeFragment : Fragment(), HasAndroidInjector {
+class HomeFragment : Fragment(), HasAndroidInjector {
+
+    @Inject
+    lateinit var defaultViewModelFactory: ViewModelFactory
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    private var _binding: FragmentWelcomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, defaultViewModelFactory)[HomeViewModel::class.java]
+    }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
@@ -37,24 +42,12 @@ class WelcomeFragment : Fragment(), HasAndroidInjector {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWelcomeBinding.inflate(layoutInflater)
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUi()
-    }
-
-    private fun initUi() {
-        with(binding) {
-            viewPager.adapter = WelcomeViewPager()
-            TabLayoutMediator(tabLayout, viewPager) { _, _ ->
-            }.attach()
-            tvSkip.setOnClickListener {
-                replaceFragment<MainFragment>(R.id.container)
-            }
-        }
     }
 
     override fun onDestroyView() {
