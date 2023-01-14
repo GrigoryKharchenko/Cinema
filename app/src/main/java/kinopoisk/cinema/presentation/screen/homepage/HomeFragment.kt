@@ -13,9 +13,11 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
+import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentHomeBinding
 import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.launchWhenStarted
+import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
 import kinopoisk.cinema.presentation.screen.homepage.allcategory.AllCategoryAdapter
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -35,7 +37,11 @@ class HomeFragment : Fragment(), HasAndroidInjector {
         ViewModelProvider(this, defaultViewModelFactory)[HomeViewModel::class.java]
     }
 
-    private val adapter by lazy { AllCategoryAdapter() }
+    private val adapter by lazy {
+        AllCategoryAdapter(
+            onFilmClick = ::openFilmDetail
+        )
+    }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
@@ -67,7 +73,7 @@ class HomeFragment : Fragment(), HasAndroidInjector {
 
     private fun initViewModel() {
         with(viewModel) {
-            uiModelFlow.onEach(::handleUiState)
+            uiStateFlow.onEach(::handleUiState)
                 .launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
         }
     }
@@ -80,6 +86,7 @@ class HomeFragment : Fragment(), HasAndroidInjector {
                     tvError.isVisible = true
                     ivTitle.isVisible = false
                     rvCertainCategory.isVisible = false
+                    flProgress.isVisible = false
                 }
                 is HomeUiState.Loading -> flProgress.isVisible = true
                 is HomeUiState.Success -> {
@@ -90,7 +97,15 @@ class HomeFragment : Fragment(), HasAndroidInjector {
         }
     }
 
+    private fun openFilmDetail(filmId: Int) {
+        parentFragmentManager.beginTransaction()
+            .addToBackStack(FilmDetailFragment::class.java.simpleName)
+            .replace(R.id.fragmentContainer, FilmDetailFragment.newInstance(filmId))
+            .commit()
+    }
+
     override fun onDestroyView() {
+        binding.rvCertainCategory.adapter = null
         super.onDestroyView()
         _binding = null
     }

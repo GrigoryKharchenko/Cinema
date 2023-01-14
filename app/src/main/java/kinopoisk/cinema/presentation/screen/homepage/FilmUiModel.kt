@@ -11,6 +11,7 @@ data class CategoryUiModel(
 sealed interface TypeCardCategoryUiModel {
 
     data class FilmUiModel(
+        val id:Int,
         val poster: String,
         val rating: String,
         val isViewed: Boolean,

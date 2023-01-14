@@ -11,11 +11,9 @@ class AllCategoryFilmView constructor(
     context: Context,
 ) : LinearLayout(context) {
 
-    private val binding = ItemAllCategoryBinding.bind(inflate(context, R.layout.item_all_category, this))
-    private val adapter = TypeCardCategoryAdapter()
-
-    fun initUi(categoryUiModel: CategoryUiModel) {
-        with(binding) {
+    fun initUi(categoryUiModel: CategoryUiModel, onFilmClick: (Int) -> Unit) {
+        val adapter = TypeCardCategoryAdapter(onFilmClick)
+        ItemAllCategoryBinding.bind(inflate(context, R.layout.item_all_category, this)).apply {
             tvCategory.text = context.getString(categoryUiModel.category)
             rvCertainCategory.adapter = adapter
             adapter.submitList(categoryUiModel.films)

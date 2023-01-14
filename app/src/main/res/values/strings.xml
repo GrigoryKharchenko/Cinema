@@ -18,4 +18,13 @@
     <string name="home_serials">Сериалы</string>
     <string name="home_random">Рандом</string>
     <string name="home_error">Извините, что-то пошло не так.\nМы работаем над тем, чтобы\nисправить это как можно скорее.</string>
+
+    <!-- FilmDetailFragment -->
+    <string name="film_detail_name_film">%s %s</string>
+    <string name="film_detail_year_film">%s, %s</string>
+    <string name="film_detail_country_film">%s, %s, %s</string>
+    <string name="film_detail_filmed">В фильме снимались</string>
+    <string name="film_detail_film_worked">Над фильмом работали</string>
+    <string name="film_detail_gallery">Галерея</string>
+    <string name="film_detail_similar_film">Похожие фильмы</string>
 </resources>

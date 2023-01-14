@@ -10,6 +10,8 @@
     <color name="selected_dot_color">#121616</color>
     <color name="default_dot_color">#D9D9D9</color>
     <color name="splash_color">#3D3BFF</color>
+    <color name="start_black_gradient">#1B1B1B</color>
+    <color name="end_black_gradient">#001B1B1B</color>
     <color name="default_bottom_navigation_bar_icon_color">#272727</color>
     <color name="selected_bottom_navigation_bar_icon_color">#3D3BFF</color>
     <color name="gray_text_color">#838390</color>

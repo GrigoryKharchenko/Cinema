@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivPhotoActor"
+        android:layout_width="48dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/preview_background" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNameActor"
+        style="@style/Text.Black"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/tvActorCharacter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPhotoActor"
+        app:layout_constraintTop_toTopOf="@id/ivPhotoActor"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Владимир Оноховaaaaa" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvActorCharacter"
+        style="@style/Text.HintGray.12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/ivPhotoActor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPhotoActor"
+        app:layout_constraintTop_toBottomOf="@id/tvNameActor"
+        tools:text="Лешfffffffccccкаdddddddddddddddddddddd" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

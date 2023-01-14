@@ -7,20 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import kinopoisk.cinema.presentation.customview.AllCategoryFilmView
 import kinopoisk.cinema.presentation.screen.homepage.CategoryUiModel
 
-class AllCategoryAdapter : ListAdapter<CategoryUiModel, AllCategoryViewHolder>(AllCategoryDiffUtil()) {
+class AllCategoryAdapter(
+    private val onFilmClick: (Int) -> Unit
+) : ListAdapter<CategoryUiModel, AllCategoryViewHolder>(AllCategoryDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllCategoryViewHolder =
         AllCategoryViewHolder(AllCategoryFilmView(parent.context))
 
     override fun onBindViewHolder(holder: AllCategoryViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onFilmClick)
 }
 
 class AllCategoryViewHolder(private val allCategoryFilmView: AllCategoryFilmView) :
     RecyclerView.ViewHolder(allCategoryFilmView.rootView) {
 
-    fun bind(categoryUiModel: CategoryUiModel) {
-        allCategoryFilmView.initUi(categoryUiModel)
+    fun bind(categoryUiModel: CategoryUiModel, onFilmClick: (Int) -> Unit) {
+        allCategoryFilmView.initUi(categoryUiModel, onFilmClick)
     }
 }
 

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        style="@style/TransparentBackGround"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:collapsedTitleTextAppearance="@style/WhiteTextCollapsingToolbar"
+            app:expandedTitleTextAppearance="@style/TransparentTextCollapsingToolbar"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/ivPosterFilm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/il_welcome_page_1" />
+
+                <View
+                    android:id="@+id/vPosterGradient"
+                    style="@style/BlackGradientBackGround"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_26"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    app:layout_constraintBottom_toTopOf="@id/tvNameFilm"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@drawable/ic_welcome_title" />
+
+                <ImageView
+                    android:id="@+id/ivLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_26"
+                    android:layout_marginBottom="@dimen/dp_26"
+                    android:src="@drawable/ic_like"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ivFavorites"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/ivFavorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_26"
+                    android:src="@drawable/ic_favorites"
+                    app:layout_constraintBottom_toBottomOf="@id/ivLike"
+                    app:layout_constraintEnd_toStartOf="@id/ivDontViewed"
+                    app:layout_constraintStart_toEndOf="@id/ivLike" />
+
+                <ImageView
+                    android:id="@+id/ivDontViewed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_26"
+                    android:src="@drawable/ic_dont_viewed"
+                    app:layout_constraintBottom_toBottomOf="@id/ivLike"
+                    app:layout_constraintEnd_toStartOf="@id/ivShare"
+                    app:layout_constraintStart_toEndOf="@id/ivFavorites" />
+
+                <ImageView
+                    android:id="@+id/ivShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_26"
+                    android:src="@drawable/ic_share"
+                    app:layout_constraintBottom_toBottomOf="@id/ivLike"
+                    app:layout_constraintEnd_toStartOf="@id/ivExtraMenu"
+                    app:layout_constraintStart_toEndOf="@id/ivDontViewed" />
+
+                <ImageView
+                    android:id="@+id/ivExtraMenu"
+                    android:layout_width="@dimen/dp_16"
+                    android:layout_height="@dimen/dp_16"
+                    android:layout_marginBottom="@dimen/dp_26"
+                    android:src="@drawable/ic_extra_menu"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivShare" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvNameFilm"
+                    style="@style/Text.HintGray.12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_16"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@id/ivDontViewed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="6.4 Китобой" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_left" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/registrationLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvShortDescription"
+                style="@style/Text.Black.Bold.16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="fkfkfkfkkfkfkfkfkfkfkfkfkfkfkfkfk" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:ellipsize="end"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:maxLines="5"
+                android:paddingHorizontal="@dimen/dp_26"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvShortDescription"
+                tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvActor"
+                style="@style/Text.Black.Bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_26"
+                android:text="@string/film_detail_filmed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCountActor"
+                style="@style/Text.Blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_26"
+                android:drawableEnd="@drawable/ic_next_arrow"
+                android:drawablePadding="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="@id/tvActor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvActor"
+                tools:text="27" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActors"
+                style="@style/HorizontalRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_26"
+                android:paddingStart="@dimen/dp_26"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvActor"
+                app:spanCount="4"
+                tools:listitem="@layout/item_film_crew" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFilmWorked"
+                style="@style/Text.Black.Bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_26"
+                android:text="@string/film_detail_film_worked"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvActors" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCountFilmWorked"
+                style="@style/Text.Blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_26"
+                android:drawableEnd="@drawable/ic_next_arrow"
+                android:drawablePadding="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="@id/tvFilmWorked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvFilmWorked"
+                tools:text="27" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFilmCrew"
+                style="@style/HorizontalRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_26"
+                android:paddingStart="@dimen/dp_26"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvFilmWorked"
+                app:spanCount="2"
+                tools:listitem="@layout/item_film_crew" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGallery"
+                style="@style/Text.Black.Bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_26"
+                android:text="@string/film_detail_gallery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvFilmCrew" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCountGallery"
+                style="@style/Text.Blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_26"
+                android:drawableEnd="@drawable/ic_next_arrow"
+                android:drawablePadding="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="@id/tvGallery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvGallery"
+                tools:text="27" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGallery"
+                style="@style/HorizontalRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_26"
+                android:paddingStart="@dimen/dp_26"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGallery"
+                tools:listitem="@layout/item_gallery" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSimilarFilm"
+                style="@style/Text.Black.Bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_26"
+                android:text="@string/film_detail_similar_film"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvGallery" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCountSimilarFilm"
+                style="@style/Text.Blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_26"
+                android:drawableEnd="@drawable/ic_next_arrow"
+                android:drawablePadding="@dimen/dp_8"
+                app:layout_constraintBottom_toBottomOf="@id/tvSimilarFilm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvSimilarFilm"
+                tools:text="27" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSimilarFilm"
+                style="@style/HorizontalRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_26"
+                android:layout_marginBottom="@dimen/dp_26"
+                android:paddingStart="@dimen/dp_26"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSimilarFilm"
+                tools:listitem="@layout/item_certain_category" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/flProgress"
+        style="@style/ProgressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+    </FrameLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvError"
+        style="@style/Text.Black.18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_error"
+        android:text="@string/home_error"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

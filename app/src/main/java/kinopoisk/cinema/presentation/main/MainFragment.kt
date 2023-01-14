@@ -16,7 +16,6 @@ import kinopoisk.cinema.extension.replaceFragment
 import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class MainFragment : Fragment(), HasAndroidInjector {
@@ -53,20 +52,12 @@ class MainFragment : Fragment(), HasAndroidInjector {
         with(binding) {
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.homePage -> {
-                        replaceFragment<HomeFragment>(R.id.fragmentContainer)
-                        true
-                    }
-                    R.id.searchPage -> {
-                        replaceFragment<SearchFragment>(R.id.fragmentContainer)
-                        true
-                    }
-                    R.id.profilePage -> {
-                        replaceFragment<ProfileFragment>(R.id.fragmentContainer)
-                        true
-                    }
+                    R.id.homePage -> replaceFragment<HomeFragment>(R.id.fragmentContainer)
+                    R.id.searchPage -> replaceFragment<SearchFragment>(R.id.fragmentContainer)
+                    R.id.profilePage -> replaceFragment<ProfileFragment>(R.id.fragmentContainer)
                     else -> throw IllegalStateException("Bottom Navigation has’t got this fragment")
                 }
+                true
             }
         }
     }
