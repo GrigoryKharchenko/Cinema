@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivPreview"
+        style="@style/NullBackgroundLayout"
+        android:layout_width="@dimen/dp_110"
+        android:layout_height="@dimen/dp_156"
+        android:layout_marginEnd="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvRating"
+        style="@style/Text.White.BlueBackground.6"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginEnd="@dimen/dp_6"
+        android:gravity="center"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/ivPreview"
+        app:layout_constraintTop_toTopOf="@id/ivPreview"
+        tools:text="6.8" />
+
+    <ImageView
+        android:id="@+id/ivViewed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_6"
+        android:layout_marginBottom="@dimen/dp_6"
+        android:src="@drawable/ic_viewed"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/ivPreview"
+        app:layout_constraintEnd_toEndOf="@id/ivPreview" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvName"
+        style="@style/Text.Black"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_8"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/ivPreview"
+        app:layout_constraintStart_toStartOf="@id/ivPreview"
+        app:layout_constraintTop_toBottomOf="@id/ivPreview"
+        tools:text="Name filmcccccccccccccc" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvGenre"
+        style="@style/Text.Gray.12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_2"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/tvName"
+        app:layout_constraintStart_toStartOf="@id/tvName"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        tools:text="Name filmcccccccccccccc" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

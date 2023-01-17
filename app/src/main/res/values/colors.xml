@@ -3,11 +3,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_color">#FFFFFFFF</color>
-    <color name="text_color">#272727</color>
+    <color name="black_text_color">#272727</color>
+    <color name="white_text_color">#FFFFFFFF</color>
+    <color name="blue_text_color">#3D3BFF</color>
     <color name="hint_text_color">#B5B5C9</color>
     <color name="selected_dot_color">#121616</color>
     <color name="default_dot_color">#D9D9D9</color>
     <color name="splash_color">#3D3BFF</color>
     <color name="default_bottom_navigation_bar_icon_color">#272727</color>
     <color name="selected_bottom_navigation_bar_icon_color">#3D3BFF</color>
+    <color name="gray_text_color">#838390</color>
+    <color name="gray_alfa_30">#4DA6A6A6</color>
 </resources>

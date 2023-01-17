@@ -30,14 +30,62 @@
         <item name="android:background">@color/background_color</item>
     </style>
 
+    <style name="PreviewBackgroundLayout">
+        <item name="android:background">@drawable/preview_background</item>
+    </style>
+
+    <style name="NullBackgroundLayout">
+        <item name="android:background">@null</item>
+    </style>
+
     <style name="Text" />
 
+    <style name="Text.White">
+        <item name="android:textColor">@color/white_text_color</item>
+    </style>
+
+    <style name="Text.White.BlueBackground">
+        <item name="android:background">@drawable/rating_background</item>
+    </style>
+
+    <style name="Text.White.BlueBackground.6">
+        <item name="android:textSize">@dimen/sp_6</item>
+    </style>
+
     <style name="Text.Black">
-        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColor">@color/black_text_color</item>
+    </style>
+
+    <style name="Text.Black.12">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="Text.Black.18">
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
+    <style name="Text.Blue">
+        <item name="android:textColor">@color/blue_text_color</item>
+    </style>
+
+    <style name="Text.Black.Bold">
+        <item name="android:fontFamily">sans-serif-black</item>
     </style>
 
     <style name="Text.Black.32">
         <item name="android:textSize">@dimen/sp_32</item>
+    </style>
+
+    <style name="Text.Black.Bold.18">
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
+    <style name="Text.Gray">
+        <item name="android:textColor">@color/gray_text_color</item>
+    </style>
+
+    <style name="Text.Gray.12">
+        <item name="android:textSize">@dimen/sp_12</item>
     </style>
 
     <style name="Text.HintGray">
@@ -46,5 +94,20 @@
 
     <style name="Text.HintGray.Ripple">
         <item name="android:background">@drawable/click_text_ripple_effect</item>
+    </style>
+
+    <style name="FabWhite">
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:src">@drawable/ic_arrow_right</item>
+        <item name="android:gravity">center</item>
+        <item name="borderWidth">0dp</item>
+        <item name="fabSize">mini</item>
+        <item name="tint">@color/blue_text_color</item>
+    </style>
+
+    <style name="ProgressBarStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@color/gray_alfa_30</item>
     </style>
 </resources>
