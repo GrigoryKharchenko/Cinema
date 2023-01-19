@@ -19,6 +19,7 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun getCategories(): List<CategoryUiModel> =
         coroutineScope {
+            // TODO: а зачем тут Random четыре раза создается?
             val firstRandomCountry = (Random().nextInt(ApiConstants.MAX_COUNTRIES) + 1).toString()
             val firstRandomGenre = (Random().nextInt(ApiConstants.MAX_GENRES) + 1).toString()
             val secondRandomCountry = (Random().nextInt(ApiConstants.MAX_COUNTRIES) + 1).toString()
@@ -45,6 +46,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ).mapToDifferentFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
             }
             val serial = async {
+                // TODO: plus(TypeCardCategoryUiModel.FooterUiModel()) абсолютно во всех запросах. может куда-то вынести чтоб не копировать?
                 kinopoiskApi.getSerial().mapToDifferentFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
             }
 

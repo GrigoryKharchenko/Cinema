@@ -23,9 +23,11 @@ class SearchFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+    // TODO оба приватные, зачем два?
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
+    // TODO Property "viewModel" is never used
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelFactory)[SearchViewModel::class.java]
     }
@@ -46,6 +48,7 @@ class SearchFragment : Fragment(), HasAndroidInjector {
         return binding.root
     }
 
+    // TODO Redundant overriding method
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

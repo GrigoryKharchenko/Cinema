@@ -8,6 +8,7 @@ import retrofit2.http.Query
 
 interface KinopoiskApi {
 
+    // TODO: а почему не интерцептор с хедером? чтоб не копировать каждый раз
     @GET("/api/v2.2/films/premieres?year=2023&month=FEBRUARY")
     @Headers("X-API-KEY:${BuildConfig.API_KEY}")
     suspend fun getPremieres(): FilmsResponse

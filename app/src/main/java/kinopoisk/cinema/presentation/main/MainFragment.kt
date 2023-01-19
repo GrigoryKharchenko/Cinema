@@ -49,6 +49,7 @@ class MainFragment : Fragment(), HasAndroidInjector {
         replaceFragment<HomeFragment>(R.id.fragmentContainer)
     }
 
+    // TODO: см. WelcomeFragment
     private fun initUi() {
         with(binding) {
             bottomNavigation.setOnItemSelectedListener {

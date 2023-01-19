@@ -59,6 +59,7 @@ class HomeFragment : Fragment(), HasAndroidInjector {
         initViewModel()
     }
 
+    // TODO: см. WelcomeFragment
     private fun initUi() {
         with(binding) {
             rvCertainCategory.adapter = adapter
@@ -67,6 +68,7 @@ class HomeFragment : Fragment(), HasAndroidInjector {
 
     private fun initViewModel() {
         with(viewModel) {
+            // TODO: каждый раз так писать будешь? может покороче екстеншн какой сделать?
             uiModelFlow.onEach(::handleUiState)
                 .launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
         }
@@ -75,6 +77,8 @@ class HomeFragment : Fragment(), HasAndroidInjector {
     private fun handleUiState(homeUiState: HomeUiState) {
         with(binding) {
             when (homeUiState) {
+                //  TODO: ошибка прогресс не должна скрывать? у тебя прогрессбар не остается поверх сообщения об ошибке?
+                //    выглядит как будто тут when не очень то и нужен
                 is HomeUiState.Error -> {
                     ivError.isVisible = true
                     tvError.isVisible = true

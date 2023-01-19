@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--  TODO: я правильно понял что тут текст картинокой?
+        layout_width="0dp" а по горизонтали только один констрейнт. может нужен layout_width="wrap_content"?
+        текствьюхи везде из материала, а ImageView даже не из аппкомпата -->
     <ImageView
         android:id="@+id/ivTitle"
         android:layout_width="0dp"
@@ -15,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--  TODO: layout_constraintStart_to***Of? или может layout_width="wrap_content"? -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvSkip"
         style="@style/Text.HintGray.Ripple"
@@ -36,6 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--  TODO: дизайны есть под это? покажешь? -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         style="@style/WhiteBackgroundLayout"

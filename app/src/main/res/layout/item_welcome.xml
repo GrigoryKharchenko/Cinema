@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--  TODO: текствьюхи везде из материала, а ImageView даже не из аппкомпата -->
     <ImageView
         android:id="@+id/image"
         android:layout_width="0dp"

@@ -5,6 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!--  TODO: текствьюхи везде из материала, а ImageView даже не из аппкомпата
+            ширина конкретно задана, layout_constraintEnd_toEndOf не обязательно -->
     <ImageView
         android:id="@+id/ivPreview"
         style="@style/NullBackgroundLayout"
@@ -28,6 +30,7 @@
         app:layout_constraintTop_toTopOf="@id/ivPreview"
         tools:text="6.8" />
 
+    <!--  TODO: текствьюхи везде из материала, а ImageView даже не из аппкомпата -->
     <ImageView
         android:id="@+id/ivViewed"
         android:layout_width="wrap_content"
