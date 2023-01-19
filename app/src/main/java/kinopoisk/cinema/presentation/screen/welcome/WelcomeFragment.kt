@@ -22,6 +22,7 @@ class WelcomeFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+    // TODO: оба приватные, зачем два?
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
 
@@ -46,6 +47,7 @@ class WelcomeFragment : Fragment(), HasAndroidInjector {
         initUi()
     }
 
+    // TODO: такая функция планируется в каждом фрагменте? может вынести в общий асбтрактный класс? заодно и  androidInjector туда вытащить и onAttach? возможно и биндинг туда как-то затащить можно, чтобы не копировать целиком всё как сейчас сделано во всех фрагментах?....
     private fun initUi() {
         with(binding) {
             viewPager.adapter = WelcomeViewPager()

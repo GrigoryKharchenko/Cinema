@@ -22,7 +22,9 @@ class HomeViewModel @Inject constructor(
         getCategories()
     }
 
+    // TODO: а если у тебя этот метод апишки будет в нескольких местах вызываться ты везде будешь runCatching тыкать? может это в общую реализацию вынести?
     private fun getCategories() {
+        // TODO: в чем суть сего действа если ты даже название оставил как у стандартного диспатчера?
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 categoryRepository.getCategories()

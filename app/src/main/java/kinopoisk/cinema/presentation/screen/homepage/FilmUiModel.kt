@@ -15,6 +15,7 @@ sealed interface TypeCardCategoryUiModel {
         val rating: String,
         val isViewed: Boolean,
         val name: String,
+        // TODO: жанр обязательное поле в апишке. почему на юае оно стало необязательным?
         val genre: String?,
         val isVisibleRating: Boolean,
     ) : TypeCardCategoryUiModel

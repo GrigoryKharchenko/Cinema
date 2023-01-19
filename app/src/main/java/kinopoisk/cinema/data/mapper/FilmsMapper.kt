@@ -17,6 +17,8 @@ fun FilmResponse.mapToFilmModel(): TypeCardCategoryUiModel =
         rating = ratingKinopoisk ?: rating ?: "",
         isViewed = false,
         name = nameRu ?: nameEn ?: nameOriginal,
+        // TODO: так может екстеншн сразу на String? повесить?
+        //  жанр точно может быть пустым?
         genre = genre.firstOrNull()?.genre?.firstCharToUpperCase(),
         isVisibleRating = ratingKinopoisk?.isNotEmpty() ?: rating?.isNotEmpty() ?: false,
     )

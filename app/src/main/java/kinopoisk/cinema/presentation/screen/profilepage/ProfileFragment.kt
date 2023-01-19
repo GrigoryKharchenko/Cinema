@@ -23,9 +23,11 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+    // TODO оба приватные, зачем два?
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    // TODO Property "viewModel" is never used
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelFactory)[ProfileViewModel::class.java]
     }
@@ -46,6 +48,7 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
         return binding.root
     }
 
+    // TODO Redundant overriding method
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
