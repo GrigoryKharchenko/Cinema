@@ -1,6 +1,6 @@
 package kinopoisk.cinema.presentation.screen.filmdetail
 
-enum class TypeFilmCrew {
+enum class TypeStuff {
     WRITER,
     OPERATOR,
     EDITOR,
@@ -12,5 +12,5 @@ enum class TypeFilmCrew {
     PRODUCER,
     ACTOR,
     VOICE_DIRECTOR,
-    UNKNOWN
+    UNKNOWN,
 }

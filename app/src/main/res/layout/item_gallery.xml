@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/ivGallery"
-        android:layout_width="192dp"
-        android:layout_height="108dp"
+        android:layout_width="@dimen/dp_192"
+        android:layout_height="@dimen/dp_108"
         android:layout_marginEnd="@dimen/dp_8"
         tools:src="@drawable/preview_background" />
 

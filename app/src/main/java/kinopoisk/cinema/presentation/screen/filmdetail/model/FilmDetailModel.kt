@@ -1,6 +1,6 @@
-package kinopoisk.cinema.presentation.screen.filmdetail
+package kinopoisk.cinema.presentation.screen.filmdetail.model
 
-data class FilmDetailUiModel(
+data class FilmDetailModel(
     val id: Int,
     val poster: String,
     val logo: String,

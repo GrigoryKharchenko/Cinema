@@ -1,18 +1,13 @@
 package kinopoisk.cinema.presentation.screen.filmdetail
 
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.filmcrew.FilmCrewUiModel
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryUiModel
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarUiModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.ErrorUiModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 
 sealed interface FilmDetailUiState {
 
-    object Error : FilmDetailUiState
+    data class Error(val errors: ErrorUiModel) : FilmDetailUiState
     object Loading : FilmDetailUiState
     data class Success(
-        val detailFilm: FilmDetailUiModel,
-        val actor: List<FilmCrewUiModel>,
-        val gallery: List<GalleryUiModel>,
-        val similar: List<SimilarUiModel>,
-        val filmCrew: List<FilmCrewUiModel>
+        val filmDetailUiModel: FilmDetailUiModel
     ) : FilmDetailUiState
 }

@@ -8,8 +8,9 @@ import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.ItemGalleryBinding
 import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
+import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 
-class GalleryAdapter : ListAdapter<GalleryUiModel, GalleryViewHolder>(GalleryDiffUtil()) {
+class GalleryAdapter : ListAdapter<GalleryModel, GalleryViewHolder>(GalleryDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder =
         GalleryViewHolder(ItemGalleryBinding.bind(parent.inflate(R.layout.item_gallery)))
 
@@ -18,18 +19,16 @@ class GalleryAdapter : ListAdapter<GalleryUiModel, GalleryViewHolder>(GalleryDif
 }
 
 class GalleryViewHolder(private val binding: ItemGalleryBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(galleryUiModel: GalleryUiModel) {
-        with(binding) {
-            ivGallery.loadCropImage(galleryUiModel.image)
-        }
+    fun bind(galleryModel: GalleryModel) {
+        binding.ivGallery.loadCropImage(galleryModel.image)
     }
 }
 
-class GalleryDiffUtil : DiffUtil.ItemCallback<GalleryUiModel>() {
-    override fun areItemsTheSame(oldItem: GalleryUiModel, newItem: GalleryUiModel): Boolean =
+class GalleryDiffUtil : DiffUtil.ItemCallback<GalleryModel>() {
+    override fun areItemsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean =
         oldItem.image == newItem.image
 
-    override fun areContentsTheSame(oldItem: GalleryUiModel, newItem: GalleryUiModel): Boolean =
+    override fun areContentsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean =
         oldItem == newItem
 
 }

@@ -8,7 +8,7 @@ import kinopoisk.cinema.presentation.customview.AllCategoryFilmView
 import kinopoisk.cinema.presentation.screen.homepage.CategoryUiModel
 
 class AllCategoryAdapter(
-    private val onFilmClick: (Int) -> Unit
+    private val onFilmClick: (Int) -> Unit,
 ) : ListAdapter<CategoryUiModel, AllCategoryViewHolder>(AllCategoryDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllCategoryViewHolder =

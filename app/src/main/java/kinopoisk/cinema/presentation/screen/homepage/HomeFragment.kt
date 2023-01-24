@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import dagger.android.AndroidInjector
@@ -16,6 +18,7 @@ import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentHomeBinding
 import kinopoisk.cinema.di.ViewModelFactory
+import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
 import kinopoisk.cinema.presentation.screen.homepage.allcategory.AllCategoryAdapter
@@ -98,10 +101,11 @@ class HomeFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun openFilmDetail(filmId: Int) {
-        parentFragmentManager.beginTransaction()
-            .addToBackStack(FilmDetailFragment::class.java.simpleName)
-            .replace(R.id.fragmentContainer, FilmDetailFragment.newInstance(filmId))
-            .commit()
+        parentFragmentManager.commit {
+            val bundle = bundleOf()
+            bundle.putInt(FilmDetailFragment.KEY_FILM, filmId)
+            addFragmentWithArgs<FilmDetailFragment>(R.id.fragmentContainer, args = bundle)
+        }
     }
 
     override fun onDestroyView() {

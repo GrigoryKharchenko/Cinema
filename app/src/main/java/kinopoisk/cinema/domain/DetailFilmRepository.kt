@@ -1,20 +1,20 @@
 package kinopoisk.cinema.domain
 
-import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailUiModel
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.filmcrew.FilmCrewUiModel
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryUiModel
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarUiModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.StuffModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
 
 interface DetailFilmRepository {
 
-    suspend fun getFilmDetail(id: Int): FilmDetailUiModel
+    suspend fun getFilmDetail(id: Int): FilmDetailModel
 
-    suspend fun getActor(id: Int): List<FilmCrewUiModel>
+    suspend fun getActor(id: Int): List<StuffModel>
 
-    suspend fun getGallery(id: Int): List<GalleryUiModel>
+    suspend fun getGallery(id: Int): List<GalleryModel>
 
-    suspend fun getSimilar(id: Int): List<SimilarUiModel>
+    suspend fun getSimilar(id: Int): List<SimilarFilmModel>
 
-    suspend fun getFilmCrew(id: Int): List<FilmCrewUiModel>
+    suspend fun getStuff(id: Int): List<StuffModel>
 
 }

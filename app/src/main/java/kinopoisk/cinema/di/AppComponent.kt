@@ -10,6 +10,7 @@ import kinopoisk.cinema.CinemaApp
 import kinopoisk.cinema.di.module.ActivityModule
 import kinopoisk.cinema.di.module.DispatcherModule
 import kinopoisk.cinema.di.module.FragmentModule
+import kinopoisk.cinema.di.module.InterceptorModule
 import kinopoisk.cinema.di.module.RepositoryModule
 import kinopoisk.cinema.di.module.RetrofitModule
 import kinopoisk.cinema.di.module.ViewModelModule
@@ -25,7 +26,8 @@ import javax.inject.Singleton
         FragmentModule::class,
         RetrofitModule::class,
         RepositoryModule::class,
-        DispatcherModule::class
+        DispatcherModule::class,
+        InterceptorModule::class,
     ]
 )
 interface AppComponent : AndroidInjector<CinemaApp> {
