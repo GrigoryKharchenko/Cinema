@@ -55,7 +55,7 @@ class FilmDetailViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 detailFilmRepository.getActor(id).filter { actor ->
-                    actor.profession == TypeStaff.ACTOR.name
+                    actor.profession == TypeStaff.ACTOR
                 }
             }.onSuccess { actor ->
                 _uiStateFlow.update { uiState ->
@@ -84,7 +84,7 @@ class FilmDetailViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 detailFilmRepository.getStaff(id).filter { actor ->
-                    actor.profession != TypeStaff.ACTOR.name
+                    actor.profession != TypeStaff.ACTOR
                 }
             }.onSuccess { staff ->
                 _uiStateFlow.update { uiState ->

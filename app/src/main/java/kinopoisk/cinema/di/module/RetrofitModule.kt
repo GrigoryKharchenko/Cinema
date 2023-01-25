@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import kinopoisk.cinema.BuildConfig
 import kinopoisk.cinema.data.network.KinopoiskApi
-import kinopoisk.cinema.domain.InterceptorKey
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -35,14 +35,12 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideHttpClient(
-        interceptorKey: InterceptorKey,
+        apiKeyInterceptor: Interceptor,
     ): OkHttpClient {
         val build = OkHttpClient.Builder()
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor { chain ->
-                interceptorKey.addInterceptorKey(chain)
-            }
+            .addInterceptor(apiKeyInterceptor)
         if (BuildConfig.DEBUG) {
             build.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         }

@@ -7,6 +7,7 @@ import kinopoisk.cinema.data.network.response.SimilarResponse
 import kinopoisk.cinema.data.network.response.SimilarsResponse
 import kinopoisk.cinema.data.network.response.StaffResponse
 import kinopoisk.cinema.extension.firstCharToUpperCase
+import kinopoisk.cinema.presentation.screen.filmdetail.TypeStaff
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
