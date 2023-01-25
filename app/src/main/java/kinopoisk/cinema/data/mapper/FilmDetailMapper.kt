@@ -59,7 +59,7 @@ private fun DetailFilmResponse.mapToDetailFilm(): String {
     val genres = genres.joinToString { it.genre.firstCharToUpperCase() }
     val name = nameRu ?: nameEn ?: nameOriginal
     val duration = if (duration != null) "$duration мин" else null
-    val ratingAge = ratingAgeLimits ?: ratingMpaa ?: ""
+    val ratingAge = ratingAgeLimits ?: ratingMpaa
 
     val firstPart = listOfNotNull(rating, name).joinToString(" ")
     val secondPart = listOfNotNull(released, genres).joinToString()

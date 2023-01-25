@@ -104,6 +104,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             val actor = filmDetailUiState.filmDetailUiModel.actor
             flProgress.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleProgress
             tvError.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTextError
+            nestedScroll.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleNestedScroll
+            appBar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleAppBar
             tvTitleActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleActor
             tvCountActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountActor
             tvTitleStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleStaff
