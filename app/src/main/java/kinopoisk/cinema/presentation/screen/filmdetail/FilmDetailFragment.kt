@@ -18,6 +18,7 @@ import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
+import kinopoisk.cinema.extension.toStringOrEmpty
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
@@ -90,12 +91,11 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private fun handleUiState(filmDetailUiState: FilmDetailUiState) {
         when (filmDetailUiState) {
             FilmDetailUiState.Loading -> binding.flProgress.isVisible = true
-            is FilmDetailUiState.Success -> successResponse(filmDetailUiState)
-            is FilmDetailUiState.Error -> failureResponse(filmDetailUiState)
+            is FilmDetailUiState.Content -> updateUiState(filmDetailUiState)
         }
     }
 
-    private fun successResponse(filmDetailUiState: FilmDetailUiState.Success) {
+    private fun updateUiState(filmDetailUiState: FilmDetailUiState.Content) {
         with(binding) {
             val gallery = filmDetailUiState.filmDetailUiModel.gallery
             val similar = filmDetailUiState.filmDetailUiModel.similar
@@ -106,18 +106,18 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             tvError.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTextError
             nestedScroll.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleNestedScroll
             appBar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleAppBar
-            tvTitleActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleActor
-            tvCountActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountActor
-            tvTitleStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleStaff
-            tvCountStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountStaff
-            tvTitleGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleGallery
-            tvCountGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountGallery
-            tvTitleSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleSimilar
-            tvCountSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountSimilar
-            tvCountGallery.text = gallery.size.toString()
-            tvCountSimilarFilm.text = similar.size.toString()
-            tvCountStaff.text = staff.size.toString()
-            tvCountActor.text = actor.size.toString()
+            tvTitleActor.isVisible = filmDetailUiState.filmDetailUiModel.isActorsVisible
+            tvCountActor.isVisible = filmDetailUiState.filmDetailUiModel.isActorsVisible
+            tvTitleStaff.isVisible = filmDetailUiState.filmDetailUiModel.isStaffVisible
+            tvCountStaff.isVisible = filmDetailUiState.filmDetailUiModel.isStaffVisible
+            tvTitleGallery.isVisible = filmDetailUiState.filmDetailUiModel.isGalleryVisible
+            tvCountGallery.isVisible = filmDetailUiState.filmDetailUiModel.isGalleryVisible
+            tvTitleSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isSimilarVisible
+            tvCountSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isSimilarVisible
+            tvCountGallery.text = gallery?.size.toStringOrEmpty()
+            tvCountSimilarFilm.text = similar?.size.toStringOrEmpty()
+            tvCountStaff.text = staff?.size.toStringOrEmpty()
+            tvCountActor.text = actor?.size.toStringOrEmpty()
             setDetailFilm(detailFilm)
             actorAdapter.submitList(actor)
             galleryAdapter.submitList(gallery)
@@ -126,24 +126,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         }
     }
 
-    private fun failureResponse(filmDetailUiState: FilmDetailUiState.Error) {
-        with(binding) {
-            flProgress.isVisible = filmDetailUiState.errors.isVisibleProgress
-            tvError.isVisible = filmDetailUiState.errors.isVisibleTextError
-            nestedScroll.isVisible = filmDetailUiState.errors.isVisibleNestedScroll
-            appBar.isVisible = filmDetailUiState.errors.isVisibleAppBar
-            tvCountActor.isVisible = filmDetailUiState.errors.isVisibleCountActor
-            tvTitleActor.isVisible = filmDetailUiState.errors.isVisibleTitleActor
-            tvTitleStaff.isVisible = filmDetailUiState.errors.isVisibleTitleStaff
-            tvCountStaff.isVisible = filmDetailUiState.errors.isVisibleCountStaff
-            tvTitleGallery.isVisible = filmDetailUiState.errors.isVisibleTitleGallery
-            tvCountGallery.isVisible = filmDetailUiState.errors.isVisibleCountGallery
-            tvTitleSimilarFilm.isVisible = filmDetailUiState.errors.isVisibleTitleSimilar
-            tvCountSimilarFilm.isVisible = filmDetailUiState.errors.isVisibleCountSimilar
-        }
-    }
-
-    private fun setDetailFilm(filmDetailModel: FilmDetailModel) {
+    private fun setDetailFilm(filmDetailModel: FilmDetailModel?) {
+        filmDetailModel ?: return
         with(filmDetailModel) {
             binding.ivPosterFilm.loadCropImage(poster)
             binding.ivLogo.loadImage(logo)
