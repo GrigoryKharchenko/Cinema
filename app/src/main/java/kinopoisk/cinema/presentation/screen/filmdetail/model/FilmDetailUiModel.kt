@@ -1,21 +1,17 @@
 package kinopoisk.cinema.presentation.screen.filmdetail.model
 
 data class FilmDetailUiModel(
-    val detailFilm: FilmDetailModel,
-    val actor: List<StaffModel> = emptyList(),
-    val gallery: List<GalleryModel> = emptyList(),
-    val similar: List<SimilarFilmModel> = emptyList(),
-    val staff: List<StaffModel> = emptyList(),
+    val detailFilm: FilmDetailModel? = null,
+    val actor: List<StaffModel>? = null,
+    val gallery: List<GalleryModel>? = null,
+    val similar: List<SimilarFilmModel>? = null,
+    val staff: List<StaffModel>? = null,
     val isVisibleTextError: Boolean = false,
     val isVisibleProgress: Boolean = false,
     val isVisibleAppBar: Boolean = true,
     val isVisibleNestedScroll: Boolean = true,
-    val isVisibleTitleActor: Boolean = true,
-    val isVisibleCountActor: Boolean = true,
-    val isVisibleTitleStaff: Boolean = true,
-    val isVisibleCountStaff: Boolean = true,
-    val isVisibleTitleGallery: Boolean = true,
-    val isVisibleCountGallery: Boolean = true,
-    val isVisibleTitleSimilar: Boolean = true,
-    val isVisibleCountSimilar: Boolean = true,
+    val isVisibleActors: Boolean = true,
+    val isVisibleStaff: Boolean = true,
+    val isVisibleGallery: Boolean = true,
+    val isVisibleSimilar: Boolean = true
 )
