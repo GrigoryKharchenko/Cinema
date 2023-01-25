@@ -16,11 +16,13 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
+import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.databinding.FragmentHomeBinding
 import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
+import kinopoisk.cinema.presentation.screen.films.FilmsFragment
 import kinopoisk.cinema.presentation.screen.homepage.allcategory.AllCategoryAdapter
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -42,7 +44,8 @@ class HomeFragment : Fragment(), HasAndroidInjector {
 
     private val adapter by lazy {
         AllCategoryAdapter(
-            onFilmClick = ::openFilmDetail
+            onFilmClick = ::openFilmDetail,
+            onShowAllClick = ::openFilmsFragment
         )
     }
 
@@ -97,6 +100,15 @@ class HomeFragment : Fragment(), HasAndroidInjector {
                     adapter.submitList(homeUiState.films)
                 }
             }
+        }
+    }
+
+    private fun openFilmsFragment(typeCategories: TypeCategories) {
+        parentFragmentManager.commit {
+            addFragmentWithArgs<FilmsFragment>(
+                containerId = R.id.fragmentContainer,
+                args = bundleOf(FilmsFragment.KEY_FILMS to typeCategories)
+            )
         }
     }
 

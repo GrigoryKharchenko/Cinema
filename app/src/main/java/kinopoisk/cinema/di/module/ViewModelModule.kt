@@ -32,5 +32,4 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(FilmDetailViewModel::class)
     fun bindFilmDetailViewModel(viewModel: FilmDetailViewModel): ViewModel
-
 }

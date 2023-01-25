@@ -18,6 +18,7 @@ data class FilmResponse(
     @SerializedName("genres") val genres: List<GenreResponse>,
     @SerializedName("kinopoiskId") val kinopoiskId: Int?,
     @SerializedName("filmId") val id: Int,
+    @SerializedName("countries") val countries: List<CountryResponse>,
 )
 
 data class GenreResponse(
