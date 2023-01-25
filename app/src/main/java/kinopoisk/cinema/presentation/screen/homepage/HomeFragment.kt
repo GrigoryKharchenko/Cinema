@@ -102,9 +102,10 @@ class HomeFragment : Fragment(), HasAndroidInjector {
 
     private fun openFilmDetail(filmId: Int) {
         parentFragmentManager.commit {
-            val bundle = bundleOf()
-            bundle.putInt(FilmDetailFragment.KEY_FILM, filmId)
-            addFragmentWithArgs<FilmDetailFragment>(R.id.fragmentContainer, args = bundle)
+            addFragmentWithArgs<FilmDetailFragment>(
+                containerId = R.id.fragmentContainer,
+                args = bundleOf(FilmDetailFragment.KEY_FILM to filmId)
+            )
         }
     }
 

@@ -14,7 +14,8 @@ data class DetailFilmResponse(
     @SerializedName("genres") val genres: List<GenreResponse>,
     @SerializedName("countries") val countries: List<CountryResponse>,
     @SerializedName("filmLength") val duration: String?,
-    @SerializedName("ratingMpaa") val ratingAgeLimits: String?,
+    @SerializedName("ratingMpaa") val ratingMpaa: String?,
+    @SerializedName("ratingAgeLimits") val ratingAgeLimits: String?,
     @SerializedName("shortDescription") val shortDescription: String?,
     @SerializedName("description") val description: String,
 )

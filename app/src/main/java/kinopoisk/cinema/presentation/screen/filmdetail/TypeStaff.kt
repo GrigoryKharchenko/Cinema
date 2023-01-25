@@ -1,6 +1,6 @@
 package kinopoisk.cinema.presentation.screen.filmdetail
 
-enum class TypeStuff {
+enum class TypeStaff {
     WRITER,
     OPERATOR,
     EDITOR,

@@ -20,7 +20,7 @@ import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
-import kinopoisk.cinema.presentation.screen.filmdetail.adpters.stuff.StuffAdapter
+import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -36,8 +36,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private var _binding: FragmentFilmDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val actorAdapter by lazy { StuffAdapter() }
-    private val stuffAdapter by lazy { StuffAdapter() }
+    private val actorAdapter by lazy { StaffAdapter() }
+    private val staffAdapter by lazy { StaffAdapter() }
     private val galleryAdapter by lazy { GalleryAdapter() }
     private val similarFilmAdapter by lazy { SimilarFilmAdapter() }
 
@@ -72,7 +72,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private fun initUi() {
         with(binding) {
             toolbar.setNavigationOnClickListener { goBack() }
-            rvStuff.adapter = stuffAdapter
+            rvStaff.adapter = staffAdapter
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
@@ -99,28 +99,28 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         with(binding) {
             val gallery = filmDetailUiState.filmDetailUiModel.gallery
             val similar = filmDetailUiState.filmDetailUiModel.similar
-            val stuff = filmDetailUiState.filmDetailUiModel.stuff
+            val staff = filmDetailUiState.filmDetailUiModel.staff
             val detailFilm = filmDetailUiState.filmDetailUiModel.detailFilm
             val actor = filmDetailUiState.filmDetailUiModel.actor
             flProgress.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleProgress
             tvError.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTextError
             tvTitleActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleActor
             tvCountActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountActor
-            tvTitleStuff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleStuff
-            tvCountStuff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountStuff
+            tvTitleStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleStaff
+            tvCountStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountStaff
             tvTitleGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleGallery
             tvCountGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountGallery
             tvTitleSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTitleSimilar
             tvCountSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleCountSimilar
             tvCountGallery.text = gallery.size.toString()
             tvCountSimilarFilm.text = similar.size.toString()
-            tvCountStuff.text = stuff.size.toString()
+            tvCountStaff.text = staff.size.toString()
             tvCountActor.text = actor.size.toString()
             setDetailFilm(detailFilm)
             actorAdapter.submitList(actor)
             galleryAdapter.submitList(gallery)
             similarFilmAdapter.submitList(similar)
-            stuffAdapter.submitList(stuff)
+            staffAdapter.submitList(staff)
         }
     }
 
@@ -132,8 +132,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             appBar.isVisible = filmDetailUiState.errors.isVisibleAppBar
             tvCountActor.isVisible = filmDetailUiState.errors.isVisibleCountActor
             tvTitleActor.isVisible = filmDetailUiState.errors.isVisibleTitleActor
-            tvTitleStuff.isVisible = filmDetailUiState.errors.isVisibleTitleStuff
-            tvCountStuff.isVisible = filmDetailUiState.errors.isVisibleCountStuff
+            tvTitleStaff.isVisible = filmDetailUiState.errors.isVisibleTitleStaff
+            tvCountStaff.isVisible = filmDetailUiState.errors.isVisibleCountStaff
             tvTitleGallery.isVisible = filmDetailUiState.errors.isVisibleTitleGallery
             tvCountGallery.isVisible = filmDetailUiState.errors.isVisibleCountGallery
             tvTitleSimilarFilm.isVisible = filmDetailUiState.errors.isVisibleTitleSimilar
@@ -169,7 +169,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
 
     override fun onDestroyView() {
         with(binding) {
-            rvStuff.adapter = null
+            rvStaff.adapter = null
             rvGallery.adapter = null
             rvSimilarFilm.adapter = null
             rvActors.adapter = null

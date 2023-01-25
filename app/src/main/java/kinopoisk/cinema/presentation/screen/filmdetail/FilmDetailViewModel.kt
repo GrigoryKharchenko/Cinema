@@ -34,7 +34,7 @@ class FilmDetailViewModel @Inject constructor(
                     )
                 )
                 getActors(id)
-                getStuff(id)
+                getStaff(id)
                 getGallery(id)
                 getSimilar(id)
             }.onFailure {
@@ -55,7 +55,7 @@ class FilmDetailViewModel @Inject constructor(
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 detailFilmRepository.getActor(id).filter { actor ->
-                    actor.profession == TypeStuff.ACTOR.name
+                    actor.profession == TypeStaff.ACTOR.name
                 }
             }.onSuccess { actor ->
                 _uiStateFlow.update { uiState ->
@@ -80,19 +80,19 @@ class FilmDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getStuff(id: Int) {
+    private fun getStaff(id: Int) {
         viewModelScope.launch(ioDispatcher) {
             runCatching {
-                detailFilmRepository.getStuff(id).filter { actor ->
-                    actor.profession != TypeStuff.ACTOR.name
+                detailFilmRepository.getStaff(id).filter { actor ->
+                    actor.profession != TypeStaff.ACTOR.name
                 }
-            }.onSuccess { stuff ->
+            }.onSuccess { staff ->
                 _uiStateFlow.update { uiState ->
                     (uiState as? FilmDetailUiState.Success)?.copy(
                         filmDetailUiModel = uiState.filmDetailUiModel.copy(
-                            stuff = stuff,
-                            isVisibleTitleStuff = stuff.isNotEmpty(),
-                            isVisibleCountStuff = stuff.isNotEmpty(),
+                            staff = staff,
+                            isVisibleTitleStaff = staff.isNotEmpty(),
+                            isVisibleCountStaff = staff.isNotEmpty(),
                         )
                     ) ?: uiState
                 }
@@ -100,8 +100,8 @@ class FilmDetailViewModel @Inject constructor(
                 _uiStateFlow.emit(
                     FilmDetailUiState.Error(
                         ErrorUiModel(
-                            isVisibleTitleStuff = false,
-                            isVisibleCountStuff = false,
+                            isVisibleTitleStaff = false,
+                            isVisibleCountStaff = false,
                         )
                     )
                 )

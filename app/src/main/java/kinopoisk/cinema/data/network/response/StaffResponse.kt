@@ -2,7 +2,7 @@ package kinopoisk.cinema.data.network.response
 
 import com.google.gson.annotations.SerializedName
 
-data class StuffResponse(
+data class StaffResponse(
     @SerializedName("staffId") val id: Int,
     @SerializedName("nameRu") val nameRu: String?,
     @SerializedName("nameEn") val nameEn: String,

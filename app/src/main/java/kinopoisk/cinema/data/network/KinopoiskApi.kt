@@ -4,7 +4,7 @@ import kinopoisk.cinema.data.network.response.DetailFilmResponse
 import kinopoisk.cinema.data.network.response.FilmsResponse
 import kinopoisk.cinema.data.network.response.GalleryResponse
 import kinopoisk.cinema.data.network.response.SimilarsResponse
-import kinopoisk.cinema.data.network.response.StuffResponse
+import kinopoisk.cinema.data.network.response.StaffResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -41,9 +41,9 @@ interface KinopoiskApi {
     ): DetailFilmResponse
 
     @GET("/api/v1/staff")
-    suspend fun getStuff(
+    suspend fun getStaff(
         @Query("filmId") id: Int
-    ): List<StuffResponse>
+    ): List<StaffResponse>
 
     @GET("/api/v2.2/films/{id}/images?page=1")
     suspend fun getGallery(

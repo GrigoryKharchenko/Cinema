@@ -28,7 +28,7 @@
                 <ImageView
                     android:id="@+id/ivPosterFilm"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="@dimen/dp_400"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -206,10 +206,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleActor"
                 app:spanCount="4"
-                tools:listitem="@layout/item_stuff" />
+                tools:listitem="@layout/item_staff" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvTitleStuff"
+                android:id="@+id/tvTitleStaff"
                 style="@style/Text.Black.Bold.18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,20 +220,20 @@
                 app:layout_constraintTop_toBottomOf="@id/rvActors" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tvCountStuff"
+                android:id="@+id/tvCountStaff"
                 style="@style/Text.Blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_26"
                 android:drawableEnd="@drawable/ic_next_arrow"
                 android:drawablePadding="@dimen/dp_8"
-                app:layout_constraintBottom_toBottomOf="@id/tvTitleStuff"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitleStaff"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvTitleStuff"
+                app:layout_constraintTop_toTopOf="@id/tvTitleStaff"
                 tools:text="27" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvStuff"
+                android:id="@+id/rvStaff"
                 style="@style/HorizontalRecycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -242,9 +242,9 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitleStuff"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleStaff"
                 app:spanCount="2"
-                tools:listitem="@layout/item_stuff" />
+                tools:listitem="@layout/item_staff" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTitleGallery"
@@ -255,7 +255,7 @@
                 android:layout_marginTop="@dimen/dp_26"
                 android:text="@string/film_detail_gallery"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvStuff" />
+                app:layout_constraintTop_toBottomOf="@id/rvStaff" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCountGallery"

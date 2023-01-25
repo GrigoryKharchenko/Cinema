@@ -1,6 +1,6 @@
 package kinopoisk.cinema.presentation.screen.filmdetail.model
 
-data class StuffModel(
+data class StaffModel(
     val id: Int,
     val name: String?,
     val photo: String,
