@@ -10,10 +10,12 @@ import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.ItemCertainCategoryBinding
 import kinopoisk.cinema.databinding.ItemShowAllBinding
 import kinopoisk.cinema.extension.inflate
-import kinopoisk.cinema.extension.setGlideImage
+import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.presentation.screen.homepage.TypeCardCategoryUiModel
 
-class TypeCardCategoryAdapter :
+class TypeCardCategoryAdapter(
+    private val onFilmClick: (Int) -> Unit,
+) :
     ListAdapter<TypeCardCategoryUiModel, TypeCardCategoryViewHolder>(TypeCardCategoryDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypeCardCategoryViewHolder {
@@ -31,7 +33,7 @@ class TypeCardCategoryAdapter :
     override fun onBindViewHolder(holder: TypeCardCategoryViewHolder, position: Int) {
         when (holder) {
             is TypeCardCategoryViewHolder.CertainCategoryViewHolder ->
-                holder.bind(getItem(position) as TypeCardCategoryUiModel.FilmUiModel)
+                holder.bind(getItem(position) as TypeCardCategoryUiModel.FilmUiModel, onFilmClick)
             is TypeCardCategoryViewHolder.FooterViewHolder ->
                 holder.bind()
         }
@@ -52,9 +54,13 @@ sealed class TypeCardCategoryViewHolder(binding: ViewBinding) : RecyclerView.Vie
     class CertainCategoryViewHolder(
         private val binding: ItemCertainCategoryBinding,
     ) : TypeCardCategoryViewHolder(binding) {
-        fun bind(certainCategory: TypeCardCategoryUiModel.FilmUiModel) {
+        fun bind(
+            certainCategory: TypeCardCategoryUiModel.FilmUiModel,
+            onFilmClick: (Int) -> Unit
+        ) {
             with(binding) {
-                ivPreview.setGlideImage(image = certainCategory.poster)
+                root.setOnClickListener { onFilmClick(certainCategory.id) }
+                ivPreview.loadCropImage(image = certainCategory.poster)
                 tvRating.text = certainCategory.rating
                 tvName.text = certainCategory.name
                 tvGenre.text = certainCategory.genre ?: itemView.context.getString(R.string.unknown)

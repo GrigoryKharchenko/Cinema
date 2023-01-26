@@ -12,11 +12,11 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
-    private val _uiModelFLow = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
-    val uiModelFlow = _uiModelFLow.asStateFlow()
+    private val _uiStateFLow = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
+    val uiStateFlow = _uiStateFLow.asStateFlow()
 
     init {
         getCategories()
@@ -27,9 +27,9 @@ class HomeViewModel @Inject constructor(
             runCatching {
                 categoryRepository.getCategories()
             }.onSuccess { categories ->
-                _uiModelFLow.emit(HomeUiState.Success(categories))
+                _uiStateFLow.emit(HomeUiState.Success(categories))
             }.onFailure {
-                _uiModelFLow.emit(HomeUiState.Error)
+                _uiStateFLow.emit(HomeUiState.Error)
             }
         }
     }

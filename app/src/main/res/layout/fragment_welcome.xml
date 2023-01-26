@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/ivTitle"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_26"
         android:layout_marginTop="@dimen/dp_36"
@@ -18,7 +18,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvSkip"
         style="@style/Text.HintGray.Ripple"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_26"
         android:padding="@dimen/dp_16"

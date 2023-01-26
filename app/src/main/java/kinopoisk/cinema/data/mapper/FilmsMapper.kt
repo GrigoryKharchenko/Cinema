@@ -13,10 +13,11 @@ fun FilmsResponse.mapToTopFilmsModel(): List<TypeCardCategoryUiModel> =
 
 fun FilmResponse.mapToFilmModel(): TypeCardCategoryUiModel =
     TypeCardCategoryUiModel.FilmUiModel(
+        id = kinopoiskId ?: id,
         poster = poster,
         rating = ratingKinopoisk ?: rating ?: "",
         isViewed = false,
         name = nameRu ?: nameEn ?: nameOriginal,
-        genre = genre.firstOrNull()?.genre?.firstCharToUpperCase(),
+        genre = genres.firstOrNull()?.genre?.firstCharToUpperCase(),
         isVisibleRating = ratingKinopoisk?.isNotEmpty() ?: rating?.isNotEmpty() ?: false,
     )

@@ -3,6 +3,7 @@ package kinopoisk.cinema.di.module
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import kinopoisk.cinema.presentation.main.MainFragment
+import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
 import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
@@ -25,4 +26,7 @@ interface FragmentModule {
 
     @ContributesAndroidInjector
     fun bindMainFragment(): MainFragment
+
+    @ContributesAndroidInjector
+    fun bindFilmDetailFragment(): FilmDetailFragment
 }

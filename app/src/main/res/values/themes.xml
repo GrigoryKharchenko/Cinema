@@ -19,6 +19,10 @@
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
+    <style name="Theme.Fragment" parent="Theme.Cinema">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <style name="BottomNavigationBar">
         <item name="itemRippleColor">@color/selected_bottom_navigation_bar_icon_color</item>
         <item name="itemIconTint">@color/selector_bottom_navigation_bar</item>
@@ -76,6 +80,10 @@
         <item name="android:textSize">@dimen/sp_32</item>
     </style>
 
+    <style name="Text.Black.Bold.16">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
     <style name="Text.Black.Bold.18">
         <item name="android:textSize">@dimen/sp_18</item>
     </style>
@@ -90,6 +98,10 @@
 
     <style name="Text.HintGray">
         <item name="android:textColor">@color/hint_text_color</item>
+    </style>
+
+    <style name="Text.HintGray.12">
+        <item name="android:textSize">@dimen/sp_12</item>
     </style>
 
     <style name="Text.HintGray.Ripple">
@@ -109,5 +121,27 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:background">@color/gray_alfa_30</item>
+    </style>
+
+    <style name="WhiteTextCollapsingToolbar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TransparentTextCollapsingToolbar" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TransparentBackGround" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="BlackGradientBackGround">
+        <item name="android:background">@drawable/black_gradient</item>
+    </style>
+
+    <style name="HorizontalRecycler">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:nestedScrollingEnabled">false</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 </resources>
