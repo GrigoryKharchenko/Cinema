@@ -20,94 +20,108 @@ class FilmDetailViewModel @Inject constructor(
     private val _uiStateFlow = MutableStateFlow<FilmDetailUiState>(FilmDetailUiState.Loading)
     val uiStateFlow = _uiStateFlow.asStateFlow()
 
-    private fun updateUiState(updateUiModel: (oldUiModel: FilmDetailUiModel) -> FilmDetailUiModel) {
-        _uiStateFlow.update { uiState ->
-            when (uiState) {
-                is FilmDetailUiState.DetailFilm ->
-                    FilmDetailUiState.DetailFilm(updateUiModel(uiState.filmDetailUiModel))
-                else ->
-                    FilmDetailUiState.DetailFilm(updateUiModel(FilmDetailUiModel()))
-            }
-        }
-    }
-
-    private fun <T> getFilmInfo(
-        request: suspend () -> Result<T>,
-        onResult: (result: T?, isError: Boolean) -> Unit,
-        doAfter: () -> Unit = {},
-    ) {
-        viewModelScope.launch(ioDispatcher) {
-            request().onSuccess { result ->
-                onResult(result, false)
-                doAfter()
-            }.onFailure {
-                onResult(null, true)
-            }
-        }
-    }
-
     fun getFilmDetail(id: Int) {
-        getFilmInfo(request = {
+        viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getFilmDetail(id)
-        }, onResult = { filmDetailModel, isError ->
-            updateUiState { oldModel ->
-                oldModel.copy(
-                    detailFilm = filmDetailModel,
-                    isVisibleTextError = isError,
-                    isVisibleAppBar = !isError,
-                    isVisibleNestedScroll = !isError
-                )
-            }
-        }, doAfter = {
-            getStaff(id)
-            getGallery(id)
-            getSimilar(id)
-        })
+                .onSuccess { filmDetailModel ->
+                    _uiStateFlow.emit(
+                        FilmDetailUiState.DetailFilm(
+                            filmDetailUiModel = FilmDetailUiModel(
+                                detailFilm = filmDetailModel,
+                            )
+                        )
+                    )
+                    getStaff(id)
+                    getGallery(id)
+                    getSimilar(id)
+                }.onFailure {
+                    _uiStateFlow.emit(
+                        FilmDetailUiState.DetailFilm(
+                            filmDetailUiModel = FilmDetailUiModel(
+                                isVisibleTextError = true,
+                                isVisibleAppBar = false,
+                                isVisibleNestedScroll = false
+                            )
+                        )
+                    )
+                }
+        }
     }
 
     private fun getStaff(id: Int) {
-        getFilmInfo(request = {
+        viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getStaff(id)
-        },
-            onResult = { staff, isError ->
-                updateUiState { oldModel ->
-                    val actors = staff?.filter { it.profession == TypeStaff.ACTOR }
-                    val filmmakers = staff?.filter { it.profession != TypeStaff.ACTOR }
-                    oldModel.copy(
-                        actor = actors,
-                        staff = filmmakers,
-                        isVisibleActors = !actors.isNullOrEmpty() && !isError,
-                        isVisibleStaff = !filmmakers.isNullOrEmpty() && !isError,
-                    )
+                .onSuccess { staff ->
+                    val actors = staff.filter { it.profession == TypeStaff.ACTOR }
+                    val filmmakers = staff.filter { it.profession != TypeStaff.ACTOR }
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = uiState.filmDetailUiModel.copy(
+                                staff = filmmakers,
+                                actor = actors,
+                                isVisibleActors = actors.isNotEmpty(),
+                                isVisibleStaff = filmmakers.isNotEmpty(),
+                            )
+                        ) ?: uiState
+                    }
+                }.onFailure {
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = FilmDetailUiModel(
+                                isVisibleActors = false,
+                                isVisibleStaff = false,
+                            )
+                        ) ?: uiState
+                    }
                 }
-            })
+        }
     }
 
     private fun getGallery(id: Int) {
-        getFilmInfo(request = {
+        viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getGallery(id)
-        },
-            onResult = { gallery, isError ->
-                updateUiState { oldModel ->
-                    oldModel.copy(
-                        gallery = gallery,
-                        isVisibleGallery = !gallery.isNullOrEmpty() && !isError
-                    )
+                .onSuccess { gallery ->
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = uiState.filmDetailUiModel.copy(
+                                gallery = gallery,
+                                isVisibleGallery = gallery.isNotEmpty(),
+                            )
+                        ) ?: uiState
+                    }
+                }.onFailure {
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = FilmDetailUiModel(
+                                isVisibleGallery = false,
+                            )
+                        ) ?: uiState
+                    }
                 }
-            })
+        }
     }
 
     private fun getSimilar(id: Int) {
-        getFilmInfo(request = {
+        viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getSimilar(id)
-        },
-            onResult = { similar, isError ->
-                updateUiState { oldModel ->
-                    oldModel.copy(
-                        similar = similar,
-                        isVisibleSimilar = !similar.isNullOrEmpty() && !isError
-                    )
+                .onSuccess { similar ->
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = uiState.filmDetailUiModel.copy(
+                                similar = similar,
+                                isVisibleSimilar = similar.isNotEmpty(),
+                            )
+                        ) ?: uiState
+                    }
+                }.onFailure {
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = FilmDetailUiModel(
+                                isVisibleSimilar = false,
+                            )
+                        ) ?: uiState
+                    }
                 }
-            })
+        }
     }
 }
