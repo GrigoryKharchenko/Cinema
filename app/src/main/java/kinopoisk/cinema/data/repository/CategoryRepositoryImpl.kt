@@ -6,6 +6,8 @@ import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.data.mapper.mapToDifferentFilmsModel
 import kinopoisk.cinema.data.mapper.mapToTopFilmsModel
 import kinopoisk.cinema.data.network.ApiConstants
+import kinopoisk.cinema.data.network.FilmParameters.getRandomCountry
+import kinopoisk.cinema.data.network.FilmParameters.getRandomGenre
 import kinopoisk.cinema.data.network.KinopoiskApi
 import kinopoisk.cinema.domain.CategoryRepository
 import kinopoisk.cinema.presentation.screen.homepage.CategoryUiModel
@@ -18,16 +20,13 @@ class CategoryRepositoryImpl @Inject constructor(
     private val context: Context,
 ) : CategoryRepository {
 
-    private val countries = listOf("США", "Швейцария", "Франция", "Польша", "Великобритания", "Швеция", "Индия", "Испания", "Германия", "Италия")
-    private val genres = listOf("Триллер", "Драма", "Криминал", "Мелодрама", "Детектив", "Фантастика", "Приключения")
-
     override suspend fun getCategories(): List<CategoryUiModel> =
         coroutineScope {
-            val (firstCountryIndex, firstCountryCode) = getRandomCountry()
-            val (firstGenreIndex, firstGenreCode) = getRandomGenre()
+            val (firstCountryName, firstCountryCode) = getRandomCountry()
+            val (firstGenreName, firstGenreCode) = getRandomGenre()
 
-            val (secondCountryIndex, secondCountryCode) = getRandomCountry()
-            val (secondGenreIndex, secondGenreCode) = getRandomGenre()
+            val (secondCountryName, secondCountryCode) = getRandomCountry()
+            val (secondGenreName, secondGenreCode) = getRandomGenre()
 
             val premiers = async {
                 kinopoiskApi.getPremieres().mapToDifferentFilmsModel()
@@ -39,7 +38,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 kinopoiskApi.getRandomCategory(
                     countries = firstCountryCode,
                     genres = firstGenreCode
-                ).mapToDifferentFilmsModel(genres[firstGenreIndex])
+                ).mapToDifferentFilmsModel(firstGenreName)
             }
             val top = async {
                 kinopoiskApi.getTopFilms(type = ApiConstants.TOP_250).mapToTopFilmsModel()
@@ -48,7 +47,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 kinopoiskApi.getRandomCategory(
                     countries = secondCountryCode,
                     genres = secondGenreCode
-                ).mapToDifferentFilmsModel(genres[secondGenreIndex])
+                ).mapToDifferentFilmsModel(secondGenreName)
             }
             val serial = async {
                 kinopoiskApi.getSerial().mapToDifferentFilmsModel()
@@ -70,7 +69,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ),
                 CategoryUiModel(
                     typeCategory = TypeCategories.Random(
-                        nameCategory = "${countries[firstCountryIndex]} ${genres[firstGenreIndex]}",
+                        nameCategory = "$firstCountryName $firstGenreName",
                         countryCode = firstCountryCode,
                         genresCode = firstGenreCode
                     ),
@@ -85,7 +84,7 @@ class CategoryRepositoryImpl @Inject constructor(
                 ),
                 CategoryUiModel(
                     typeCategory = TypeCategories.Random(
-                        nameCategory = "${countries[secondCountryIndex]} ${genres[secondGenreIndex]}",
+                        nameCategory = "$secondCountryName $secondGenreName",
                         countryCode = secondCountryCode,
                         genresCode = secondGenreCode
                     ),
@@ -100,16 +99,4 @@ class CategoryRepositoryImpl @Inject constructor(
                 ),
             )
         }
-
-    private fun getRandomCountry(): Pair<Int, String> {
-        val countryIndex = countries.indices.random()
-        val countryCode = (countryIndex + 1).toString()
-        return Pair(countryIndex, countryCode)
-    }
-
-    private fun getRandomGenre(): Pair<Int, String> {
-        val genreIndex = genres.indices.random()
-        val genreCode = (genreIndex + 1).toString()
-        return Pair(genreIndex, genreCode)
-    }
 }
