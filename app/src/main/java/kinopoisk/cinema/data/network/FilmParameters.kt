@@ -5,7 +5,6 @@ object FilmParameters {
     val countries = listOf("США", "Швейцария", "Франция", "Польша", "Великобритания", "Швеция", "Индия", "Испания", "Германия", "Италия")
     val genres = listOf("Триллер", "Драма", "Криминал", "Мелодрама", "Детектив", "Фантастика", "Приключения")
 
-
     fun getRandomCountry(): Pair<String, String> {
         val countryIndex = countries.indices.random()
         val nameCountry = countries[countryIndex]

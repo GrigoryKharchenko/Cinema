@@ -2,6 +2,8 @@ package kinopoisk.cinema.data.repository
 
 import android.content.Context
 import kinopoisk.cinema.R
+import kinopoisk.cinema.data.network.FilmParameters.countries
+import kinopoisk.cinema.data.network.FilmParameters.genres
 import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.data.mapper.mapToDifferentFilmsModel
 import kinopoisk.cinema.data.mapper.mapToTopFilmsModel
