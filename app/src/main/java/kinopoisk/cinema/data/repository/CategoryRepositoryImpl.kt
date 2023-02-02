@@ -13,13 +13,13 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
-private val countries = listOf("США", "Швейцария", "Франция")
-private val genres = listOf("Триллер", "Драма", "Криминал")
-
 class CategoryRepositoryImpl @Inject constructor(
     private val kinopoiskApi: KinopoiskApi,
     private val context: Context,
 ) : CategoryRepository {
+
+    private val countries = listOf("США", "Швейцария", "Франция", "Польша", "Великобритания", "Швеция", "Индия", "Испания", "Германия", "Италия")
+    private val genres = listOf("Триллер", "Драма", "Криминал", "Мелодрама", "Детектив", "Фантастика", "Приключения")
 
     override suspend fun getCategories(): List<CategoryUiModel> =
         coroutineScope {

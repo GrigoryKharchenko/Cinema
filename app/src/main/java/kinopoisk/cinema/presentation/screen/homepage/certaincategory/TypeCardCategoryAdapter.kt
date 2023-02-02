@@ -72,13 +72,9 @@ sealed class TypeCardCategoryViewHolder(binding: ViewBinding) : RecyclerView.Vie
     }
 
     class FooterViewHolder(private val binding: ItemShowAllBinding) : TypeCardCategoryViewHolder(binding) {
-        fun bind(
-            onShowAllClick: () -> Unit,
-        ) {
-            with(binding) {
-                fabShowAll.setOnClickListener {
-                    onShowAllClick()
-                }
+        fun bind(onShowAllClick: () -> Unit) {
+            binding.fabShowAll.setOnClickListener {
+                onShowAllClick()
             }
         }
     }

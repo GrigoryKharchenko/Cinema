@@ -28,7 +28,7 @@ class FilmsFragment : Fragment(), HasAndroidInjector {
     private val adapter by lazy { FilmsAdapter() }
 
     private val argument: TypeCategories by lazy {
-        arguments?.getParcelable(KEY_FILMS) as? TypeCategories
+        arguments?.getSerializable(KEY_FILMS) as? TypeCategories
             ?: throw RuntimeException("${FilmsFragment::class.java.simpleName} must have argument")
     }
 
