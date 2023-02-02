@@ -14,9 +14,9 @@ interface KinopoiskApi {
     @GET("/api/v2.2/films/premieres")
     suspend fun getPremieres(
         @Query("year")
-        year: String = "2022",
+        year: String = ApiConstants.YEAR,
         @Query("month")
-        month: String = "FEBRUARY"
+        month: String = ApiConstants.MONTH
     ): FilmsResponse
 
     @GET("/api/v2.2/films/top")

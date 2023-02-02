@@ -20,9 +20,7 @@ class FilmsAdapter : PagingDataAdapter<FilmModel, FilmsViewHolder>(FilmsDiffUtil
 }
 
 class FilmsViewHolder(private val binding: ItemCertainCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(
-        filmModel: FilmModel,
-    ) {
+    fun bind(filmModel: FilmModel) {
         with(binding) {
             tvRating.text = filmModel.rating
             ivPreview.loadCropImage(filmModel.poster)

@@ -22,15 +22,15 @@ class FilmsPageSource @AssistedInject constructor(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FilmModel> {
-        val page = params.key ?: 1
+        val page = params.key ?: ApiConstants.FIRST_PAGE
         return runCatching {
             getFilms(page)
         }.fold(
             onSuccess = { filmResponse ->
                 LoadResult.Page(
                     data = filmResponse,
-                    prevKey = if (page == 1) null else page - 1,
-                    nextKey = if (filmResponse.isEmpty()) null else page + 1
+                    prevKey = if (page == ApiConstants.FIRST_PAGE) null else page - ApiConstants.FIRST_PAGE,
+                    nextKey = if (filmResponse.isEmpty()) null else page + ApiConstants.FIRST_PAGE
                 )
             },
             onFailure = { error ->

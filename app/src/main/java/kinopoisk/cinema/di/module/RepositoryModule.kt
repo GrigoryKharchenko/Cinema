@@ -19,5 +19,5 @@ interface RepositoryModule {
     fun bindDetailFilmRepository(repositoryImpl: DetailFilmRepositoryImpl): DetailFilmRepository
 
     @Binds
-    fun bindFilmsPAgeSourceRepository(repositoryImpl: FilmsRepositoryImpl): FilmsRepository
+    fun bindFilmsPageSourceRepository(repositoryImpl: FilmsRepositoryImpl): FilmsRepository
 }

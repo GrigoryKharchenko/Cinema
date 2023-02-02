@@ -65,6 +65,6 @@ fun FilmResponse.mapToFilmsModel(): FilmModel =
         rating = ratingKinopoisk ?: rating ?: "",
         isViewed = false,
         name = nameRu ?: nameEn ?: nameOriginal,
-        genre = genres.firstOrNull()?.genre?.firstCharToUpperCase(),
+        genre = genres.first().genre.firstCharToUpperCase(),
         isVisibleRating = ratingKinopoisk?.isNotEmpty() ?: rating?.isNotEmpty() ?: false,
     )

@@ -23,11 +23,11 @@ class CategoryRepositoryImpl @Inject constructor(
 
     override suspend fun getCategories(): List<CategoryUiModel> =
         coroutineScope {
-            val (countryIndex_1, countryCode_1) = getRandomCountry()
-            val (genreIndex_1, genreCode_1) = getRandomGenre()
+            val (firstCountryIndex, firstCountryCode) = getRandomCountry()
+            val (firstGenreIndex, firstGenreCode) = getRandomGenre()
 
-            val (countryIndex_2, countryCode_2) = getRandomCountry()
-            val (genreIndex_2, genreCode_2) = getRandomGenre()
+            val (secondCountryIndex, secondCountryCode) = getRandomCountry()
+            val (secondGenreIndex, secondGenreCode) = getRandomGenre()
 
             val premiers = async {
                 kinopoiskApi.getPremieres().mapToDifferentFilmsModel()
@@ -37,18 +37,18 @@ class CategoryRepositoryImpl @Inject constructor(
             }
             val firstRandom = async {
                 kinopoiskApi.getRandomCategory(
-                    countries = countryCode_1,
-                    genres = genreCode_1
-                ).mapToDifferentFilmsModel(genres[genreIndex_1])
+                    countries = firstCountryCode,
+                    genres = firstGenreCode
+                ).mapToDifferentFilmsModel(genres[firstGenreIndex])
             }
             val top = async {
                 kinopoiskApi.getTopFilms(type = ApiConstants.TOP_250).mapToTopFilmsModel()
             }
             val secondRandom = async {
                 kinopoiskApi.getRandomCategory(
-                    countries = countryCode_2,
-                    genres = genreCode_2
-                ).mapToDifferentFilmsModel(genres[genreIndex_2])
+                    countries = secondCountryCode,
+                    genres = secondGenreCode
+                ).mapToDifferentFilmsModel(genres[secondGenreIndex])
             }
             val serial = async {
                 kinopoiskApi.getSerial().mapToDifferentFilmsModel()
@@ -70,9 +70,9 @@ class CategoryRepositoryImpl @Inject constructor(
                 ),
                 CategoryUiModel(
                     typeCategory = TypeCategories.Random(
-                        nameCategory = "${countries[countryIndex_1]} ${genres[genreIndex_1]}",
-                        countryCode = countryCode_1,
-                        genresCode = genreCode_1
+                        nameCategory = "${countries[firstCountryIndex]} ${genres[firstGenreIndex]}",
+                        countryCode = firstCountryCode,
+                        genresCode = firstGenreCode
                     ),
                     films = firstRandom.await(),
                 ),
@@ -85,9 +85,9 @@ class CategoryRepositoryImpl @Inject constructor(
                 ),
                 CategoryUiModel(
                     typeCategory = TypeCategories.Random(
-                        nameCategory = "${countries[countryIndex_2]} ${genres[genreIndex_2]}",
-                        countryCode = countryCode_2,
-                        genresCode = genreCode_2
+                        nameCategory = "${countries[secondCountryIndex]} ${genres[secondGenreIndex]}",
+                        countryCode = secondCountryCode,
+                        genresCode = secondGenreCode
                     ),
                     films = secondRandom.await(),
                 ),

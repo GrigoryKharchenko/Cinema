@@ -6,6 +6,6 @@ data class FilmModel(
     val rating: String,
     val isViewed: Boolean,
     val name: String,
-    val genre: String?,
+    val genre: String,
     val isVisibleRating: Boolean,
 )
