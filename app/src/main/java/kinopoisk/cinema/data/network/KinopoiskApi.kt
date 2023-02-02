@@ -11,29 +11,40 @@ import retrofit2.http.Query
 
 interface KinopoiskApi {
 
-    @GET("/api/v2.2/films/premieres?year=2023&month=FEBRUARY")
-    suspend fun getPremieres(): FilmsResponse
+    @GET("/api/v2.2/films/premieres")
+    suspend fun getPremieres(
+        @Query("year")
+        year: String = ApiConstants.YEAR,
+        @Query("month")
+        month: String = ApiConstants.MONTH
+    ): FilmsResponse
 
-    @GET("/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1")
-    suspend fun getPopularFilms(): FilmsResponse
-
-    @GET("/api/v2.2/films")
-    suspend fun getFirstRandomFilms(
-        @Query("countries") countries: String,
-        @Query("genres") genres: String,
+    @GET("/api/v2.2/films/top")
+    suspend fun getTopFilms(
+        @Query("page")
+        @androidx.annotation.IntRange(from = 1)
+        page: Int = ApiConstants.FIRST_PAGE,
+        @Query("type")
+        type: String
     ): FilmsResponse
 
     @GET("/api/v2.2/films")
-    suspend fun getSecondRandomFilms(
+    suspend fun getRandomCategory(
         @Query("countries") countries: String,
         @Query("genres") genres: String,
+        @Query("page")
+        @androidx.annotation.IntRange(from = 1)
+        page: Int = ApiConstants.FIRST_PAGE
     ): FilmsResponse
 
-    @GET("/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1")
-    suspend fun getTopFilms(): FilmsResponse
-
-    @GET("/api/v2.2/films?type=TV_SERIES")
-    suspend fun getSerial(): FilmsResponse
+    @GET("/api/v2.2/films")
+    suspend fun getSerial(
+        @Query("page")
+        @androidx.annotation.IntRange(from = 1)
+        page: Int = ApiConstants.FIRST_PAGE,
+        @Query("type")
+        type: String = ApiConstants.TV_SERIES
+    ): FilmsResponse
 
     @GET("/api/v2.2/films/{id}")
     suspend fun getDetailFilm(

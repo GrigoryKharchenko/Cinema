@@ -15,6 +15,7 @@ import kinopoisk.cinema.presentation.screen.homepage.TypeCardCategoryUiModel
 
 class TypeCardCategoryAdapter(
     private val onFilmClick: (Int) -> Unit,
+    private val onShowAllClick: () -> Unit
 ) :
     ListAdapter<TypeCardCategoryUiModel, TypeCardCategoryViewHolder>(TypeCardCategoryDiffUtil()) {
 
@@ -35,7 +36,7 @@ class TypeCardCategoryAdapter(
             is TypeCardCategoryViewHolder.CertainCategoryViewHolder ->
                 holder.bind(getItem(position) as TypeCardCategoryUiModel.FilmUiModel, onFilmClick)
             is TypeCardCategoryViewHolder.FooterViewHolder ->
-                holder.bind()
+                holder.bind(onShowAllClick)
         }
     }
 
@@ -71,11 +72,9 @@ sealed class TypeCardCategoryViewHolder(binding: ViewBinding) : RecyclerView.Vie
     }
 
     class FooterViewHolder(private val binding: ItemShowAllBinding) : TypeCardCategoryViewHolder(binding) {
-        fun bind() {
-            with(binding) {
-                fabShowAll.setOnClickListener {
-                    //TODO
-                }
+        fun bind(onShowAllClick: () -> Unit) {
+            binding.fabShowAll.setOnClickListener {
+                onShowAllClick()
             }
         }
     }

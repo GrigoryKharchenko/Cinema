@@ -2,9 +2,10 @@ package kinopoisk.cinema.presentation.screen.homepage
 
 import androidx.annotation.StringRes
 import kinopoisk.cinema.R
+import kinopoisk.cinema.data.TypeCategories
 
 data class CategoryUiModel(
-    @StringRes val category: Int,
+    val typeCategory: TypeCategories,
     val films: List<TypeCardCategoryUiModel>
 )
 
