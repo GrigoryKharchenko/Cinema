@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -17,7 +16,6 @@ import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.databinding.FragmentFilmsBinding
 import kinopoisk.cinema.extension.launchWhenStarted
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class FilmsFragment : Fragment(), HasAndroidInjector {
@@ -65,10 +63,7 @@ class FilmsFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun initViewModel() {
-        with(viewModel) {
-            filmsFlow.onEach(adapter::submitData)
-                .launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
-        }
+        launchWhenStarted(viewModel.filmsFlow, adapter::submitData)
     }
 
     private fun initUi() {
