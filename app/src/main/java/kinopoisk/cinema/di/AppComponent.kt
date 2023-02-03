@@ -14,6 +14,7 @@ import kinopoisk.cinema.di.module.InterceptorModule
 import kinopoisk.cinema.di.module.RepositoryModule
 import kinopoisk.cinema.di.module.RetrofitModule
 import kinopoisk.cinema.di.module.ViewModelModule
+import kinopoisk.cinema.presentation.screen.films.FilmsViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -40,4 +41,6 @@ interface AppComponent : AndroidInjector<CinemaApp> {
 
         fun build(): AppComponent
     }
+
+    fun filmsViewModel(): FilmsViewModel.Factory
 }

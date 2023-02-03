@@ -8,21 +8,20 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
+import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.databinding.FragmentHomeBinding
 import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
+import kinopoisk.cinema.presentation.screen.films.FilmsFragment
 import kinopoisk.cinema.presentation.screen.homepage.allcategory.AllCategoryAdapter
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), HasAndroidInjector {
@@ -42,7 +41,8 @@ class HomeFragment : Fragment(), HasAndroidInjector {
 
     private val adapter by lazy {
         AllCategoryAdapter(
-            onFilmClick = ::openFilmDetail
+            onFilmClick = ::openFilmDetail,
+            onShowAllClick = ::openFilmsFragment
         )
     }
 
@@ -69,16 +69,11 @@ class HomeFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun initUi() {
-        with(binding) {
-            rvCertainCategory.adapter = adapter
-        }
+        binding.rvCertainCategory.adapter = adapter
     }
 
     private fun initViewModel() {
-        with(viewModel) {
-            uiStateFlow.onEach(::handleUiState)
-                .launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
-        }
+        launchWhenStarted(viewModel.uiStateFlow, ::handleUiState)
     }
 
     private fun handleUiState(homeUiState: HomeUiState) {
@@ -100,13 +95,18 @@ class HomeFragment : Fragment(), HasAndroidInjector {
         }
     }
 
+    private fun openFilmsFragment(typeCategories: TypeCategories) {
+        addFragmentWithArgs<FilmsFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(FilmsFragment.KEY_FILMS to typeCategories)
+        )
+    }
+
     private fun openFilmDetail(filmId: Int) {
-        parentFragmentManager.commit {
-            addFragmentWithArgs<FilmDetailFragment>(
-                containerId = R.id.fragmentContainer,
-                args = bundleOf(FilmDetailFragment.KEY_FILM to filmId)
-            )
-        }
+        addFragmentWithArgs<FilmDetailFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(FilmDetailFragment.KEY_FILM to filmId)
+        )
     }
 
     override fun onDestroyView() {

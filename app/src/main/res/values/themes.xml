@@ -72,6 +72,10 @@
         <item name="android:textColor">@color/blue_text_color</item>
     </style>
 
+    <style name="Text.Blue.Ripple">
+        <item name="android:background">@drawable/ripple_effect</item>
+    </style>
+
     <style name="Text.Black.Bold">
         <item name="android:fontFamily">sans-serif-black</item>
     </style>
@@ -108,12 +112,19 @@
         <item name="android:background">@drawable/click_text_ripple_effect</item>
     </style>
 
+    <style name="TitleToolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleCentered">true</item>
+    </style>
+
+    <style name="TitleToolbar.TextBlack">
+        <item name="titleTextColor">@color/black_text_color</item>
+    </style>
+
     <style name="FabWhite">
-        <item name="backgroundTint">@color/white</item>
         <item name="android:src">@drawable/ic_arrow_right</item>
         <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="borderWidth">0dp</item>
-        <item name="fabSize">mini</item>
         <item name="tint">@color/blue_text_color</item>
     </style>
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -23,7 +22,6 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAd
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -83,8 +81,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private fun initViewModel() {
         with(viewModel) {
             getFilmDetail(getArgs())
-            uiStateFlow.onEach(::handleUiState)
-                .launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
+            launchWhenStarted(uiStateFlow, ::handleUiState)
         }
     }
 

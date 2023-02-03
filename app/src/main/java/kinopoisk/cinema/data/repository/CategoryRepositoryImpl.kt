@@ -1,76 +1,100 @@
 package kinopoisk.cinema.data.repository
 
+import android.content.Context
 import kinopoisk.cinema.R
+import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.data.mapper.mapToDifferentFilmsModel
 import kinopoisk.cinema.data.mapper.mapToTopFilmsModel
 import kinopoisk.cinema.data.network.ApiConstants
+import kinopoisk.cinema.data.network.FilmParameters.getRandomCountry
+import kinopoisk.cinema.data.network.FilmParameters.getRandomGenre
 import kinopoisk.cinema.data.network.KinopoiskApi
 import kinopoisk.cinema.domain.CategoryRepository
 import kinopoisk.cinema.presentation.screen.homepage.CategoryUiModel
-import kinopoisk.cinema.presentation.screen.homepage.TypeCardCategoryUiModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import java.util.Random
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
     private val kinopoiskApi: KinopoiskApi,
+    private val context: Context,
 ) : CategoryRepository {
 
     override suspend fun getCategories(): List<CategoryUiModel> =
         coroutineScope {
-            val firstRandomCountry = (Random().nextInt(ApiConstants.MAX_COUNTRIES) + 1).toString()
-            val firstRandomGenre = (Random().nextInt(ApiConstants.MAX_GENRES) + 1).toString()
-            val secondRandomCountry = (Random().nextInt(ApiConstants.MAX_COUNTRIES) + 1).toString()
-            val secondRandomGenre = (Random().nextInt(ApiConstants.MAX_GENRES) + 1).toString()
+            val (firstCountryName, firstCountryCode) = getRandomCountry()
+            val (firstGenreName, firstGenreCode) = getRandomGenre()
+
+            val (secondCountryName, secondCountryCode) = getRandomCountry()
+            val (secondGenreName, secondGenreCode) = getRandomGenre()
+
             val premiers = async {
-                kinopoiskApi.getPremieres().mapToDifferentFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
+                kinopoiskApi.getPremieres().mapToDifferentFilmsModel()
             }
             val popular = async {
-                kinopoiskApi.getPopularFilms().mapToTopFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
+                kinopoiskApi.getTopFilms(type = ApiConstants.TOP_100).mapToTopFilmsModel()
             }
             val firstRandom = async {
-                kinopoiskApi.getFirstRandomFilms(
-                    countries = firstRandomCountry,
-                    genres = firstRandomGenre
-                ).mapToDifferentFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
+                kinopoiskApi.getRandomCategory(
+                    countries = firstCountryCode,
+                    genres = firstGenreCode
+                ).mapToDifferentFilmsModel(firstGenreName)
             }
             val top = async {
-                kinopoiskApi.getTopFilms().mapToTopFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
+                kinopoiskApi.getTopFilms(type = ApiConstants.TOP_250).mapToTopFilmsModel()
             }
             val secondRandom = async {
-                kinopoiskApi.getSecondRandomFilms(
-                    countries = secondRandomCountry,
-                    genres = secondRandomGenre
-                ).mapToDifferentFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
+                kinopoiskApi.getRandomCategory(
+                    countries = secondCountryCode,
+                    genres = secondGenreCode
+                ).mapToDifferentFilmsModel(secondGenreName)
             }
             val serial = async {
-                kinopoiskApi.getSerial().mapToDifferentFilmsModel().plus(TypeCardCategoryUiModel.FooterUiModel())
+                kinopoiskApi.getSerial().mapToDifferentFilmsModel()
             }
 
             listOf(
                 CategoryUiModel(
-                    category = R.string.home_premieres,
+                    typeCategory = TypeCategories.Premieres(
+                        nameCategory = context.getString(R.string.home_premieres)
+                    ),
                     films = premiers.await(),
                 ),
                 CategoryUiModel(
-                    category = R.string.home_popular,
+                    typeCategory = TypeCategories.Top(
+                        nameCategory = context.getString(R.string.home_popular),
+                        type = ApiConstants.TOP_100,
+                    ),
                     films = popular.await(),
                 ),
                 CategoryUiModel(
-                    category = R.string.home_random,
+                    typeCategory = TypeCategories.Random(
+                        nameCategory = "$firstCountryName $firstGenreName",
+                        countryCode = firstCountryCode,
+                        genresCode = firstGenreCode
+                    ),
                     films = firstRandom.await(),
                 ),
                 CategoryUiModel(
-                    category = R.string.home_top,
+                    typeCategory = TypeCategories.Top(
+                        nameCategory = context.getString(R.string.home_top),
+                        type = ApiConstants.TOP_250,
+                    ),
                     films = top.await(),
                 ),
                 CategoryUiModel(
-                    category = R.string.home_random,
+                    typeCategory = TypeCategories.Random(
+                        nameCategory = "$secondCountryName $secondGenreName",
+                        countryCode = secondCountryCode,
+                        genresCode = secondGenreCode
+                    ),
                     films = secondRandom.await(),
                 ),
                 CategoryUiModel(
-                    category = R.string.home_serials,
+                    typeCategory = TypeCategories.Serials(
+                        nameCategory = context.getString(R.string.home_serials),
+                        type = ApiConstants.TV_SERIES,
+                    ),
                     films = serial.await(),
                 ),
             )
