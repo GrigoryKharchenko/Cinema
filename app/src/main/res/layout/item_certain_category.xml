@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RippleBackground"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="@dimen/dp_8">
 
     <ImageView
         android:id="@+id/ivPreview"

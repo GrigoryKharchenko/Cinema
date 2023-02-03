@@ -42,6 +42,10 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="RippleBackground">
+        <item name="android:background">@drawable/ripple_effect</item>
+    </style>
+
     <style name="Text" />
 
     <style name="Text.White">
@@ -109,7 +113,7 @@
     </style>
 
     <style name="Text.HintGray.Ripple">
-        <item name="android:background">@drawable/click_text_ripple_effect</item>
+        <item name="android:background">@drawable/ripple_effect</item>
     </style>
 
     <style name="TitleToolbar" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
