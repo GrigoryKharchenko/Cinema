@@ -6,7 +6,7 @@ import kinopoisk.cinema.extension.firstCharToUpperCase
 import kinopoisk.cinema.presentation.screen.films.FilmModel
 import kinopoisk.cinema.presentation.screen.homepage.TypeCardCategoryUiModel
 
-private const val MAX_FILMS = 20
+private const val MAX_FILMS = 10
 
 fun FilmsResponse.mapToDifferentFilmsModel(genre: String): List<TypeCardCategoryUiModel> =
     this.anotherFilms.take(MAX_FILMS).map {
