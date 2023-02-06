@@ -11,8 +11,8 @@
         style="@style/Text.Black.Bold.18"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp_36"
-        android:layout_marginStart="@dimen/dp_26"
-        android:gravity="center||start"
+        android:layout_marginStart="@dimen/dp_36"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toStartOf="@id/tvAll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvAll"
-        style="@style/Text.Blue"
+        style="@style/Text.Blue.Ripple"
         android:layout_width="@dimen/dp_36"
         android:layout_height="@dimen/dp_36"
         android:layout_marginEnd="@dimen/dp_26"

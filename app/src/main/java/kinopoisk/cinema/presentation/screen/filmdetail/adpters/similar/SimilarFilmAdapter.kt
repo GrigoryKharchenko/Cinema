@@ -11,20 +11,28 @@ import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
 
-class SimilarFilmAdapter : ListAdapter<SimilarFilmModel, SimilarFilmViewHolder>(SimilarFilmDiffUtil()) {
+class SimilarFilmAdapter(
+    private val onFilmClick: (Int) -> Unit
+) : ListAdapter<SimilarFilmModel, SimilarFilmViewHolder>(SimilarFilmDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarFilmViewHolder =
         SimilarFilmViewHolder(ItemCertainCategoryBinding.bind(parent.inflate(R.layout.item_certain_category)))
 
     override fun onBindViewHolder(holder: SimilarFilmViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onFilmClick)
 }
 
 class SimilarFilmViewHolder(private val binding: ItemCertainCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(similarFilmModel: SimilarFilmModel) {
+    fun bind(
+        similarFilmModel: SimilarFilmModel,
+        onFilmClick: (Int) -> Unit,
+    ) {
         with(binding) {
             ivPreview.loadCropImage(similarFilmModel.poster)
             tvName.text = similarFilmModel.name
             tvRating.isVisible = false
+            root.setOnClickListener {
+                onFilmClick(similarFilmModel.id)
+            }
         }
     }
 }
