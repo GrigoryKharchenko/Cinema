@@ -10,17 +10,22 @@ import kinopoisk.cinema.databinding.ItemCertainCategoryBinding
 import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
 
-class FilmsAdapter : PagingDataAdapter<FilmModel, FilmsViewHolder>(FilmsDiffUtil()) {
+class FilmsAdapter(
+    private val onOpenFilm: (Int) -> Unit,
+) : PagingDataAdapter<FilmModel, FilmsViewHolder>(FilmsDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmsViewHolder =
         FilmsViewHolder(ItemCertainCategoryBinding.bind(parent.inflate(R.layout.item_certain_category)))
 
     override fun onBindViewHolder(holder: FilmsViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, onOpenFilm) }
     }
 }
 
 class FilmsViewHolder(private val binding: ItemCertainCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(filmModel: FilmModel) {
+    fun bind(
+        filmModel: FilmModel,
+        onOpenFilm: (Int) -> Unit,
+    ) {
         with(binding) {
             tvRating.text = filmModel.rating
             ivPreview.loadCropImage(filmModel.poster)
@@ -28,6 +33,9 @@ class FilmsViewHolder(private val binding: ItemCertainCategoryBinding) : Recycle
             tvGenre.text = filmModel.genre
             ivViewed.isVisible = filmModel.isViewed
             tvRating.isVisible = filmModel.isVisibleRating
+            root.setOnClickListener {
+                onOpenFilm(filmModel.id)
+            }
         }
     }
 }

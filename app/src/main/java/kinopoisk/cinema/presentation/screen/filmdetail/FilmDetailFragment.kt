@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,8 +13,10 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
+import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentFilmDetailsBinding
 import kinopoisk.cinema.di.ViewModelFactory
+import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
@@ -38,7 +41,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private val actorAdapter by lazy { StaffAdapter() }
     private val staffAdapter by lazy { StaffAdapter() }
     private val galleryAdapter by lazy { GalleryAdapter() }
-    private val similarFilmAdapter by lazy { SimilarFilmAdapter() }
+    private val similarFilmAdapter by lazy { SimilarFilmAdapter(onFilmClick = ::openSimilarFilm) }
 
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelFactory)[FilmDetailViewModel::class.java]
@@ -146,6 +149,13 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         }
     }
 
+    private fun openSimilarFilm(similarId: Int) {
+        addFragmentWithArgs<FilmDetailFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_FILM to similarId)
+        )
+    }
+
     private fun goBack() {
         parentFragmentManager.popBackStack()
     }
@@ -159,7 +169,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         }
         super.onDestroyView()
         _binding = null
-
     }
 
     companion object {

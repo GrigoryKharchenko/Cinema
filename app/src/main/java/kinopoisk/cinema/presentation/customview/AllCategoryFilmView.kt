@@ -1,7 +1,7 @@
 package kinopoisk.cinema.presentation.customview
 
 import android.content.Context
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import kinopoisk.cinema.R
 import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.databinding.ItemAllCategoryBinding
@@ -10,7 +10,7 @@ import kinopoisk.cinema.presentation.screen.homepage.certaincategory.TypeCardCat
 
 class AllCategoryFilmView constructor(
     context: Context,
-) : LinearLayout(context) {
+) : ConstraintLayout(context) {
 
     fun initUi(
         categoryUiModel: CategoryUiModel,
