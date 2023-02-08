@@ -81,7 +81,7 @@ class HomeFragment : Fragment(), HasAndroidInjector {
             when (homeUiState) {
                 is HomeUiState.Error -> {
                     tvError.isVisible = true
-                    ivTitle.isVisible = false
+                    appBar.isVisible = false
                     rvCertainCategory.isVisible = false
                     flProgress.isVisible = false
                 }
