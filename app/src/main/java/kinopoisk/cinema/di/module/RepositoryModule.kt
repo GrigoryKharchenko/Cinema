@@ -5,9 +5,9 @@ import dagger.Module
 import kinopoisk.cinema.data.repository.CategoryRepositoryImpl
 import kinopoisk.cinema.data.repository.DetailFilmRepositoryImpl
 import kinopoisk.cinema.data.repository.FilmsRepositoryImpl
-import kinopoisk.cinema.domain.CategoryRepository
-import kinopoisk.cinema.domain.DetailFilmRepository
-import kinopoisk.cinema.domain.FilmsRepository
+import kinopoisk.cinema.domain.reposittory.CategoryRepository
+import kinopoisk.cinema.domain.reposittory.DetailFilmRepository
+import kinopoisk.cinema.domain.reposittory.FilmsRepository
 
 @Module
 interface RepositoryModule {

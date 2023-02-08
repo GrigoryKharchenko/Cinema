@@ -1,4 +1,4 @@
-package kinopoisk.cinema.domain
+package kinopoisk.cinema.domain.reposittory
 
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel

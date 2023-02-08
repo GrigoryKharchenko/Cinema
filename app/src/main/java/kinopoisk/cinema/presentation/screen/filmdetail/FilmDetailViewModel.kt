@@ -3,7 +3,7 @@ package kinopoisk.cinema.presentation.screen.filmdetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kinopoisk.cinema.di.IoDispatcher
-import kinopoisk.cinema.domain.DetailFilmRepository
+import kinopoisk.cinema.domain.reposittory.DetailFilmRepository
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

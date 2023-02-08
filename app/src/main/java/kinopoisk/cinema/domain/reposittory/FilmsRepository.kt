@@ -1,4 +1,4 @@
-package kinopoisk.cinema.domain
+package kinopoisk.cinema.domain.reposittory
 
 import androidx.paging.PagingSource
 import kinopoisk.cinema.data.TypeCategories
