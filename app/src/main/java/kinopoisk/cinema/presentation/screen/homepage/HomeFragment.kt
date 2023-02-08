@@ -80,16 +80,19 @@ class HomeFragment : Fragment(), HasAndroidInjector {
         with(binding) {
             when (homeUiState) {
                 is HomeUiState.Error -> {
-                    ivError.isVisible = true
                     tvError.isVisible = true
-                    ivTitle.isVisible = false
+                    appBar.isVisible = false
                     rvCertainCategory.isVisible = false
                     flProgress.isVisible = false
                 }
-                is HomeUiState.Loading -> flProgress.isVisible = true
+                is HomeUiState.Loading -> {
+                    flProgress.isVisible = true
+                    appBar.isVisible = false
+                }
                 is HomeUiState.Success -> {
                     flProgress.isVisible = false
-                    adapter.submitList(homeUiState.films)
+                    appBar.isVisible = true
+                    ivTitle.isVisible = false
                 }
             }
         }
