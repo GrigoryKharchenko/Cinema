@@ -87,11 +87,11 @@ class HomeFragment : Fragment(), HasAndroidInjector {
                 }
                 is HomeUiState.Loading -> {
                     flProgress.isVisible = true
-                    ivTitle.isVisible = false
+                    appBar.isVisible = false
                 }
                 is HomeUiState.Success -> {
                     flProgress.isVisible = false
-                    ivTitle.isVisible = true
+                    appBar.isVisible = true
                     adapter.submitList(homeUiState.films)
                 }
             }
