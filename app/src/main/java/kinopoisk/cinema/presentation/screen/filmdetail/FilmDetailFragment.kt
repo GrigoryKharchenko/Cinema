@@ -21,6 +21,7 @@ import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
 import kinopoisk.cinema.extension.toStringOrEmpty
+import kinopoisk.cinema.presentation.screen.actor.ActorFragment
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
@@ -38,8 +39,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private var _binding: FragmentFilmDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val actorAdapter by lazy { StaffAdapter() }
-    private val staffAdapter by lazy { StaffAdapter() }
+    private val actorAdapter by lazy { StaffAdapter(onStaffClick = ::openDetailStaff) }
+    private val staffAdapter by lazy { StaffAdapter(onStaffClick = ::openDetailStaff) }
     private val galleryAdapter by lazy { GalleryAdapter() }
     private val similarFilmAdapter by lazy { SimilarFilmAdapter(onFilmClick = ::openSimilarFilm) }
 
@@ -156,18 +157,25 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         )
     }
 
+    private fun openDetailStaff(stuffId: Int) {
+        addFragmentWithArgs<ActorFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(ActorFragment.KEY_STAFF to stuffId)
+        )
+    }
+
     private fun goBack() {
         parentFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {
+        super.onDestroyView()
         with(binding) {
             rvStaff.adapter = null
             rvGallery.adapter = null
             rvSimilarFilm.adapter = null
             rvActors.adapter = null
         }
-        super.onDestroyView()
         _binding = null
     }
 

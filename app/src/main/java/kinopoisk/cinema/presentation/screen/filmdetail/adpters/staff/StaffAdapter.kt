@@ -10,22 +10,29 @@ import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.presentation.screen.filmdetail.model.StaffModel
 
-class StaffAdapter : ListAdapter<StaffModel, StaffViewHolder>(StaffDiffUtil()) {
+class StaffAdapter(private val onStaffClick: (Int) -> Unit) :
+    ListAdapter<StaffModel, StaffViewHolder>(StaffDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffViewHolder =
         StaffViewHolder(ItemStaffBinding.bind(parent.inflate(R.layout.item_staff)))
 
     override fun onBindViewHolder(holder: StaffViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onStaffClick)
 }
 
 class StaffViewHolder(private val binding: ItemStaffBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(staffModel: StaffModel,) {
+    fun bind(
+        staffModel: StaffModel,
+        onStaffClick: (Int) -> Unit
+    ) {
         with(binding) {
             tvNameActor.text = staffModel.name ?: itemView.context.getString(R.string.unknown)
             tvActorCharacter.text = staffModel.character ?: itemView.context.getString(R.string.unknown)
             ivPhotoActor.loadCropImage(staffModel.photo)
+            root.setOnClickListener {
+                onStaffClick(staffModel.id)
+            }
         }
     }
 }

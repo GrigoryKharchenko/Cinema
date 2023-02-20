@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolBar"
+            style="@style/TitleToolbar.TextBlack"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_left_gray" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/ivPhotoActor"
+        android:layout_width="@dimen/dp_156"
+        android:layout_height="@dimen/dp_200"
+        android:layout_marginStart="@dimen/dp_26"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        tools:src="@drawable/preview_background" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNameActor"
+        style="@style/Text.Black.Bold.16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPhotoActor"
+        app:layout_constraintTop_toTopOf="@id/ivPhotoActor"
+        tools:text="Name actor" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvProfession"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPhotoActor"
+        app:layout_constraintTop_toBottomOf="@id/tvNameActor"
+        tools:text="Profession" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitleBest"
+        style="@style/Text.Black.Bold.18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_26"
+        android:layout_marginTop="@dimen/dp_26"
+        android:text="@string/actor_title_best"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPhotoActor" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvAllBest"
+        style="@style/Text.Blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_26"
+        android:drawableEnd="@drawable/ic_next_arrow"
+        android:drawablePadding="@dimen/dp_8"
+        android:text="@string/home_all"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleBest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitleBest" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSimilarFilm"
+        style="@style/HorizontalRecycler"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_26"
+        android:layout_marginBottom="@dimen/dp_26"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleBest"
+        tools:listitem="@layout/item_certain_category" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitleFilmography"
+        style="@style/Text.Black.Bold.18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_26"
+        android:layout_marginTop="@dimen/dp_26"
+        android:text="@string/actor_title_filmography"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSimilarFilm" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvToList"
+        style="@style/Text.Blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_26"
+        android:drawableEnd="@drawable/ic_next_arrow"
+        android:drawablePadding="@dimen/dp_8"
+        android:text="@string/actor_to_list"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleFilmography"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitleFilmography" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCountFilm"
+        style="@style/Text.Gray.12"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintStart_toStartOf="@id/tvTitleFilmography"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleFilmography"
+        tools:text="@string/actor_count_films" />
+
+    <FrameLayout
+        android:id="@+id/flProgress"
+        style="@style/ProgressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
