@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentActorBinding
-import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.presentation.screen.actor.adapter.BestFilmsActorAdapter
@@ -26,7 +26,7 @@ class ActorFragment : Fragment(), HasAndroidInjector {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var defaultViewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ActorViewModel.Factory
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -36,12 +36,11 @@ class ActorFragment : Fragment(), HasAndroidInjector {
             ?: throw RuntimeException("${ActorFragment::class.java.simpleName} must have argument")
     }
 
-    private val adapter by lazy {
-        BestFilmsActorAdapter()
-    }
+    private val adapter = BestFilmsActorAdapter()
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, defaultViewModelFactory)[ActorViewModel::class.java]
+
+    private val viewModel: ActorViewModel by viewModels {
+        ActorViewModel.provideFactory(viewModelFactory, argument)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -75,7 +74,6 @@ class ActorFragment : Fragment(), HasAndroidInjector {
 
     private fun initViewModel() {
         with(viewModel) {
-            getActors(argument)
             launchWhenStarted(actorFlow, ::handleUiState)
         }
     }
@@ -84,19 +82,27 @@ class ActorFragment : Fragment(), HasAndroidInjector {
         when (actorUiState) {
             ActorUiState.Loading -> binding.flProgress.isVisible = true
             is ActorUiState.Success -> setActor(actorUiState)
-            ActorUiState.Error -> binding.flProgress.isVisible = false
+            ActorUiState.Error -> setError()
         }
     }
 
-    private fun setActor(successUiState: ActorUiState.Success) {
+    private fun setActor(state: ActorUiState.Success) {
         with(binding) {
             flProgress.isVisible = false
-            ivPhotoActor.loadCropImage(successUiState.actorModel.photo)
-            tvNameActor.text = successUiState.actorModel.name
-            tvProfession.text = successUiState.actorModel.profession
-            val countFilms = successUiState.actorModel.countFilm
+            ivPhotoActor.loadCropImage(state.actorModel.photo)
+            tvNameActor.text = state.actorModel.name
+            tvProfession.text = state.actorModel.profession
+            val countFilms = state.actorModel.countFilm
             tvCountFilm.text = resources.getQuantityString(R.plurals.plurals_film, countFilms, countFilms)
-            adapter.submitList(successUiState.actorModel.bestFilms)
+            adapter.submitList(state.actorModel.bestFilms)
+        }
+    }
+
+    private fun setError() {
+        with(binding) {
+            group.isGone = true
+            tvError.isVisible = true
+            flProgress.isGone = true
         }
     }
 

@@ -23,6 +23,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="ivPhotoActor,tvNameActor,tvProfession,tvAllBest,tvTitleBest,rvSimilarFilm,tvTitleFilmography,tvToList" />
+
     <ImageView
         android:id="@+id/ivPhotoActor"
         android:layout_width="@dimen/dp_156"
@@ -31,6 +37,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBar"
         tools:src="@drawable/preview_background" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvError"
+        style="@style/Text.Black.18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_error"
+        android:text="@string/home_error"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvNameActor"
@@ -126,8 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         app:layout_constraintStart_toStartOf="@id/tvTitleFilmography"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleFilmography"
-        tools:text="@string/actor_count_films" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitleFilmography" />
 
     <FrameLayout
         android:id="@+id/flProgress"

@@ -5,7 +5,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import kinopoisk.cinema.di.ViewModelKey
-import kinopoisk.cinema.presentation.screen.actor.ActorViewModel
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailViewModel
 import kinopoisk.cinema.presentation.screen.homepage.HomeViewModel
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileViewModel
@@ -33,9 +32,4 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(FilmDetailViewModel::class)
     fun bindFilmDetailViewModel(viewModel: FilmDetailViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ActorViewModel::class)
-    fun bindActorViewModel(viewModel: ActorViewModel): ViewModel
 }
