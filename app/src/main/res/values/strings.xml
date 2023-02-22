@@ -70,4 +70,15 @@
         <item quantity="many">%d фильмов</item>
         <item quantity="other">%d фильмов</item>
     </plurals>
+
+    <!-- GalleryFragment -->
+    <string name="gallery_still">Кадры</string>
+    <string name="gallery_shooting">Изображения со съемок</string>
+    <string name="gallery_poster">Постеры</string>
+    <string name="gallery_fan_art">Фан-арты</string>
+    <string name="gallery_concept">Концепт-арты</string>
+    <string name="gallery_wallpaper">Обои</string>
+    <string name="gallery_cover">Обложки</string>
+    <string name="gallery_screenshot">Скриншоты</string>
+    <string name="gallery_promo">Промо</string>
 </resources>

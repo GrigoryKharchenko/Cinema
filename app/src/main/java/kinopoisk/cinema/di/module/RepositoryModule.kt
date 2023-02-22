@@ -7,6 +7,7 @@ import kinopoisk.cinema.data.repository.CategoryRepositoryImpl
 import kinopoisk.cinema.data.repository.DetailFilmRepositoryImpl
 import kinopoisk.cinema.data.repository.FilmViewedViewedRepositoryImpl
 import kinopoisk.cinema.data.repository.FilmsRepositoryImpl
+import kinopoisk.cinema.data.repository.GalleryRepositoryImpl
 import kinopoisk.cinema.data.repository.StaffRepositoryImpl
 import kinopoisk.cinema.data.repository.SearchFilmRepositoryImpl
 import kinopoisk.cinema.domain.repository.ActorRepository
@@ -14,6 +15,7 @@ import kinopoisk.cinema.domain.repository.CategoryRepository
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
 import kinopoisk.cinema.domain.repository.FilmViewedRepository
 import kinopoisk.cinema.domain.repository.FilmsRepository
+import kinopoisk.cinema.domain.repository.GalleryRepository
 import kinopoisk.cinema.domain.repository.StaffRepository
 import kinopoisk.cinema.domain.repository.SearchFilmRepository
 
@@ -31,6 +33,9 @@ interface RepositoryModule {
 
     @Binds
     fun bindActorRepository(repositoryImpl: ActorRepositoryImpl): ActorRepository
+
+    @Binds
+    fun bindGalleryRepository(repositoryImpl: GalleryRepositoryImpl): GalleryRepository
 
     @Binds
     fun bindStaffRepository(repositoryImpl: StaffRepositoryImpl): StaffRepository

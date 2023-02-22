@@ -58,9 +58,13 @@ interface KinopoiskApi {
         @Query("filmId") id: Int
     ): List<StaffResponse>
 
-    @GET("/api/v2.2/films/{id}/images?page=1")
+    @GET("/api/v2.2/films/{id}/images")
     suspend fun getGallery(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Query("page")
+        @androidx.annotation.IntRange(from = 1)
+        page: Int = ApiConstants.FIRST_PAGE,
+        @Query("type") type: String = ""
     ): GalleryResponse
 
     @GET("/api/v2.2/films/{id}/similars")
