@@ -9,6 +9,7 @@
         android:layout_width="@dimen/dp_192"
         android:layout_height="@dimen/dp_108"
         android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginVertical="@dimen/dp_8"
         tools:src="@drawable/preview_background" />
 
 </LinearLayout>

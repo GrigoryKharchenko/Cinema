@@ -3,6 +3,7 @@ package kinopoisk.cinema.data.repository
 import kinopoisk.cinema.data.mapper.mapToDetailFilmModel
 import kinopoisk.cinema.data.mapper.mapToGalleryModel
 import kinopoisk.cinema.data.mapper.mapToSimilarsFilmsModel
+import kinopoisk.cinema.data.mapper.mapToSizePhotos
 import kinopoisk.cinema.data.mapper.mapToStaffModel
 import kinopoisk.cinema.data.network.KinopoiskApi
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
@@ -10,6 +11,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.StaffModel
+import kinopoisk.cinema.presentation.screen.gallery.TypeSizePhotoUiModel
 import javax.inject.Inject
 
 class DetailFilmRepositoryImpl @Inject constructor(
@@ -21,10 +23,8 @@ class DetailFilmRepositoryImpl @Inject constructor(
             kinopoiskApi.getDetailFilm(id).mapToDetailFilmModel()
         }
 
-    override suspend fun getGallery(id: Int): Result<List<GalleryModel>> =
-        runCatching {
-            kinopoiskApi.getGallery(id).mapToGalleryModel()
-        }
+    override suspend fun getGallery(id: Int, type: String): Result<List<GalleryModel>> =
+        runCatching { kinopoiskApi.getGallery(id, type = type).mapToGalleryModel() }
 
     override suspend fun getSimilar(id: Int): Result<List<SimilarFilmModel>> =
         runCatching {

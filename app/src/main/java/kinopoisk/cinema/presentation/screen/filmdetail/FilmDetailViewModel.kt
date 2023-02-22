@@ -88,7 +88,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getGallery() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getGallery(filmId)
+            detailFilmRepository.getGallery(filmId,"")
                 .onSuccess { gallery ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(

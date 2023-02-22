@@ -27,6 +27,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapte
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
+import kinopoisk.cinema.presentation.screen.gallery.GalleryFragment
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -82,6 +83,9 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
+            tvCountGallery.setOnClickListener {
+                openGalleryFragment(argument)
+            }
         }
     }
 
@@ -170,6 +174,13 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         addFragmentWithArgs<FullScreenPhotoFragment>(
             containerId = R.id.fragmentContainer,
             args = bundleOf(KEY_PHOTO to galleryModel.image)
+        )
+    }
+
+    private fun openGalleryFragment(filmId: Int) {
+        addFragmentWithArgs<GalleryFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_FILM to filmId)
         )
     }
 

@@ -7,6 +7,7 @@ import kinopoisk.cinema.presentation.screen.actor.ActorFragment
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
 import kinopoisk.cinema.presentation.screen.films.FilmsFragment
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
+import kinopoisk.cinema.presentation.screen.gallery.GalleryFragment
 import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
@@ -41,4 +42,7 @@ interface FragmentModule {
 
     @ContributesAndroidInjector
     fun bindFullScreenPhotoFragment(): FullScreenPhotoFragment
+
+    @ContributesAndroidInjector
+    fun bindGalleryFragment(): GalleryFragment
 }
