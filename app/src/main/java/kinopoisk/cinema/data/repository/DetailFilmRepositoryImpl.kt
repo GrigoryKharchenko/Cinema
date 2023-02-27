@@ -22,7 +22,9 @@ class DetailFilmRepositoryImpl @Inject constructor(
         }
 
     override suspend fun getGallery(id: Int): Result<List<GalleryModel>> =
-        runCatching { kinopoiskApi.getGallery(id).mapToGalleryModel() }
+        runCatching {
+            kinopoiskApi.getGallery(id).mapToGalleryModel()
+        }
 
     override suspend fun getSimilar(id: Int): Result<List<SimilarFilmModel>> =
         runCatching {

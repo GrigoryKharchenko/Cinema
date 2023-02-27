@@ -26,6 +26,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAd
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
+import kotlinx.coroutines.internal.synchronized
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
