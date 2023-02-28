@@ -120,6 +120,14 @@
         <item name="titleCentered">true</item>
     </style>
 
+    <style name="TitleToolbar.BlackBackground" parent="@style/Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">@color/black_background_color</item>
+    </style>
+
+    <style name="BlackBackground">
+        <item name="android:background">@color/black_background_color</item>
+    </style>
+
     <style name="TitleToolbar.TextBlack">
         <item name="titleTextColor">@color/black_text_color</item>
     </style>
