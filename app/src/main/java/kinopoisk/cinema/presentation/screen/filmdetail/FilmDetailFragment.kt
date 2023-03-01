@@ -21,12 +21,12 @@ import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
 import kinopoisk.cinema.extension.toStringOrEmpty
-import kinopoisk.cinema.presentation.screen.detailphoto.DetailPhotoFragment
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
+import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -159,7 +159,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun openDetailPhoto(galleryModel: GalleryModel) {
-        addFragmentWithArgs<DetailPhotoFragment>(
+        addFragmentWithArgs<FullScreenPhotoFragment>(
             containerId = R.id.fragmentContainer,
             args = bundleOf(KEY_PHOTO to galleryModel.image)
         )

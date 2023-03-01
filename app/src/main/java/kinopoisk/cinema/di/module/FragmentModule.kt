@@ -3,9 +3,9 @@ package kinopoisk.cinema.di.module
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import kinopoisk.cinema.presentation.main.MainFragment
-import kinopoisk.cinema.presentation.screen.detailphoto.DetailPhotoFragment
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
 import kinopoisk.cinema.presentation.screen.films.FilmsFragment
+import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
 import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
@@ -36,5 +36,5 @@ interface FragmentModule {
     fun bindFilmsFragment(): FilmsFragment
 
     @ContributesAndroidInjector
-    fun bindDetailPhotoFragment(): DetailPhotoFragment
+    fun bindFullScreenPhotoFragment(): FullScreenPhotoFragment
 }

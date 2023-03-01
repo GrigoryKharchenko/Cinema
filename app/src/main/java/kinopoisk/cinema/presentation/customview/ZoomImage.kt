@@ -11,11 +11,11 @@ import android.view.View
 import androidx.annotation.Nullable
 import androidx.appcompat.widget.AppCompatImageView
 
-
+// TODO Необходимо заменить, либо переписать
 class ZoomImage : AppCompatImageView, View.OnTouchListener,
     GestureDetector.OnGestureListener {
 
-    var coordinate: Pair<Float, Float>? = null
+    private var coordinate: Pair<Float, Float>? = null
 
     private var mContext: Context? = null
     private var mScaleDetector: ScaleGestureDetector? = null
@@ -229,17 +229,17 @@ class ZoomImage : AppCompatImageView, View.OnTouchListener,
         v1: Float
     ): Boolean = FALSE_VALUE_EVENT
 
-    companion object {
-        private const val IMAGE_STATE_NONE = 0
-        private const val IMAGE_STATE_DRAG = 1
-        private const val IMAGE_STATE_ZOOM = 2
+    private companion object {
+        const val IMAGE_STATE_NONE = 0
+        const val IMAGE_STATE_DRAG = 1
+        const val IMAGE_STATE_ZOOM = 2
 
-        private const val MAX_SCALE_VALUE = 4f
-        private const val MIN_SCALE_VALUE = 1f
-        private const val SAVE_SCALE_VALUE = 1f
+        const val MAX_SCALE_VALUE = 4f
+        const val MIN_SCALE_VALUE = 1f
+        const val SAVE_SCALE_VALUE = 1f
 
-        private const val ZERO_VALUE = 0f
-        private const val ARRAY_SIZE = 9
-        private const val FALSE_VALUE_EVENT = false
+        const val ZERO_VALUE = 0f
+        const val ARRAY_SIZE = 9
+        const val FALSE_VALUE_EVENT = false
     }
 }

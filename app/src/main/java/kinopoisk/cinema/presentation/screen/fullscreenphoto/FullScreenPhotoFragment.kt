@@ -1,4 +1,4 @@
-package kinopoisk.cinema.presentation.screen.detailphoto
+package kinopoisk.cinema.presentation.screen.fullscreenphoto
 
 import android.content.Context
 import android.os.Bundle
@@ -10,23 +10,21 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import kinopoisk.cinema.databinding.FragmentDetailPhotoBinding
+import kinopoisk.cinema.databinding.FragmentFullScreenPhotoBinding
 import kinopoisk.cinema.extension.loadImage
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
-import kinopoisk.cinema.presentation.screen.films.FilmsFragment
 import javax.inject.Inject
 
-class DetailPhotoFragment : Fragment(), HasAndroidInjector {
+class FullScreenPhotoFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    private var _binding: FragmentDetailPhotoBinding? = null
+    private var _binding: FragmentFullScreenPhotoBinding? = null
     private val binding get() = _binding!!
 
     private val argument: String by lazy {
-        arguments?.getString(FilmDetailFragment.KEY_PHOTO)
-            ?: throw RuntimeException("${FilmsFragment::class.java.simpleName} must have argument")
+        requireNotNull(arguments?.getString(FilmDetailFragment.KEY_PHOTO))
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -41,7 +39,7 @@ class DetailPhotoFragment : Fragment(), HasAndroidInjector {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailPhotoBinding.inflate(layoutInflater)
+        _binding = FragmentFullScreenPhotoBinding.inflate(layoutInflater)
         return binding.root
     }
 

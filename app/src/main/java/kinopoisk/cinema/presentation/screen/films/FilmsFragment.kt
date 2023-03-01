@@ -32,8 +32,7 @@ class FilmsFragment : Fragment(), HasAndroidInjector {
     }
 
     private val argument: TypeCategories by lazy {
-        arguments?.getSerializable(KEY_FILMS) as? TypeCategories
-            ?: throw RuntimeException("${FilmsFragment::class.java.simpleName} must have argument")
+        requireNotNull(arguments?.getSerializable(KEY_FILMS) as? TypeCategories)
     }
 
     private val viewModel: FilmsViewModel by viewModels {
