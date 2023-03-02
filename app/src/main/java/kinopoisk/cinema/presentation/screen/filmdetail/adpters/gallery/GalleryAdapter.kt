@@ -10,17 +10,27 @@ import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 
-class GalleryAdapter : ListAdapter<GalleryModel, GalleryViewHolder>(GalleryDiffUtil()) {
+class GalleryAdapter(
+    private val onPhotoClick: (GalleryModel) -> Unit
+) : ListAdapter<GalleryModel, GalleryViewHolder>(GalleryDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder =
         GalleryViewHolder(ItemGalleryBinding.bind(parent.inflate(R.layout.item_gallery)))
 
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onPhotoClick)
 }
 
 class GalleryViewHolder(private val binding: ItemGalleryBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(galleryModel: GalleryModel) {
-        binding.ivGallery.loadCropImage(galleryModel.image)
+    fun bind(
+        galleryModel: GalleryModel,
+        onPhotoClick: (GalleryModel) -> Unit
+    ) {
+        with(binding) {
+            ivGallery.loadCropImage(galleryModel.image)
+            root.setOnClickListener {
+                onPhotoClick(galleryModel)
+            }
+        }
     }
 }
 

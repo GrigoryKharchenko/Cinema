@@ -25,6 +25,8 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAd
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
+import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -40,7 +42,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
 
     private val actorAdapter by lazy { StaffAdapter() }
     private val staffAdapter by lazy { StaffAdapter() }
-    private val galleryAdapter by lazy { GalleryAdapter() }
+    private val galleryAdapter by lazy { GalleryAdapter(onPhotoClick = ::openDetailPhoto) }
     private val similarFilmAdapter by lazy { SimilarFilmAdapter(onFilmClick = ::openSimilarFilm) }
 
     private val viewModel by lazy {
@@ -156,6 +158,13 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         )
     }
 
+    private fun openDetailPhoto(galleryModel: GalleryModel) {
+        addFragmentWithArgs<FullScreenPhotoFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_PHOTO to galleryModel.image)
+        )
+    }
+
     private fun goBack() {
         parentFragmentManager.popBackStack()
     }
@@ -173,6 +182,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
 
     companion object {
         const val KEY_FILM = "filmId"
+        const val KEY_PHOTO = "photoId"
         private const val MAX_LINE_COLLAPSED = 5
         private const val INITIAL_IS_COLLAPSED = true
     }
