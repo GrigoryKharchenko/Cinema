@@ -27,4 +27,18 @@
     <string name="film_detail_film_worked">Над фильмом работали</string>
     <string name="film_detail_gallery">Галерея</string>
     <string name="film_detail_similar_film">Похожие фильмы</string>
+
+    <!-- ActorFragment -->
+    <string name="actor_title_best">Лучшее</string>
+    <string name="actor_title_filmography">Фильмография</string>
+    <string name="actor_to_list">К списку</string>
+
+    <plurals name="plurals_film">
+        <item quantity="zero">нет фильмов</item>
+        <item quantity="one">%d фильм</item>
+        <item quantity="two">%d фильма</item>
+        <item quantity="few">%d фильма</item>
+        <item quantity="many">%d фильмов</item>
+        <item quantity="other">%d фильмов</item>
+    </plurals>
 </resources>

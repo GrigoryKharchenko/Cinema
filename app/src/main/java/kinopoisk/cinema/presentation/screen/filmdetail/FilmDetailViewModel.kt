@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// TODO Это пиздец
 class FilmDetailViewModel @Inject constructor(
     private val detailFilmRepository: DetailFilmRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,

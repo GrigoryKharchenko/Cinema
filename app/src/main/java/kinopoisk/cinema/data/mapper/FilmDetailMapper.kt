@@ -59,6 +59,7 @@ private fun DetailFilmResponse.mapToDetailFilm(): String {
     val countries = countries.joinToString { countries -> countries.country }
     val genres = genres.joinToString { it.genre.firstCharToUpperCase() }
     val name = nameRu ?: nameEn ?: nameOriginal
+    // TODO c локалью беда будет и почему в null, а не в ""
     val duration = if (duration != null) "$duration мин" else null
     val ratingAge = ratingAgeLimits ?: ratingMpaa
 

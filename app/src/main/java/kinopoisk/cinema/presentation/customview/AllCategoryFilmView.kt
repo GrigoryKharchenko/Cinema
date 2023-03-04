@@ -9,6 +9,7 @@ import kinopoisk.cinema.databinding.ItemAllCategoryBinding
 import kinopoisk.cinema.presentation.screen.homepage.CategoryUiModel
 import kinopoisk.cinema.presentation.screen.homepage.certaincategory.TypeCardCategoryAdapter
 
+// TODO почему унаслндовался от ConstraintLayout
 class AllCategoryFilmView constructor(
     context: Context,
 ) : ConstraintLayout(context) {

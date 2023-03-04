@@ -1,5 +1,6 @@
 package kinopoisk.cinema.data.network
 
+import kinopoisk.cinema.data.network.response.ActorResponse
 import kinopoisk.cinema.data.network.response.DetailFilmResponse
 import kinopoisk.cinema.data.network.response.FilmsResponse
 import kinopoisk.cinema.data.network.response.GalleryResponse
@@ -65,4 +66,9 @@ interface KinopoiskApi {
     suspend fun getSimilars(
         @Path("id") id: Int
     ): SimilarsResponse
+
+    @GET("/api/v1/staff/{id}")
+    suspend fun getActor(
+        @Path("id") id: Int
+    ): ActorResponse
 }
