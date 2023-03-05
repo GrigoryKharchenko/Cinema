@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentFilmDetailsBinding
-import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
@@ -33,7 +32,7 @@ import javax.inject.Inject
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
 
     @Inject
-    lateinit var defaultViewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: FilmDetailViewModel.Factory
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -41,14 +40,17 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private var _binding: FragmentFilmDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
 
+    private val argument: Int by lazy {
+        requireNotNull(arguments?.getInt(KEY_FILM))
+    }
 
     private val actorAdapter by lazy { StaffAdapter(onStaffClick = ::openDetailStaff) }
     private val staffAdapter by lazy { StaffAdapter(onStaffClick = ::openDetailStaff) }
     private val galleryAdapter by lazy { GalleryAdapter(onPhotoClick = ::openDetailPhoto) }
     private val similarFilmAdapter by lazy { SimilarFilmAdapter(onFilmClick = ::openSimilarFilm) }
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, defaultViewModelFactory)[FilmDetailViewModel::class.java]
+    private val viewModel: FilmDetailViewModel by viewModels {
+        FilmDetailViewModel.provideFactory(viewModelFactory, argument)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -73,8 +75,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         initViewModel()
     }
 
-    private fun getArgs(): Int = arguments?.getInt(KEY_FILM) ?: 0
-
     private fun initUi() {
         with(binding) {
             toolbar.setNavigationOnClickListener { goBack() }
@@ -87,7 +87,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
 
     private fun initViewModel() {
         with(viewModel) {
-            getFilmDetail(getArgs())
             launchWhenStarted(uiStateFlow, ::handleUiState)
         }
     }

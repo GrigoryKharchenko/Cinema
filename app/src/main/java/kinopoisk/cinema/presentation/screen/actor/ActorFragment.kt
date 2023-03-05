@@ -32,12 +32,10 @@ class ActorFragment : Fragment(), HasAndroidInjector {
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     private val argument: Int by lazy {
-        arguments?.getInt(KEY_STAFF)
-            ?: throw RuntimeException("${ActorFragment::class.java.simpleName} must have argument")
+        requireNotNull(arguments?.getInt(KEY_STAFF))
     }
 
     private val adapter = BestFilmsActorAdapter()
-
 
     private val viewModel: ActorViewModel by viewModels {
         ActorViewModel.provideFactory(viewModelFactory, argument)
