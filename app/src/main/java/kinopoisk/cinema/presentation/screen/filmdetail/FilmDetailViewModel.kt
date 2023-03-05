@@ -1,7 +1,11 @@
 package kinopoisk.cinema.presentation.screen.filmdetail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kinopoisk.cinema.di.IoDispatcher
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
@@ -10,20 +14,24 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 // TODO Это пиздец
-class FilmDetailViewModel @Inject constructor(
+class FilmDetailViewModel @AssistedInject constructor(
     private val detailFilmRepository: DetailFilmRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @Assisted private val filmId: Int
 ) : ViewModel() {
 
     private val _uiStateFlow = MutableStateFlow<FilmDetailUiState>(FilmDetailUiState.Loading)
     val uiStateFlow = _uiStateFlow.asStateFlow()
 
-    fun getFilmDetail(id: Int) {
+    init {
+        getFilmDetail()
+    }
+
+    private fun getFilmDetail() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getFilmDetail(id)
+            detailFilmRepository.getFilmDetail(filmId)
                 .onSuccess { filmDetailModel ->
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -32,9 +40,9 @@ class FilmDetailViewModel @Inject constructor(
                             )
                         )
                     )
-                    getStaff(id)
-                    getGallery(id)
-                    getSimilar(id)
+                    getStaff()
+                    getGallery()
+                    getSimilar()
                 }.onFailure {
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -49,9 +57,9 @@ class FilmDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getStaff(id: Int) {
+    private fun getStaff() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getStaff(id)
+            detailFilmRepository.getStaff(filmId)
                 .onSuccess { staff ->
                     val actors = staff.filter { it.profession == TypeStaff.ACTOR }
                     val filmmakers = staff.filter { it.profession != TypeStaff.ACTOR }
@@ -78,9 +86,9 @@ class FilmDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getGallery(id: Int) {
+    private fun getGallery() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getGallery(id)
+            detailFilmRepository.getGallery(filmId)
                 .onSuccess { gallery ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
@@ -102,9 +110,9 @@ class FilmDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getSimilar(id: Int) {
+    private fun getSimilar() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getSimilar(id)
+            detailFilmRepository.getSimilar(filmId)
                 .onSuccess { similar ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
@@ -123,6 +131,23 @@ class FilmDetailViewModel @Inject constructor(
                         ) ?: uiState
                     }
                 }
+        }
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(filmId: Int): FilmDetailViewModel
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    companion object {
+        fun provideFactory(
+            assistedFactory: Factory,
+            filmId: Int
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return assistedFactory.create(filmId) as T
+            }
         }
     }
 }
