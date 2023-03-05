@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:collapsedTitleTextAppearance="@style/WhiteTextCollapsingToolbar"
+            app:contentScrim="@color/black"
+            app:elevation="0dp"
             app:expandedTitleTextAppearance="@style/TransparentTextCollapsingToolbar"
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
 

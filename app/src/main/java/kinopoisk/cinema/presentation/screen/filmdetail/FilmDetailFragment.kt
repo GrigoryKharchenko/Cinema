@@ -163,7 +163,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private fun openDetailStaff(stuffId: Int) {
         addFragmentWithArgs<ActorFragment>(
             containerId = R.id.fragmentContainer,
-            args = bundleOf(ActorFragment.KEY_STAFF to stuffId))
+            args = bundleOf(ActorFragment.KEY_STAFF to stuffId)
+        )
     }
 
     private fun openDetailPhoto(galleryModel: GalleryModel) {
