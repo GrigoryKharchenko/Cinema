@@ -7,8 +7,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
 
-class FilmDetailMapper {
-
+class FilmDetailMapperTest {
 
     private val detailFilm = "rating nameFilm\nreleased, Genre\ncountry, duration мин, rating"
 
@@ -53,7 +52,6 @@ class FilmDetailMapper {
         //then
         Assertions.assertEquals(to, result)
     }
-
 
     @Test
     fun `when mapToDetailFilm - then success`() {

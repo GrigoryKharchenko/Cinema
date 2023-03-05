@@ -4,13 +4,12 @@ import kinopoisk.cinema.data.network.response.CountryResponse
 import kinopoisk.cinema.data.network.response.FilmResponse
 import kinopoisk.cinema.data.network.response.FilmsResponse
 import kinopoisk.cinema.data.network.response.GenreResponse
-import kinopoisk.cinema.extension.firstCharToUpperCase
 import kinopoisk.cinema.presentation.screen.films.FilmModel
 import kinopoisk.cinema.presentation.screen.homepage.TypeCardCategoryUiModel
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
 
-class FilmsMapper {
+class FilmsMapperTest {
 
     private val filmsResponse = FilmsResponse(
         anotherFilms = listOf(
@@ -64,8 +63,8 @@ class FilmsMapper {
             rating = "rating",
             isViewed = false,
             name = "nameFilm",
-            genre = "genre".firstCharToUpperCase(),
-            isVisibleRating = ("rating").isNotEmpty()
+            genre = "Genre",
+            isVisibleRating = true
         )
     )
 
@@ -95,8 +94,8 @@ class FilmsMapper {
         rating = "rating",
         isViewed = false,
         name = "nameFilm",
-        genre = "genre".firstCharToUpperCase(),
-        isVisibleRating = ("rating").isNotEmpty()
+        genre = "Genre",
+        isVisibleRating = true
     )
 
     @Test
