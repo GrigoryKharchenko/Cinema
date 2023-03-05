@@ -5,10 +5,9 @@ import dagger.Module
 import kinopoisk.cinema.data.network.ApiKeyInterceptor
 import okhttp3.Interceptor
 
-// TODO interface
 @Module
-abstract class InterceptorModule {
+interface InterceptorModule {
 
     @Binds
-    abstract fun bindInterceptor(apiKeyInterceptor: ApiKeyInterceptor): Interceptor
+    fun bindInterceptor(apiKeyInterceptor: ApiKeyInterceptor): Interceptor
 }

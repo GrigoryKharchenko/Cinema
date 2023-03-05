@@ -40,5 +40,4 @@ class GalleryDiffUtil : DiffUtil.ItemCallback<GalleryModel>() {
 
     override fun areContentsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean =
         oldItem == newItem
-
 }

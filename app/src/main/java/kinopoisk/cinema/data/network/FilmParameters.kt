@@ -1,12 +1,9 @@
 package kinopoisk.cinema.data.network
 
-// TODO Add unit test
 object FilmParameters {
 
-    // TODO private
-    val countries = listOf("США", "Швейцария", "Франция", "Польша", "Великобритания", "Швеция", "Индия", "Испания", "Германия", "Италия")
-    // TODO private
-    val genres = listOf("Триллер", "Драма", "Криминал", "Мелодрама", "Детектив", "Фантастика", "Приключения")
+    private val countries = listOf("США", "Швейцария", "Франция", "Польша", "Великобритания", "Швеция", "Индия", "Испания", "Германия", "Италия")
+    private val genres = listOf("Триллер", "Драма", "Криминал", "Мелодрама", "Детектив", "Фантастика", "Приключения")
 
     fun getRandomCountry(): Pair<String, String> {
         val countryIndex = countries.indices.random()

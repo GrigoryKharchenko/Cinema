@@ -9,7 +9,7 @@ import kinopoisk.cinema.data.network.ApiConstants
 import kinopoisk.cinema.data.network.FilmParameters.getRandomCountry
 import kinopoisk.cinema.data.network.FilmParameters.getRandomGenre
 import kinopoisk.cinema.data.network.KinopoiskApi
-import kinopoisk.cinema.domain.CategoryRepository
+import kinopoisk.cinema.domain.repository.CategoryRepository
 import kinopoisk.cinema.presentation.screen.homepage.CategoryUiModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

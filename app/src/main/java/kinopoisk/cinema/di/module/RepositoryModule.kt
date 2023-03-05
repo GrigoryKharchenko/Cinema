@@ -6,10 +6,10 @@ import kinopoisk.cinema.data.repository.ActorRepositoryImpl
 import kinopoisk.cinema.data.repository.CategoryRepositoryImpl
 import kinopoisk.cinema.data.repository.DetailFilmRepositoryImpl
 import kinopoisk.cinema.data.repository.FilmsRepositoryImpl
-import kinopoisk.cinema.domain.ActorRepository
-import kinopoisk.cinema.domain.CategoryRepository
-import kinopoisk.cinema.domain.DetailFilmRepository
-import kinopoisk.cinema.domain.FilmsRepository
+import kinopoisk.cinema.domain.repository.ActorRepository
+import kinopoisk.cinema.domain.repository.CategoryRepository
+import kinopoisk.cinema.domain.repository.DetailFilmRepository
+import kinopoisk.cinema.domain.repository.FilmsRepository
 
 @Module
 interface RepositoryModule {

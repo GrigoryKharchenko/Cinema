@@ -11,7 +11,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kinopoisk.cinema.data.TypeCategories
-import kinopoisk.cinema.domain.FilmsRepository
+import kinopoisk.cinema.domain.repository.FilmsRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

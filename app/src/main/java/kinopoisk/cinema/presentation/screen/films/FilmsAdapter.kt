@@ -46,5 +46,4 @@ class FilmsDiffUtil : DiffUtil.ItemCallback<FilmModel>() {
 
     override fun areContentsTheSame(oldItem: FilmModel, newItem: FilmModel): Boolean =
         oldItem == newItem
-
 }

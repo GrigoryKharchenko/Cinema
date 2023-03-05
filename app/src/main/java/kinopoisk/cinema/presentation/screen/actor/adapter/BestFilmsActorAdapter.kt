@@ -8,6 +8,7 @@ import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.ItemCertainCategoryBinding
 import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
+import kinopoisk.cinema.presentation.screen.actor.BestFilmsActorModel
 
 class BestFilmsActorAdapter :
     ListAdapter<BestFilmsActorModel, BestFilmsActorViewHolder>(BestFilmsActorDiffUtil()) {
@@ -41,5 +42,3 @@ class BestFilmsActorDiffUtil : DiffUtil.ItemCallback<BestFilmsActorModel>() {
     override fun areContentsTheSame(oldItem: BestFilmsActorModel, newItem: BestFilmsActorModel): Boolean =
         oldItem == newItem
 }
-
-

@@ -2,7 +2,7 @@ package kinopoisk.cinema.data.repository
 
 import kinopoisk.cinema.data.mapper.mapToActorModel
 import kinopoisk.cinema.data.network.KinopoiskApi
-import kinopoisk.cinema.domain.ActorRepository
+import kinopoisk.cinema.domain.repository.ActorRepository
 import kinopoisk.cinema.presentation.screen.actor.ActorModel
 import javax.inject.Inject
 
