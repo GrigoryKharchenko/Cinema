@@ -7,7 +7,6 @@ import kinopoisk.cinema.data.network.response.SimilarResponse
 import kinopoisk.cinema.data.network.response.SimilarsResponse
 import kinopoisk.cinema.data.network.response.StaffResponse
 import kinopoisk.cinema.extension.firstCharToUpperCase
-import kinopoisk.cinema.presentation.screen.filmdetail.TypeStaff
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
@@ -55,14 +54,12 @@ fun DetailFilmResponse.mapToDetailFilmModel(): FilmDetailModel =
         name = nameRu ?: nameEn ?: nameOriginal,
     )
 
-private fun DetailFilmResponse.mapToDetailFilm(): String {
+ fun DetailFilmResponse.mapToDetailFilm(): String {
     val countries = countries.joinToString { countries -> countries.country }
     val genres = genres.joinToString { it.genre.firstCharToUpperCase() }
     val name = nameRu ?: nameEn ?: nameOriginal
-    // TODO c локалью беда будет и почему в null, а не в ""
-    val duration = if (duration != null) "$duration мин" else null
+    val duration = if (duration != null) "$duration мин" else ""
     val ratingAge = ratingAgeLimits ?: ratingMpaa
-
     val firstPart = listOfNotNull(rating, name).joinToString(" ")
     val secondPart = listOfNotNull(released, genres).joinToString()
     val thirdPart = listOfNotNull(countries, duration, ratingAge).joinToString()

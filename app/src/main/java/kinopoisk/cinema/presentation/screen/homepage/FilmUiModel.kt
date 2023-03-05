@@ -24,6 +24,4 @@ sealed interface TypeCardCategoryUiModel {
     data class FooterUiModel(
         @StringRes val text: Int = R.string.home_show_all
     ) : TypeCardCategoryUiModel
-
-
 }

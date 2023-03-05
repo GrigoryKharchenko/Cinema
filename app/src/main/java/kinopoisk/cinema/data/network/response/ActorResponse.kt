@@ -2,7 +2,6 @@ package kinopoisk.cinema.data.network.response
 
 import com.google.gson.annotations.SerializedName
 
-// TODO зачем тут data class
 class ActorResponse(
     @SerializedName("personId") val id: Int,
     @SerializedName("posterUrl") val photo: String,
@@ -12,7 +11,6 @@ class ActorResponse(
     @SerializedName("films") val films: List<BestFilmsActorResponse>
 )
 
-// TODO зачем тут data class
 class BestFilmsActorResponse(
     @SerializedName("fillmId") val filmsId: Int,
     @SerializedName("nameRu") val nameFilmRu: String?,

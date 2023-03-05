@@ -3,7 +3,7 @@ package kinopoisk.cinema.data.repository
 import androidx.paging.PagingSource
 import kinopoisk.cinema.data.TypeCategories
 import kinopoisk.cinema.data.network.FilmsPageSource
-import kinopoisk.cinema.domain.FilmsRepository
+import kinopoisk.cinema.domain.repository.FilmsRepository
 import kinopoisk.cinema.presentation.screen.films.FilmModel
 import javax.inject.Inject
 

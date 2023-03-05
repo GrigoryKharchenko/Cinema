@@ -3,7 +3,7 @@ package kinopoisk.cinema.data.mapper
 import kinopoisk.cinema.data.network.response.ActorResponse
 import kinopoisk.cinema.data.network.response.BestFilmsActorResponse
 import kinopoisk.cinema.presentation.screen.actor.ActorModel
-import kinopoisk.cinema.presentation.screen.actor.adapter.BestFilmsActorModel
+import kinopoisk.cinema.presentation.screen.actor.BestFilmsActorModel
 
 private const val MAX_BEST_FILM = 10
 

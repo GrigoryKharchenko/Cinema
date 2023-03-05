@@ -7,8 +7,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kinopoisk.cinema.di.IoDispatcher
-import kinopoisk.cinema.domain.ActorRepository
-import kinopoisk.cinema.domain.network.ResultWrapper
+import kinopoisk.cinema.domain.repository.ActorRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -66,13 +65,3 @@ class ActorViewModel @AssistedInject constructor(
         }
     }
 }
-
-//                    if (it is HttpException) {
-//                        Log.e("mylogs", "http ${it}")
-//                        Log.e("mylogs", "http ${it.code()}")
-//                        Log.e("mylogs", "http ${it.response()}")
-//                    } else {
-//                        Log.e("mylogs", "$it")
-//                        Log.e("mylogs", "${it.localizedMessage}")
-//                        Log.e("mylogs", "${it.message}")
-//                    }

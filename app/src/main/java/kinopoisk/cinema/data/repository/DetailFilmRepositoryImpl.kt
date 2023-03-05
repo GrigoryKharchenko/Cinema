@@ -5,7 +5,7 @@ import kinopoisk.cinema.data.mapper.mapToGalleryModel
 import kinopoisk.cinema.data.mapper.mapToSimilarsFilmsModel
 import kinopoisk.cinema.data.mapper.mapToStaffModel
 import kinopoisk.cinema.data.network.KinopoiskApi
-import kinopoisk.cinema.domain.DetailFilmRepository
+import kinopoisk.cinema.domain.repository.DetailFilmRepository
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel

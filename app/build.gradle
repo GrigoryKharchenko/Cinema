@@ -79,6 +79,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$paging_version"
 
     testImplementation "junit:junit:$junit_version"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junit_jupiter_version"
     androidTestImplementation "androidx.test.ext:junit:$test_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 }
