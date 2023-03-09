@@ -1,6 +1,8 @@
 package kinopoisk.cinema.data.repository
 
+import kinopoisk.cinema.data.entity.FilmViewedEntity
 import kinopoisk.cinema.data.mapper.mapToDetailFilmModel
+import kinopoisk.cinema.data.mapper.mapToFilmViewedEntity
 import kinopoisk.cinema.data.mapper.mapToGalleryModel
 import kinopoisk.cinema.data.mapper.mapToSimilarsFilmsModel
 import kinopoisk.cinema.data.mapper.mapToStaffModel
@@ -34,5 +36,10 @@ class DetailFilmRepositoryImpl @Inject constructor(
     override suspend fun getStaff(id: Int): Result<List<StaffModel>> =
         runCatching {
             kinopoiskApi.getStaff(id).mapToStaffModel()
+        }
+
+    override suspend fun getFimEntity(id: Int): Result<FilmViewedEntity> =
+        runCatching {
+            kinopoiskApi.getDetailFilm(id).mapToFilmViewedEntity()
         }
 }

@@ -1,5 +1,6 @@
 package kinopoisk.cinema.domain.repository
 
+import kinopoisk.cinema.data.entity.FilmViewedEntity
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
@@ -14,4 +15,6 @@ interface DetailFilmRepository {
     suspend fun getSimilar(id: Int): Result<List<SimilarFilmModel>>
 
     suspend fun getStaff(id: Int): Result<List<StaffModel>>
+
+    suspend fun getFimEntity(id:Int): Result<FilmViewedEntity>
 }

@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kinopoisk.cinema.data.mapper.mapToFilmViewedModel
 import kinopoisk.cinema.di.IoDispatcher
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
+import kinopoisk.cinema.domain.repository.FilmViewedRepository
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +21,8 @@ import kotlinx.coroutines.launch
 class FilmDetailViewModel @AssistedInject constructor(
     private val detailFilmRepository: DetailFilmRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    @Assisted private val filmId: Int
+    @Assisted private val filmId: Int,
+    private val filmViewedRepository: FilmViewedRepository
 ) : ViewModel() {
 
     private val _uiStateFlow = MutableStateFlow<FilmDetailUiState>(FilmDetailUiState.Loading)
@@ -43,6 +46,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                     getStaff()
                     getGallery()
                     getSimilar()
+                    getEntity()
                 }.onFailure {
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -131,6 +135,13 @@ class FilmDetailViewModel @AssistedInject constructor(
                         ) ?: uiState
                     }
                 }
+        }
+    }
+
+    private fun getEntity() {
+        viewModelScope.launch(ioDispatcher) {
+            detailFilmRepository.getFimEntity(filmId)
+                .onSuccess { filmViewedRepository.insertFilm(it.mapToFilmViewedModel()) }
         }
     }
 
