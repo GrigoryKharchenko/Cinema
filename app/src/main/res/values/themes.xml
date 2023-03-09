@@ -53,7 +53,7 @@
     </style>
 
     <style name="Text.White.BlueBackground">
-        <item name="android:background">@drawable/rating_background</item>
+        <item name="android:background">@drawable/rating_blue_background</item>
     </style>
 
     <style name="Text.White.BlueBackground.6">
@@ -64,8 +64,21 @@
         <item name="android:textColor">@color/black_text_color</item>
     </style>
 
+    <style name="Text.Black.WhiteBackground">
+        <item name="android:background">@drawable/rating_white_background</item>
+    </style>
+
+    <style name="Text.Black.WhiteBackground.6">
+        <item name="android:textSize">@dimen/sp_6</item>
+    </style>
+
+
     <style name="Text.Black.12">
         <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="Text.Black.16">
+        <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
     <style name="Text.Black.18">
@@ -163,6 +176,17 @@
 
     <style name="BlueGradientBackGround">
         <item name="android:background">@drawable/blue_gradient</item>
+    </style>
+
+    <style name="SearchEditText">
+        <item name="android:background">@drawable/search_input_background</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
+        <item name="android:textColor">@color/black_text_color</item>
+    </style>
+
+    <style name="SearchLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/gray_text_color</item>
+        <item name="hintEnabled">false</item>
     </style>
 
     <style name="HorizontalRecycler">
