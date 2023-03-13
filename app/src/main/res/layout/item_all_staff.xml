@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/RippleBackground"
-    android:layout_width="@dimen/dp_200"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/dp_4">
 
     <ImageView
-        android:id="@+id/ivPhotoActor"
+        android:id="@+id/ivPhotoStaff"
         android:layout_width="@dimen/dp_48"
         android:layout_height="@dimen/dp_68"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,34 +17,28 @@
         tools:src="@drawable/preview_background" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvNameActor"
+        android:id="@+id/tvNameStaff"
         style="@style/Text.Black"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_4"
-        android:ellipsize="end"
-        android:maxLines="1"
-        app:layout_constraintBottom_toTopOf="@id/tvActorCharacter"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        app:layout_constraintBottom_toTopOf="@id/tvProfession"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivPhotoActor"
-        app:layout_constraintTop_toTopOf="@id/ivPhotoActor"
+        app:layout_constraintStart_toEndOf="@id/ivPhotoStaff"
+        app:layout_constraintTop_toTopOf="@id/ivPhotoStaff"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Владимир Оноховaaaaa" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvActorCharacter"
+        android:id="@+id/tvProfession"
         style="@style/Text.HintGray.12"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_4"
-        android:ellipsize="end"
-        android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="@id/ivPhotoActor"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="@id/ivPhotoStaff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivPhotoActor"
-        app:layout_constraintTop_toBottomOf="@id/tvNameActor"
+        app:layout_constraintStart_toEndOf="@id/ivPhotoStaff"
+        app:layout_constraintTop_toBottomOf="@id/tvNameStaff"
         tools:text="Лешfffffffccccкаdddddddddddddddddddddd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,8 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapte
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
+import kinopoisk.cinema.presentation.screen.staff.StaffFragment
+import kinopoisk.cinema.presentation.screen.staff.TypeTitleStaff
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -82,6 +84,22 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
+            tvCountActor.setOnClickListener {
+                openStaff(
+                    typeTitleStaff = TypeTitleStaff.Actors(
+                        getString(R.string.film_detail_filmed),
+                        filmId = argument
+                    )
+                )
+            }
+            tvCountStaff.setOnClickListener {
+                openStaff(
+                    typeTitleStaff = TypeTitleStaff.FilmMakers(
+                        getString(R.string.film_detail_film_worked),
+                        filmId = argument
+                    )
+                )
+            }
         }
     }
 
@@ -122,10 +140,10 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             tvCountStaff.text = staff?.size.toStringOrEmpty()
             tvCountActor.text = actor?.size.toStringOrEmpty()
             setDetailFilm(detailFilm)
-            actorAdapter.submitList(actor)
+            actorAdapter.submitList(actor?.take(MAX_ACTOR))
             galleryAdapter.submitList(gallery)
             similarFilmAdapter.submitList(similar)
-            staffAdapter.submitList(staff)
+            staffAdapter.submitList(staff?.take(MAX_STAFF))
         }
     }
 
@@ -173,6 +191,13 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         )
     }
 
+    private fun openStaff(typeTitleStaff: TypeTitleStaff) {
+        addFragmentWithArgs<StaffFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_FILM to typeTitleStaff)
+        )
+    }
+
     private fun goBack() {
         parentFragmentManager.popBackStack()
     }
@@ -193,5 +218,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         const val KEY_PHOTO = "photoId"
         private const val MAX_LINE_COLLAPSED = 5
         private const val INITIAL_IS_COLLAPSED = true
+        private const val MAX_ACTOR = 20
+        private const val MAX_STAFF = 6
     }
 }
