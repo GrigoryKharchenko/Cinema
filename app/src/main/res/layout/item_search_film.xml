@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/RippleBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="@dimen/dp_96"
+        android:layout_height="@dimen/dp_132"
+        android:layout_marginVertical="@dimen/dp_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/preview_background" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNameFilm"
+        style="@style/Text.Black.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        app:layout_constraintBottom_toTopOf="@id/tvYearAndGenre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPoster"
+        app:layout_constraintTop_toTopOf="@id/ivPoster"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Anme film" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvYearAndGenre"
+        style="@style/Text.Gray"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="@id/ivPoster"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPoster"
+        app:layout_constraintTop_toBottomOf="@id/tvNameFilm"
+        tools:text="2021,drama" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvRating"
+        style="@style/Text.Black.WhiteBackground.6"
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginTop="@dimen/dp_6"
+        android:gravity="center"
+        android:maxLines="1"
+        app:layout_constraintStart_toStartOf="@id/ivPoster"
+        app:layout_constraintTop_toTopOf="@id/ivPoster"
+        tools:text="6.8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
