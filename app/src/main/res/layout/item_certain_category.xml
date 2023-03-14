@@ -17,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/preview_background" />
 
+    <View
+        android:id="@+id/vPosterGradient"
+        style="@style/BlueGradientBackGround"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/ivPreview"
+        app:layout_constraintEnd_toEndOf="@id/ivPreview"
+        app:layout_constraintStart_toStartOf="@id/ivPreview"
+        app:layout_constraintTop_toTopOf="@id/ivPreview" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvRating"
         style="@style/Text.White.BlueBackground.6"
