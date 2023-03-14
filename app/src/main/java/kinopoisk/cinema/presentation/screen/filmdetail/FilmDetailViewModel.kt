@@ -64,16 +64,18 @@ class FilmDetailViewModel @AssistedInject constructor(
     private fun getStaff() {
         viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getStaffModel(filmId)
-                .onSuccess { staff ->
-                    val actors = staff.filter { it.profession == TypeStaff.ACTOR }
-                    val filmmakers = staff.filter { it.profession != TypeStaff.ACTOR }
+                .onSuccess { staffModel ->
+                    val actors = staffModel.filter { it.profession == TypeStaff.ACTOR }
+                    val staff = staffModel.filter { it.profession != TypeStaff.ACTOR }
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
                             filmDetailUiModel = uiState.filmDetailUiModel.copy(
-                                staff = filmmakers,
-                                actor = actors,
+                                sizeActor = actors.size.toString(),
+                                sizeStuff = staffModel.size.toString(),
+                                staff = staffModel.take(MAX_STAFF),
+                                actor = actors.take(MAX_ACTOR),
                                 isVisibleActors = actors.isNotEmpty(),
-                                isVisibleStaff = filmmakers.isNotEmpty(),
+                                isVisibleStaff = staff.isNotEmpty(),
                             )
                         ) ?: uiState
                     }
@@ -98,6 +100,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
                             filmDetailUiModel = uiState.filmDetailUiModel.copy(
                                 gallery = gallery,
+                                sizeGallery = gallery.size.toString(),
                                 isVisibleGallery = gallery.isNotEmpty(),
                             )
                         ) ?: uiState
@@ -122,6 +125,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
                             filmDetailUiModel = uiState.filmDetailUiModel.copy(
                                 similar = similar,
+                                sizeSimilar = similar.size.toString(),
                                 isVisibleSimilar = similar.isNotEmpty(),
                             )
                         ) ?: uiState
@@ -152,6 +156,9 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     @Suppress("UNCHECKED_CAST")
     companion object {
+        private const val MAX_ACTOR = 20
+        private const val MAX_STAFF = 6
+
         fun provideFactory(
             assistedFactory: Factory,
             filmId: Int

@@ -86,7 +86,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvActors.adapter = actorAdapter
             tvCountActor.setOnClickListener {
                 openStaff(
-                    typeTitleStaff = TypeTitleStaff.Actors(
+                    typeTitleStaff = TypeTitleStaff(
                         getString(R.string.film_detail_filmed),
                         filmId = argument
                     )
@@ -94,7 +94,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             }
             tvCountStaff.setOnClickListener {
                 openStaff(
-                    typeTitleStaff = TypeTitleStaff.FilmMakers(
+                    typeTitleStaff = TypeTitleStaff(
                         getString(R.string.film_detail_film_worked),
                         filmId = argument
                     )
@@ -135,15 +135,15 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             tvCountGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
             tvTitleSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
             tvCountSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
-            tvCountGallery.text = gallery?.size.toStringOrEmpty()
-            tvCountSimilarFilm.text = similar?.size.toStringOrEmpty()
-            tvCountStaff.text = staff?.size.toStringOrEmpty()
-            tvCountActor.text = actor?.size.toStringOrEmpty()
+            tvCountGallery.text = filmDetailUiState.filmDetailUiModel.sizeGallery
+            tvCountSimilarFilm.text = filmDetailUiState.filmDetailUiModel.sizeSimilar
+            tvCountStaff.text = filmDetailUiState.filmDetailUiModel.sizeStuff
+            tvCountActor.text = filmDetailUiState.filmDetailUiModel.sizeActor
             setDetailFilm(detailFilm)
-            actorAdapter.submitList(actor?.take(MAX_ACTOR))
+            actorAdapter.submitList(actor)
             galleryAdapter.submitList(gallery)
             similarFilmAdapter.submitList(similar)
-            staffAdapter.submitList(staff?.take(MAX_STAFF))
+            staffAdapter.submitList(staff)
         }
     }
 
@@ -218,7 +218,5 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         const val KEY_PHOTO = "photoId"
         private const val MAX_LINE_COLLAPSED = 5
         private const val INITIAL_IS_COLLAPSED = true
-        private const val MAX_ACTOR = 20
-        private const val MAX_STAFF = 6
     }
 }

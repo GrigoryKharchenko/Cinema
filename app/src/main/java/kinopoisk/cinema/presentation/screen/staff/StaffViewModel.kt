@@ -27,8 +27,8 @@ class StaffViewModel @AssistedInject constructor(
         viewModelScope.launch {
             runCatching {
                 detailFilmRepository.getStuff(typeTitleStaff)
-            }.onSuccess {
-                _staffUiStateFlow.emit(StaffUiState.Success(it))
+            }.onSuccess { staff ->
+                _staffUiStateFlow.emit(StaffUiState.Success(staff))
             }.onFailure {
                 _staffUiStateFlow.emit(StaffUiState.Error)
             }
