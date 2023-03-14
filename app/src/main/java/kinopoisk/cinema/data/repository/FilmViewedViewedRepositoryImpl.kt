@@ -14,8 +14,8 @@ class FilmViewedViewedRepositoryImpl @Inject constructor(
 
     override fun subscribeToReceive(): Flow<List<FilmViewedEntity>> = filmViewedDao.subscribeToReceive()
 
-    override suspend fun insertFilm(typeCardViewedUiModel: TypeCardCategoryUiModel.FilmUiModel) =
-        filmViewedDao.insertFilm(typeCardViewedUiModel.mapToFilmViewedEntity())
+    override suspend fun insertOrUpdate(typeCardViewedUiModel: TypeCardCategoryUiModel.FilmUiModel) =
+        filmViewedDao.insertOrUpdate(typeCardViewedUiModel.mapToFilmViewedEntity())
 
-    override suspend fun deleteAllFilms() = filmViewedDao.deleteALlFilm()
+    override suspend fun deleteAllFilms() = filmViewedDao.deleteALl()
 }

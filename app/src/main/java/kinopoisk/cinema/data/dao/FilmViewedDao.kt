@@ -14,8 +14,8 @@ interface FilmViewedDao {
     fun subscribeToReceive(): Flow<List<FilmViewedEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFilm(filmViewedEntity: FilmViewedEntity)
+    suspend fun insertOrUpdate(filmViewedEntity: FilmViewedEntity)
 
     @Query("DELETE FROM film")
-    suspend fun deleteALlFilm()
+    suspend fun deleteALl()
 }

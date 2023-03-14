@@ -34,7 +34,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getFilmDetail() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getFilmDetail(filmId)
+            detailFilmRepository.getFilmDetailModel(filmId)
                 .onSuccess { filmDetailModel ->
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -46,7 +46,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                     getStaff()
                     getGallery()
                     getSimilar()
-                    getEntity()
+                    getFilmViewed()
                 }.onFailure {
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -63,7 +63,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getStaff() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getStaff(filmId)
+            detailFilmRepository.getStaffModel(filmId)
                 .onSuccess { staff ->
                     val actors = staff.filter { it.profession == TypeStaff.ACTOR }
                     val filmmakers = staff.filter { it.profession != TypeStaff.ACTOR }
@@ -92,7 +92,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getGallery() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getGallery(filmId)
+            detailFilmRepository.getGalleryModel(filmId)
                 .onSuccess { gallery ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
@@ -116,7 +116,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getSimilar() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getSimilar(filmId)
+            detailFilmRepository.getSimilarFilmModel(filmId)
                 .onSuccess { similar ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
@@ -138,10 +138,10 @@ class FilmDetailViewModel @AssistedInject constructor(
         }
     }
 
-    private fun getEntity() {
+    private fun getFilmViewed() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getFimEntity(filmId)
-                .onSuccess { filmViewedRepository.insertFilm(it.mapToFilmViewedModel()) }
+            detailFilmRepository.getFilmViewedEntity(filmId)
+                .onSuccess { filmViewedRepository.insertOrUpdate(it.mapToFilmViewedModel()) }
         }
     }
 

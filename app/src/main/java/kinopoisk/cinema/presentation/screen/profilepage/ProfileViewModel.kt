@@ -34,12 +34,10 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun subscribeFilm() {
-        viewModelScope.launch(ioDispatcher) {
-            filmViewedRepository.subscribeToReceive().map { filmsEntity ->
-                filmsEntity.mapToFilmsViewedModel()
-            }.onEach { filmViewedUiModels ->
-                _filmFlow.emit(filmViewedUiModels)
-            }.launchIn(viewModelScope)
-        }
+        filmViewedRepository.subscribeToReceive().map { filmsEntity ->
+            filmsEntity.mapToFilmsViewedModel()
+        }.onEach { filmViewedUiModels ->
+            _filmFlow.emit(filmViewedUiModels)
+        }.launchIn(viewModelScope)
     }
 }

@@ -8,13 +8,13 @@ import kinopoisk.cinema.presentation.screen.filmdetail.model.StaffModel
 
 interface DetailFilmRepository {
 
-    suspend fun getFilmDetail(id: Int): Result<FilmDetailModel>
+    suspend fun getFilmDetailModel(id: Int): Result<FilmDetailModel>
 
-    suspend fun getGallery(id: Int): Result<List<GalleryModel>>
+    suspend fun getGalleryModel(id: Int): Result<List<GalleryModel>>
 
-    suspend fun getSimilar(id: Int): Result<List<SimilarFilmModel>>
+    suspend fun getSimilarFilmModel(id: Int): Result<List<SimilarFilmModel>>
 
-    suspend fun getStaff(id: Int): Result<List<StaffModel>>
+    suspend fun getStaffModel(id: Int): Result<List<StaffModel>>
 
-    suspend fun getFimEntity(id:Int): Result<FilmViewedEntity>
+    suspend fun getFilmViewedEntity(id:Int): Result<FilmViewedEntity>
 }

@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface FilmViewedRepository {
 
     fun subscribeToReceive(): Flow<List<FilmViewedEntity>>
-    suspend fun insertFilm(typeCardViewedUiModel: TypeCardCategoryUiModel.FilmUiModel)
+    suspend fun insertOrUpdate(typeCardViewedUiModel: TypeCardCategoryUiModel.FilmUiModel)
     suspend fun deleteAllFilms()
 }

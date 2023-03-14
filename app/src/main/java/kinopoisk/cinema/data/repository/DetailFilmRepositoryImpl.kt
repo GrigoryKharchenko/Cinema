@@ -18,27 +18,27 @@ class DetailFilmRepositoryImpl @Inject constructor(
     private val kinopoiskApi: KinopoiskApi,
 ) : DetailFilmRepository {
 
-    override suspend fun getFilmDetail(id: Int): Result<FilmDetailModel> =
+    override suspend fun getFilmDetailModel(id: Int): Result<FilmDetailModel> =
         runCatching {
             kinopoiskApi.getDetailFilm(id).mapToDetailFilmModel()
         }
 
-    override suspend fun getGallery(id: Int): Result<List<GalleryModel>> =
+    override suspend fun getGalleryModel(id: Int): Result<List<GalleryModel>> =
         runCatching {
             kinopoiskApi.getGallery(id).mapToGalleryModel()
         }
 
-    override suspend fun getSimilar(id: Int): Result<List<SimilarFilmModel>> =
+    override suspend fun getSimilarFilmModel(id: Int): Result<List<SimilarFilmModel>> =
         runCatching {
             kinopoiskApi.getSimilars(id).mapToSimilarsFilmsModel()
         }
 
-    override suspend fun getStaff(id: Int): Result<List<StaffModel>> =
+    override suspend fun getStaffModel(id: Int): Result<List<StaffModel>> =
         runCatching {
             kinopoiskApi.getStaff(id).mapToStaffModel()
         }
 
-    override suspend fun getFimEntity(id: Int): Result<FilmViewedEntity> =
+    override suspend fun getFilmViewedEntity(id: Int): Result<FilmViewedEntity> =
         runCatching {
             kinopoiskApi.getDetailFilm(id).mapToFilmViewedEntity()
         }
