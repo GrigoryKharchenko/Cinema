@@ -17,5 +17,5 @@ interface FilmViewedDao {
     suspend fun insertOrUpdate(filmViewedEntity: FilmViewedEntity)
 
     @Query("DELETE FROM film")
-    suspend fun deleteALl()
+    suspend fun deleteAll()
 }

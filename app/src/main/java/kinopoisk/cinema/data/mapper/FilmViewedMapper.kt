@@ -25,6 +25,6 @@ fun TypeCardCategoryUiModel.FilmUiModel.mapToFilmViewedEntity(): FilmViewedEntit
         rating = rating,
         isViewed = isViewed,
         nameFilm = name,
-        genre = genre ?: "Неизвестно",
+        genre = genre ?: "",
         isVisibleRating = isVisibleRating
     )

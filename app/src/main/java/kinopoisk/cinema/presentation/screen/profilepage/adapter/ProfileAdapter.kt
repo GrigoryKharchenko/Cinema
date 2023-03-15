@@ -42,8 +42,10 @@ class ProfileAdapter(
         return when (getItem(position)) {
             is TypeCardCategoryUiModel.FooterUiModel ->
                 R.layout.item_delete_history
-            else ->
+            is TypeCardCategoryUiModel.FilmUiModel ->
                 R.layout.item_certain_category
+            else ->
+                throw IllegalArgumentException("Invalid ViewType Provided")
         }
     }
 }
