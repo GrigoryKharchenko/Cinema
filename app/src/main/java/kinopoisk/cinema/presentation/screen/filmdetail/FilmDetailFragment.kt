@@ -19,7 +19,6 @@ import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
-import kinopoisk.cinema.extension.toStringOrEmpty
 import kinopoisk.cinema.presentation.screen.actor.ActorFragment
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
@@ -42,7 +41,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private var _binding: FragmentFilmDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val argument: Int by lazy {
+    private val filmId: Int by lazy {
         requireNotNull(arguments?.getInt(KEY_FILM))
     }
 
@@ -52,7 +51,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private val similarFilmAdapter by lazy { SimilarFilmAdapter(onFilmClick = ::openSimilarFilm) }
 
     private val viewModel: FilmDetailViewModel by viewModels {
-        FilmDetailViewModel.provideFactory(viewModelFactory, argument)
+        FilmDetailViewModel.provideFactory(viewModelFactory, filmId)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -86,18 +85,12 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvActors.adapter = actorAdapter
             tvCountActor.setOnClickListener {
                 openStaff(
-                    typeTitleStaff = TypeTitleStaff(
-                        getString(R.string.film_detail_filmed),
-                        filmId = argument
-                    )
+                    typeTitleStaff = setTitleActors()
                 )
             }
             tvCountStaff.setOnClickListener {
                 openStaff(
-                    typeTitleStaff = TypeTitleStaff(
-                        getString(R.string.film_detail_film_worked),
-                        filmId = argument
-                    )
+                    typeTitleStaff = setTitleStaff()
                 )
             }
         }
@@ -197,6 +190,20 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             args = bundleOf(KEY_FILM to typeTitleStaff)
         )
     }
+
+    private fun setTitleActors(): TypeTitleStaff =
+        TypeTitleStaff(
+            getString(R.string.film_detail_filmed),
+            filmId = filmId,
+            typeStaff = TypeStaff.ACTOR
+        )
+
+    private fun setTitleStaff(): TypeTitleStaff =
+        TypeTitleStaff(
+            getString(R.string.film_detail_film_worked),
+            filmId = filmId,
+            typeStaff = TypeStaff.All
+        )
 
     private fun goBack() {
         parentFragmentManager.popBackStack()

@@ -30,12 +30,12 @@ class StaffFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    private val argument: TypeTitleStaff by lazy {
+    private val typeTitleStaff: TypeTitleStaff by lazy {
         requireNotNull(arguments?.getSerializable(FilmDetailFragment.KEY_FILM) as? TypeTitleStaff)
     }
 
     private val viewModel: StaffViewModel by viewModels {
-        StaffViewModel.provideFactory(defaultViewModelFactory, argument)
+        StaffViewModel.provideFactory(defaultViewModelFactory, typeTitleStaff)
     }
 
     private var _binding: FragmentStaffBinding? = null
@@ -71,7 +71,7 @@ class StaffFragment : Fragment(), HasAndroidInjector {
         with(binding) {
             rvStaff.adapter = adapter
             toolBar.setNavigationOnClickListener { goBack() }
-            tvTitleStaff.text = argument.titleStaff
+            tvTitleStaff.text = typeTitleStaff.titleStaff
         }
     }
 

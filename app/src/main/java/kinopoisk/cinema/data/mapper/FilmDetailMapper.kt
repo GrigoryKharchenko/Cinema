@@ -21,7 +21,7 @@ private fun StaffResponse.mapToStaffModel(): StaffModel =
         id = id,
         name = nameRu ?: nameEn,
         photo = photo,
-        character = character ?: "Неизвестно",
+        character = character ?: "",
         profession = profession,
     )
 
@@ -67,6 +67,7 @@ fun DetailFilmResponse.mapToFilmViewedEntity(): FilmViewedEntity =
     )
 
 private fun DetailFilmResponse.mapToDetailFilm(): String {
+fun DetailFilmResponse.mapToDetailFilm(): String {
     val countries = countries.joinToString { countries -> countries.country }
     val genres = genres.joinToString { it.genre.firstCharToUpperCase() }
     val name = nameRu ?: nameEn ?: nameOriginal

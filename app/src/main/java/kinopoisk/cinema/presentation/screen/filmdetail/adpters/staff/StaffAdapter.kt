@@ -27,8 +27,8 @@ class StaffViewHolder(private val binding: ItemStaffBinding) : RecyclerView.View
         onStaffClick: (Int) -> Unit
     ) {
         with(binding) {
-            tvNameActor.text = staffModel.name ?: itemView.context.getString(R.string.unknown)
-            tvActorCharacter.text = staffModel.character ?: itemView.context.getString(R.string.unknown)
+            tvNameActor.text = staffModel.name
+            tvActorCharacter.text = staffModel.character
             ivPhotoActor.loadCropImage(staffModel.photo)
             root.setOnClickListener {
                 onStaffClick(staffModel.id)
