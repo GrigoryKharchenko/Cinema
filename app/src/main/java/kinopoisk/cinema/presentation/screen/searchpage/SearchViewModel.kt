@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.cachedIn
-import kinopoisk.cinema.domain.usecase.QueryFilmUseCase
+import kinopoisk.cinema.domain.repository.SearchFilmRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class SearchViewModel @Inject constructor(
-    private val searchFilmRepository: Provider<QueryFilmUseCase>
+    private val searchFilmRepository: Provider<SearchFilmRepository>
 ) : ViewModel() {
 
     private val _query = MutableStateFlow("")

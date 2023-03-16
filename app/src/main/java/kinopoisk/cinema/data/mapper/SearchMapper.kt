@@ -5,7 +5,7 @@ import kinopoisk.cinema.data.network.response.SearchFilmsResponse
 import kinopoisk.cinema.presentation.screen.searchpage.SearchModel
 
 fun SearchFilmsResponse.mapToSearchFilmsModel(): List<SearchModel> =
-    this.anotherFilms.map(SearchFilmResponse::mapToSearchFilmModel)
+    this.differentFilms.map(SearchFilmResponse::mapToSearchFilmModel)
 
 fun SearchFilmResponse.mapToSearchFilmModel(): SearchModel =
     SearchModel(
@@ -17,5 +17,5 @@ fun SearchFilmResponse.mapToSearchFilmModel(): SearchModel =
     )
 
 private fun SearchFilmResponse.mapToDataAndGenre(): String {
-    return "$year,${genres.first().genre}"
+    return "$year,${genres.firstOrNull()?.genre}"
 }

@@ -3,7 +3,7 @@ package kinopoisk.cinema.data.network.response
 import com.google.gson.annotations.SerializedName
 
 class SearchFilmsResponse(
-    @SerializedName("items") val anotherFilms: List<SearchFilmResponse>
+    @SerializedName("items") val differentFilms: List<SearchFilmResponse>
 )
 
 class SearchFilmResponse(

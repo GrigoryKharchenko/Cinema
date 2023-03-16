@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class SearchFilmRepositoryImpl @Inject constructor(
     private val searchFilmsPageSource: SearchFilmsPageSource.Factory
-): SearchFilmRepository {
+) : SearchFilmRepository {
 
-    override fun getAll(nameFilm: String): PagingSource<Int, SearchModel> {
+    override fun invoke(nameFilm: String): PagingSource<Int, SearchModel> {
         return searchFilmsPageSource.create(nameFilm)
     }
 }
