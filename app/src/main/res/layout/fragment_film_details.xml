@@ -146,6 +146,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupActor"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="tvCountActor,tvTitleActor,rvActors" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupStaff"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="tvCountStaff,tvTitleStaff,rvStaff" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupGallery"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="tvCountGallery,tvTitleGallery,rvGallery" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupSimilar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="tvCountSimilarFilm,tvTitleSimilarFilm,rvSimilarFilm" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvShortDescription"
                 style="@style/Text.Black.Bold.16"

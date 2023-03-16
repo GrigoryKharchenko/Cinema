@@ -64,18 +64,19 @@ class StaffFragment : Fragment(), HasAndroidInjector {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUi()
-        initViewModel()
+        subscribeViewModel()
     }
 
     private fun initUi() {
         with(binding) {
             rvStaff.adapter = adapter
             toolBar.setNavigationOnClickListener { goBack() }
-            tvTitleStaff.text = typeTitleStaff.titleStaff
+            tvTitleStaff.setText(typeTitleStaff.titleStaff)
+            btnRetry.setOnClickListener { viewModel.getStaff() }
         }
     }
 
-    private fun initViewModel() {
+    private fun subscribeViewModel() {
         with(viewModel) {
             launchWhenStarted(staffUiStateFlow, ::handleUiState)
         }
@@ -92,10 +93,13 @@ class StaffFragment : Fragment(), HasAndroidInjector {
                 StaffUiState.Error -> {
                     flProgress.isVisible = false
                     tvError.isVisible = true
+                    btnRetry.isVisible = true
                     tvTitleStaff.isVisible = false
                 }
                 is StaffUiState.Success -> {
                     flProgress.isVisible = false
+                    tvError.isVisible = false
+                    btnRetry.isVisible = false
                     adapter.submitList(staffUiState.staff)
                 }
             }

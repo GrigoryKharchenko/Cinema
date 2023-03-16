@@ -5,5 +5,7 @@ import kinopoisk.cinema.presentation.screen.staff.TypeTitleStaff
 
 interface StaffRepository {
 
-    suspend fun getStuff(typeTitleStaff: TypeTitleStaff): List<StaffModel>
+    suspend fun getActors(filmId: Int): List<StaffModel>
+
+    suspend fun getStaff(filmId: Int): List<StaffModel>
 }

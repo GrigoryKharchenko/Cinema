@@ -85,12 +85,12 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvActors.adapter = actorAdapter
             tvCountActor.setOnClickListener {
                 openStaff(
-                    typeTitleStaff = setTitleActors()
+                    typeTitleStaff = TypeTitleStaff.createActor(filmId)
                 )
             }
             tvCountStaff.setOnClickListener {
                 openStaff(
-                    typeTitleStaff = setTitleStaff()
+                    typeTitleStaff = TypeTitleStaff.createStaff(filmId)
                 )
             }
         }
@@ -120,14 +120,10 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             tvError.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTextError
             nestedScroll.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleNestedScroll
             appBar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleAppBar
-            tvTitleActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleActors
-            tvCountActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleActors
-            tvTitleStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleStaff
-            tvCountStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleStaff
-            tvTitleGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
-            tvCountGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
-            tvTitleSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
-            tvCountSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
+            groupActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleActors
+            groupStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleStaff
+            groupGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
+            groupSimilar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
             tvCountGallery.text = filmDetailUiState.filmDetailUiModel.sizeGallery
             tvCountSimilarFilm.text = filmDetailUiState.filmDetailUiModel.sizeSimilar
             tvCountStaff.text = filmDetailUiState.filmDetailUiModel.sizeStuff
@@ -190,20 +186,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             args = bundleOf(KEY_FILM to typeTitleStaff)
         )
     }
-
-    private fun setTitleActors(): TypeTitleStaff =
-        TypeTitleStaff(
-            getString(R.string.film_detail_filmed),
-            filmId = filmId,
-            typeStaff = TypeStaff.ACTOR
-        )
-
-    private fun setTitleStaff(): TypeTitleStaff =
-        TypeTitleStaff(
-            getString(R.string.film_detail_film_worked),
-            filmId = filmId,
-            typeStaff = TypeStaff.All
-        )
 
     private fun goBack() {
         parentFragmentManager.popBackStack()

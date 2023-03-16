@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cinema</string>
     <string name="unknown">Неизвестно</string>
+    <string name="refresh">Обновить</string>
 
     <!-- WelcomeFragment -->
     <string name="welcome_title">Skillcinema</string>
