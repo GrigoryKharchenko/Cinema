@@ -91,15 +91,14 @@ class StaffFragment : Fragment(), HasAndroidInjector {
             when (staffUiState) {
                 StaffUiState.Loading -> flProgress.isVisible = true
                 StaffUiState.Error -> {
+                    groupError.isVisible = true
+                    groupSuccess.isVisible = false
                     flProgress.isVisible = false
-                    tvError.isVisible = true
-                    btnRetry.isVisible = true
-                    tvTitleStaff.isVisible = false
                 }
                 is StaffUiState.Success -> {
                     flProgress.isVisible = false
-                    tvError.isVisible = false
-                    btnRetry.isVisible = false
+                    groupError.isVisible = false
+                    groupSuccess.isVisible = true
                     adapter.submitList(staffUiState.staff)
                 }
             }

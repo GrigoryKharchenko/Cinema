@@ -110,24 +110,24 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun updateUiState(filmDetailUiState: FilmDetailUiState.DetailFilm) {
-        with(binding) {
-            val gallery = filmDetailUiState.filmDetailUiModel.gallery
-            val similar = filmDetailUiState.filmDetailUiModel.similar
-            val staff = filmDetailUiState.filmDetailUiModel.staff
-            val detailFilm = filmDetailUiState.filmDetailUiModel.detailFilm
-            val actor = filmDetailUiState.filmDetailUiModel.actor
-            flProgress.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleProgress
-            tvError.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTextError
-            nestedScroll.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleNestedScroll
-            appBar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleAppBar
-            groupActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleActors
-            groupStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleStaff
-            groupGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
-            groupSimilar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
-            tvCountGallery.text = filmDetailUiState.filmDetailUiModel.sizeGallery
-            tvCountSimilarFilm.text = filmDetailUiState.filmDetailUiModel.sizeSimilar
-            tvCountStaff.text = filmDetailUiState.filmDetailUiModel.sizeStuff
-            tvCountActor.text = filmDetailUiState.filmDetailUiModel.sizeActor
+        with(filmDetailUiState.filmDetailUiModel) {
+            val gallery = gallery
+            val similar = similar
+            val staff = staff
+            val detailFilm = detailFilm
+            val actor = actor
+            binding.flProgress.isVisible = isVisibleProgress
+            binding.tvError.isVisible = isVisibleTextError
+            binding.nestedScroll.isVisible = isVisibleNestedScroll
+            binding.appBar.isVisible = isVisibleAppBar
+            binding.groupActor.isVisible = isVisibleActors
+            binding.groupStaff.isVisible = isVisibleStaff
+            binding.groupGallery.isVisible = isVisibleGallery
+            binding.groupSimilar.isVisible = isVisibleSimilar
+            binding.tvCountGallery.text = sizeGallery
+            binding.tvCountSimilarFilm.text = sizeSimilar
+            binding.tvCountStaff.text = sizeStuff
+            binding.tvCountActor.text = sizeActor
             setDetailFilm(detailFilm)
             actorAdapter.submitList(actor)
             galleryAdapter.submitList(gallery)
