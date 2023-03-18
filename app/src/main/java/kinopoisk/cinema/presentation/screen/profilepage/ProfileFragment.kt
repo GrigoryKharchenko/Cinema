@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.AndroidInjector
@@ -13,6 +14,8 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.databinding.FragmentProfileBinding
 import kinopoisk.cinema.di.ViewModelFactory
+import kinopoisk.cinema.extension.launchWhenStarted
+import kinopoisk.cinema.presentation.screen.profilepage.adapter.ProfileAdapter
 import javax.inject.Inject
 
 class ProfileFragment : Fragment(), HasAndroidInjector {
@@ -29,6 +32,8 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelFactory)[ProfileViewModel::class.java]
     }
+
+    private val adapter = ProfileAdapter(onDelete = { viewModel.deleteAllFilm() })
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
@@ -48,6 +53,16 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUi()
+        initViewModel()
+    }
+
+    private fun initUi() {
+        binding.rvViewedFilm.adapter = adapter
+    }
+
+    private fun initViewModel() {
+        launchWhenStarted(viewModel.filmFlow, adapter::submitList)
     }
 
     override fun onDestroyView() {

@@ -17,6 +17,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField('String', 'BASE_URL', "$base_url")
         buildConfigField('String', 'API_KEY', "$api_key")
+        buildConfigField 'int', 'DB_VERSION', '1'
     }
 
     buildTypes {
@@ -31,7 +32,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        freeCompilerArgs = ['-Xjvm-default=compatibility']
+        freeCompilerArgs = ['-Xjvm-default=all-compatibility']
     }
     buildFeatures {
         viewBinding true
@@ -77,6 +78,12 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
+
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    kapt "org.xerial:sqlite-jdbc:$sqlite_version"
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.junit.jupiter:junit-jupiter:$junit_jupiter_version"

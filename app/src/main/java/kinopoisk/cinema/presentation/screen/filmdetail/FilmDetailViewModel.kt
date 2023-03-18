@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kinopoisk.cinema.data.mapper.mapToFilmViewedModel
 import kinopoisk.cinema.di.IoDispatcher
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
+import kinopoisk.cinema.domain.repository.FilmViewedRepository
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +21,8 @@ import kotlinx.coroutines.launch
 class FilmDetailViewModel @AssistedInject constructor(
     private val detailFilmRepository: DetailFilmRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    @Assisted private val filmId: Int
+    @Assisted private val filmId: Int,
+    private val filmViewedRepository: FilmViewedRepository
 ) : ViewModel() {
 
     private val _uiStateFlow = MutableStateFlow<FilmDetailUiState>(FilmDetailUiState.Loading)
@@ -31,7 +34,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getFilmDetail() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getFilmDetail(filmId)
+            detailFilmRepository.getFilmDetailModel(filmId)
                 .onSuccess { filmDetailModel ->
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -43,6 +46,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                     getStaff()
                     getGallery()
                     getSimilar()
+                    getFilmViewed()
                 }.onFailure {
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -59,7 +63,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getStaff() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getStaff(filmId)
+            detailFilmRepository.getStaffModel(filmId)
                 .onSuccess { staff ->
                     val actors = staff.filter { it.profession == TypeStaff.ACTOR }
                     val filmmakers = staff.filter { it.profession != TypeStaff.ACTOR }
@@ -88,7 +92,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getGallery() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getGallery(filmId)
+            detailFilmRepository.getGalleryModel(filmId)
                 .onSuccess { gallery ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
@@ -112,7 +116,7 @@ class FilmDetailViewModel @AssistedInject constructor(
 
     private fun getSimilar() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getSimilar(filmId)
+            detailFilmRepository.getSimilarFilmModel(filmId)
                 .onSuccess { similar ->
                     _uiStateFlow.update { uiState ->
                         (uiState as? FilmDetailUiState.DetailFilm)?.copy(
@@ -131,6 +135,13 @@ class FilmDetailViewModel @AssistedInject constructor(
                         ) ?: uiState
                     }
                 }
+        }
+    }
+
+    private fun getFilmViewed() {
+        viewModelScope.launch(ioDispatcher) {
+            detailFilmRepository.getFilmViewedEntity(filmId)
+                .onSuccess { filmViewedRepository.insertOrUpdate(it.mapToFilmViewedModel()) }
         }
     }
 

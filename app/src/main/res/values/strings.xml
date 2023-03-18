@@ -33,6 +33,10 @@
     <string name="actor_title_filmography">Фильмография</string>
     <string name="actor_to_list">К списку</string>
 
+    <!-- ProfileFragment -->
+    <string name="profile_title_viewed">Просмотрено</string>
+    <string name="profile_delete_history">Очистить\nисторию</string>
+
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>
         <item quantity="one">%d фильм</item>

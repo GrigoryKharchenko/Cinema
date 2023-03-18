@@ -1,5 +1,6 @@
 package kinopoisk.cinema.data.mapper
 
+import kinopoisk.cinema.data.entity.FilmViewedEntity
 import kinopoisk.cinema.data.network.response.DetailFilmResponse
 import kinopoisk.cinema.data.network.response.GalleryResponse
 import kinopoisk.cinema.data.network.response.ImageResponse
@@ -54,7 +55,18 @@ fun DetailFilmResponse.mapToDetailFilmModel(): FilmDetailModel =
         name = nameRu ?: nameEn ?: nameOriginal,
     )
 
- fun DetailFilmResponse.mapToDetailFilm(): String {
+fun DetailFilmResponse.mapToFilmViewedEntity(): FilmViewedEntity =
+    FilmViewedEntity(
+        id = id,
+        poster = poster,
+        rating = rating ?: "",
+        isViewed = true,
+        nameFilm = nameRu ?: nameEn ?: nameOriginal,
+        genre = genres.first().genre.firstCharToUpperCase(),
+        isVisibleRating = rating?.isNotEmpty() ?: false
+    )
+
+private fun DetailFilmResponse.mapToDetailFilm(): String {
     val countries = countries.joinToString { countries -> countries.country }
     val genres = genres.joinToString { it.genre.firstCharToUpperCase() }
     val name = nameRu ?: nameEn ?: nameOriginal
