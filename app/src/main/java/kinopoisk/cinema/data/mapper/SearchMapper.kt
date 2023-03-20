@@ -17,5 +17,5 @@ fun SearchFilmResponse.mapToSearchFilmModel(): SearchModel =
     )
 
 private fun SearchFilmResponse.mapToDataAndGenre(): String {
-    return "$year,${genres.firstOrNull()?.genre}"
+    return "$year,${genres.firstOrNull()?.genre ?: ""}"
 }
