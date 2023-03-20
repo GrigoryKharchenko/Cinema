@@ -10,7 +10,6 @@ class SearchFilmRepositoryImpl @Inject constructor(
     private val searchFilmsPageSource: SearchFilmsPageSource.Factory
 ) : SearchFilmRepository {
 
-    override fun invoke(nameFilm: String): PagingSource<Int, SearchModel> {
-        return searchFilmsPageSource.create(nameFilm)
-    }
+    override fun getSearchFilm(nameFilm: String): PagingSource<Int, SearchModel> =
+        searchFilmsPageSource.create(nameFilm)
 }

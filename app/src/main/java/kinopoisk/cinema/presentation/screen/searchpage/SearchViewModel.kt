@@ -37,7 +37,7 @@ class SearchViewModel @Inject constructor(
     private fun newPager(query: String): Pager<Int, SearchModel> {
         return Pager(PagingConfig(20, enablePlaceholders = false)) {
             val films = searchFilmRepository.get()
-            films(query).also { newPagingSource = it }
+            films.getSearchFilm(query).also { newPagingSource = it }
         }
     }
 

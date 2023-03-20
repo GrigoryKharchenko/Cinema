@@ -5,5 +5,5 @@ import kinopoisk.cinema.presentation.screen.searchpage.SearchModel
 
 interface SearchFilmRepository {
 
-    operator fun invoke(nameFilm: String): PagingSource<Int, SearchModel>
+    fun getSearchFilm(nameFilm: String): PagingSource<Int, SearchModel>
 }
