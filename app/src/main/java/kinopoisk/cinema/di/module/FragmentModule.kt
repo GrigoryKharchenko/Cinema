@@ -10,6 +10,7 @@ import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragm
 import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
+import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsFragment
 import kinopoisk.cinema.presentation.screen.welcome.WelcomeFragment
 
 @Module
@@ -41,4 +42,7 @@ interface FragmentModule {
 
     @ContributesAndroidInjector
     fun bindFullScreenPhotoFragment(): FullScreenPhotoFragment
+
+    @ContributesAndroidInjector
+    fun bindSearchSettingsFragment(): SearchSettingsFragment
 }

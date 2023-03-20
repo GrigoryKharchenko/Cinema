@@ -9,6 +9,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailViewModel
 import kinopoisk.cinema.presentation.screen.homepage.HomeViewModel
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileViewModel
 import kinopoisk.cinema.presentation.screen.searchpage.SearchViewModel
+import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsViewModel
 
 @Module
 interface ViewModelModule {
@@ -27,4 +28,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchSettingsViewModel::class)
+    fun bindSearchSettingsViewModel(viewModel: SearchSettingsViewModel): ViewModel
 }
