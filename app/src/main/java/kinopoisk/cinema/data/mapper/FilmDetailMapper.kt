@@ -66,7 +66,7 @@ fun DetailFilmResponse.mapToFilmViewedEntity(): FilmViewedEntity =
         isVisibleRating = rating?.isNotEmpty() ?: false
     )
 
-private fun DetailFilmResponse.mapToDetailFilm(): String {
+fun DetailFilmResponse.mapToDetailFilm(): String {
     val countries = countries.joinToString { countries -> countries.country }
     val genres = genres.joinToString { it.genre.firstCharToUpperCase() }
     val name = nameRu ?: nameEn ?: nameOriginal
