@@ -1,11 +1,11 @@
-package kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff
+package kinopoisk.cinema.presentation.screen.staff.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kinopoisk.cinema.R
-import kinopoisk.cinema.databinding.ItemStaffBinding
+import kinopoisk.cinema.databinding.ItemAllStaffBinding
 import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.presentation.screen.filmdetail.model.StaffModel
@@ -14,22 +14,22 @@ class StaffAdapter(private val onStaffClick: (Int) -> Unit) :
     ListAdapter<StaffModel, StaffViewHolder>(StaffDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffViewHolder =
-        StaffViewHolder(ItemStaffBinding.bind(parent.inflate(R.layout.item_staff)))
+        StaffViewHolder(ItemAllStaffBinding.bind(parent.inflate(R.layout.item_all_staff)))
 
     override fun onBindViewHolder(holder: StaffViewHolder, position: Int) =
         holder.bind(getItem(position), onStaffClick)
 }
 
-class StaffViewHolder(private val binding: ItemStaffBinding) : RecyclerView.ViewHolder(binding.root) {
+class StaffViewHolder(private val binding: ItemAllStaffBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
         staffModel: StaffModel,
         onStaffClick: (Int) -> Unit
     ) {
         with(binding) {
-            tvNameActor.text = staffModel.name
-            tvActorCharacter.text = staffModel.character
-            ivPhotoActor.loadCropImage(staffModel.photo)
+            tvNameStaff.text = staffModel.name
+            tvProfession.text = staffModel.character
+            ivPhotoStaff.loadCropImage(staffModel.photo)
             root.setOnClickListener {
                 onStaffClick(staffModel.id)
             }

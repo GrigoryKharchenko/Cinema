@@ -19,7 +19,6 @@ import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
 import kinopoisk.cinema.extension.loadImage
-import kinopoisk.cinema.extension.toStringOrEmpty
 import kinopoisk.cinema.presentation.screen.actor.ActorFragment
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
@@ -27,6 +26,8 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapte
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
+import kinopoisk.cinema.presentation.screen.staff.StaffFragment
+import kinopoisk.cinema.presentation.screen.staff.TypeTitleStaff
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -40,7 +41,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private var _binding: FragmentFilmDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
 
-    private val argument: Int by lazy {
+    private val filmId: Int by lazy {
         requireNotNull(arguments?.getInt(KEY_FILM))
     }
 
@@ -50,7 +51,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     private val similarFilmAdapter by lazy { SimilarFilmAdapter(onFilmClick = ::openSimilarFilm) }
 
     private val viewModel: FilmDetailViewModel by viewModels {
-        FilmDetailViewModel.provideFactory(viewModelFactory, argument)
+        FilmDetailViewModel.provideFactory(viewModelFactory, filmId)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -82,6 +83,16 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
+            tvCountActor.setOnClickListener {
+                openStaff(
+                    typeTitleStaff = TypeTitleStaff.createActor(filmId)
+                )
+            }
+            tvCountStaff.setOnClickListener {
+                openStaff(
+                    typeTitleStaff = TypeTitleStaff.createStaff(filmId)
+                )
+            }
         }
     }
 
@@ -99,33 +110,31 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun updateUiState(filmDetailUiState: FilmDetailUiState.DetailFilm) {
-        with(binding) {
-            val gallery = filmDetailUiState.filmDetailUiModel.gallery
-            val similar = filmDetailUiState.filmDetailUiModel.similar
-            val staff = filmDetailUiState.filmDetailUiModel.staff
-            val detailFilm = filmDetailUiState.filmDetailUiModel.detailFilm
-            val actor = filmDetailUiState.filmDetailUiModel.actor
-            flProgress.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleProgress
-            tvError.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleTextError
-            nestedScroll.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleNestedScroll
-            appBar.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleAppBar
-            tvTitleActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleActors
-            tvCountActor.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleActors
-            tvTitleStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleStaff
-            tvCountStaff.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleStaff
-            tvTitleGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
-            tvCountGallery.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleGallery
-            tvTitleSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
-            tvCountSimilarFilm.isVisible = filmDetailUiState.filmDetailUiModel.isVisibleSimilar
-            tvCountGallery.text = gallery?.size.toStringOrEmpty()
-            tvCountSimilarFilm.text = similar?.size.toStringOrEmpty()
-            tvCountStaff.text = staff?.size.toStringOrEmpty()
-            tvCountActor.text = actor?.size.toStringOrEmpty()
-            setDetailFilm(detailFilm)
-            actorAdapter.submitList(actor)
-            galleryAdapter.submitList(gallery)
-            similarFilmAdapter.submitList(similar)
-            staffAdapter.submitList(staff)
+        with(filmDetailUiState.filmDetailUiModel) {
+            with(binding) {
+                val gallery = gallery
+                val similar = similar
+                val staff = staff
+                val detailFilm = detailFilm
+                val actor = actor
+                flProgress.isVisible = isVisibleProgress
+                tvError.isVisible = isVisibleTextError
+                nestedScroll.isVisible = isVisibleNestedScroll
+                appBar.isVisible = isVisibleAppBar
+                groupActor.isVisible = isVisibleActors
+                groupStaff.isVisible = isVisibleStaff
+                groupGallery.isVisible = isVisibleGallery
+                groupSimilar.isVisible = isVisibleSimilar
+                tvCountGallery.text = sizeGallery
+                tvCountSimilarFilm.text = sizeSimilar
+                tvCountStaff.text = sizeStuff
+                tvCountActor.text = sizeActor
+                setDetailFilm(detailFilm)
+                actorAdapter.submitList(actor)
+                galleryAdapter.submitList(gallery)
+                similarFilmAdapter.submitList(similar)
+                staffAdapter.submitList(staff)
+            }
         }
     }
 
@@ -170,6 +179,13 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         addFragmentWithArgs<FullScreenPhotoFragment>(
             containerId = R.id.fragmentContainer,
             args = bundleOf(KEY_PHOTO to galleryModel.image)
+        )
+    }
+
+    private fun openStaff(typeTitleStaff: TypeTitleStaff) {
+        addFragmentWithArgs<StaffFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_FILM to typeTitleStaff)
         )
     }
 

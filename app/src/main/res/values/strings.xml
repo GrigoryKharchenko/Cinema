@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cinema</string>
     <string name="unknown">Неизвестно</string>
+    <string name="refresh">Обновить</string>
 
     <!-- WelcomeFragment -->
     <string name="welcome_title">Skillcinema</string>
@@ -32,6 +33,10 @@
     <string name="actor_title_best">Лучшее</string>
     <string name="actor_title_filmography">Фильмография</string>
     <string name="actor_to_list">К списку</string>
+
+    <!-- SearchFragment -->
+    <string name="search_error">К сожалению, по вашему запросу\nничего не найдено</string>
+    <string name="search_hint">Введите название фильма</string>
 
     <!-- ProfileFragment -->
     <string name="profile_title_viewed">Просмотрено</string>
