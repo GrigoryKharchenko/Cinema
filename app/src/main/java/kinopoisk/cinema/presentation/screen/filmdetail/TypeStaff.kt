@@ -12,5 +12,5 @@ enum class TypeStaff {
     PRODUCER,
     ACTOR,
     VOICE_DIRECTOR,
-    UNKNOWN,
+    ALL,
 }

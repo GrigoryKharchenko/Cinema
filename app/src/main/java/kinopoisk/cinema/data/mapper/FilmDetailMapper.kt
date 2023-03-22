@@ -21,7 +21,7 @@ private fun StaffResponse.mapToStaffModel(): StaffModel =
         id = id,
         name = nameRu ?: nameEn,
         photo = photo,
-        character = character,
+        character = character ?: "",
         profession = profession,
     )
 

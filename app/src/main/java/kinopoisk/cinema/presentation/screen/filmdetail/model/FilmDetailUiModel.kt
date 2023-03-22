@@ -13,5 +13,9 @@ data class FilmDetailUiModel(
     val isVisibleActors: Boolean = true,
     val isVisibleStaff: Boolean = true,
     val isVisibleGallery: Boolean = true,
-    val isVisibleSimilar: Boolean = true
+    val isVisibleSimilar: Boolean = true,
+    val sizeActor: String? = null,
+    val sizeStuff: String? = null,
+    val sizeGallery: String? = null,
+    val sizeSimilar: String? = null,
 )
