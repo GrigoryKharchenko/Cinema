@@ -42,6 +42,10 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="GrayBackgroundLayout">
+        <item name="android:background">@color/hint_text_color</item>
+    </style>
+
     <style name="RippleBackground">
         <item name="android:background">@drawable/ripple_effect</item>
     </style>
@@ -176,6 +180,33 @@
 
     <style name="BlueGradientBackGround">
         <item name="android:background">@drawable/blue_gradient</item>
+    </style>
+
+    <style name="RatingSlider" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="labelStyle">@style/My_Tooltip</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
+        <item name="thumbStrokeWidth">1dp</item>
+        <item name="tickVisible">false</item>
+        <item name="labelBehavior">gone</item>
+        <item name="trackColor">@color/blue_text_color</item>
+        <item name="thumbRadius">@dimen/dp_12</item>
+    </style>
+
+    <style name="My_Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/hint_text_color</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="ThemeOverlay.Slider" parent="">
+        <item name="colorOnPrimary">@android:color/transparent</item>
+    </style>
+
+    <style name="RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:checked">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/radio_button_text</item>
     </style>
 
     <style name="SearchEditText">

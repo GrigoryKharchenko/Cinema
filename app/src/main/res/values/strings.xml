@@ -42,6 +42,26 @@
     <string name="profile_title_viewed">Просмотрено</string>
     <string name="profile_delete_history">Очистить\nисторию</string>
 
+    <!-- SearchSettingsFragment -->
+    <string name="search_setting_title">Настройки поиска</string>
+    <string name="search_setting_show">Показывать</string>
+    <string name="search_setting_all">Все</string>
+    <string name="search_setting_films">Фильмы</string>
+    <string name="search_setting_serials">Сериалы</string>
+    <string name="search_setting_title_country">Страна</string>
+    <string name="search_setting_title_genre">Жанр</string>
+    <string name="search_setting_title_year">Год</string>
+    <string name="search_setting_title_rating">Рейтинг</string>
+    <string name="search_setting_chosen_country">любая</string>
+    <string name="search_setting_chosen_genre">любой</string>
+    <string name="search_setting_chosen_year">любой</string>
+    <string name="search_setting_chosen_rating">любой</string>
+    <string name="search_setting_sort">Сортировать</string>
+    <string name="search_setting_date">Дата</string>
+    <string name="search_setting_popular">Популярность</string>
+    <string name="search_setting_rating">Рейтинг</string>
+    <string name="search_setting_not_viewed">Не просмотрен</string>
+
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>
         <item quantity="one">%d фильм</item>
