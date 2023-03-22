@@ -13,8 +13,10 @@
     <dimen name="dp_36">36dp</dimen>
     <dimen name="dp_48">48dp</dimen>
     <dimen name="dp_68">68dp</dimen>
+    <dimen name="dp_96">96dp</dimen>
     <dimen name="dp_108">108dp</dimen>
     <dimen name="dp_110">110dp</dimen>
+    <dimen name="dp_132">132dp</dimen>
     <dimen name="dp_192">192dp</dimen>
     <dimen name="dp_156">156dp</dimen>
     <dimen name="dp_200">200dp</dimen>
