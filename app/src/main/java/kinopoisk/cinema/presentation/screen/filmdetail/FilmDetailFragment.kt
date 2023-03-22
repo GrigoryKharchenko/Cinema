@@ -111,28 +111,30 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
 
     private fun updateUiState(filmDetailUiState: FilmDetailUiState.DetailFilm) {
         with(filmDetailUiState.filmDetailUiModel) {
-            val gallery = gallery
-            val similar = similar
-            val staff = staff
-            val detailFilm = detailFilm
-            val actor = actor
-            binding.flProgress.isVisible = isVisibleProgress
-            binding.tvError.isVisible = isVisibleTextError
-            binding.nestedScroll.isVisible = isVisibleNestedScroll
-            binding.appBar.isVisible = isVisibleAppBar
-            binding.groupActor.isVisible = isVisibleActors
-            binding.groupStaff.isVisible = isVisibleStaff
-            binding.groupGallery.isVisible = isVisibleGallery
-            binding.groupSimilar.isVisible = isVisibleSimilar
-            binding.tvCountGallery.text = sizeGallery
-            binding.tvCountSimilarFilm.text = sizeSimilar
-            binding.tvCountStaff.text = sizeStuff
-            binding.tvCountActor.text = sizeActor
-            setDetailFilm(detailFilm)
-            actorAdapter.submitList(actor)
-            galleryAdapter.submitList(gallery)
-            similarFilmAdapter.submitList(similar)
-            staffAdapter.submitList(staff)
+            with(binding) {
+                val gallery = gallery
+                val similar = similar
+                val staff = staff
+                val detailFilm = detailFilm
+                val actor = actor
+                flProgress.isVisible = isVisibleProgress
+                tvError.isVisible = isVisibleTextError
+                nestedScroll.isVisible = isVisibleNestedScroll
+                appBar.isVisible = isVisibleAppBar
+                groupActor.isVisible = isVisibleActors
+                groupStaff.isVisible = isVisibleStaff
+                groupGallery.isVisible = isVisibleGallery
+                groupSimilar.isVisible = isVisibleSimilar
+                tvCountGallery.text = sizeGallery
+                tvCountSimilarFilm.text = sizeSimilar
+                tvCountStaff.text = sizeStuff
+                tvCountActor.text = sizeActor
+                setDetailFilm(detailFilm)
+                actorAdapter.submitList(actor)
+                galleryAdapter.submitList(gallery)
+                similarFilmAdapter.submitList(similar)
+                staffAdapter.submitList(staff)
+            }
         }
     }
 
