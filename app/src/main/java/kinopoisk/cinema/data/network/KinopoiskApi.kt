@@ -5,6 +5,7 @@ import kinopoisk.cinema.data.network.response.DetailFilmResponse
 import kinopoisk.cinema.data.network.response.FilmsResponse
 import kinopoisk.cinema.data.network.response.GalleryResponse
 import kinopoisk.cinema.data.network.response.SearchFilmsResponse
+import kinopoisk.cinema.data.network.response.SearchFilterResponse
 import kinopoisk.cinema.data.network.response.SimilarsResponse
 import kinopoisk.cinema.data.network.response.StaffResponse
 import retrofit2.http.GET
@@ -80,4 +81,7 @@ interface KinopoiskApi {
         @androidx.annotation.IntRange(from = 1)
         page: Int = ApiConstants.FIRST_PAGE,
     ): SearchFilmsResponse
+
+    @GET("/api/v2.2/films/filters")
+    suspend fun getFilters(): SearchFilterResponse
 }

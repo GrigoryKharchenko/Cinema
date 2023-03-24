@@ -123,11 +123,11 @@
         style="@style/Text.Gray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_16"
         android:text="@string/search_setting_chosen_genre"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleGenre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewCountry" />
+        app:layout_constraintTop_toTopOf="@id/tvTitleGenre" />
 
     <View
         android:id="@+id/viewGenre"
@@ -155,11 +155,11 @@
         style="@style/Text.Gray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_16"
         android:text="@string/search_setting_chosen_year"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleYear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewGenre" />
+        app:layout_constraintTop_toTopOf="@id/tvTitleYear" />
 
     <View
         android:id="@+id/viewYear"
@@ -187,11 +187,12 @@
         style="@style/Text.Gray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_24"
         android:layout_marginEnd="@dimen/dp_16"
         android:text="@string/search_setting_chosen_rating"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleRating"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewYear" />
+        app:layout_constraintTop_toBottomOf="@id/viewYear"
+        app:layout_constraintTop_toTopOf="@id/tvTitleRating" />
 
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/sliderCounter"
@@ -215,16 +216,16 @@
         android:layout_marginStart="@dimen/dp_14"
         app:layout_constraintStart_toStartOf="@id/sliderCounter"
         app:layout_constraintTop_toBottomOf="@id/sliderCounter"
-        tools:text="1" />
+        android:text="@string/search_setting_min_rating" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvMaxRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_10"
         app:layout_constraintEnd_toEndOf="@id/sliderCounter"
         app:layout_constraintTop_toBottomOf="@id/sliderCounter"
-        tools:text="10" />
+        android:text="@string/search_setting_max_rating" />
 
     <View
         android:id="@+id/viewRating"
