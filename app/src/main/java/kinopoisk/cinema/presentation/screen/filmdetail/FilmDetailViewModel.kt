@@ -32,6 +32,32 @@ class FilmDetailViewModel @AssistedInject constructor(
         getFilmDetail()
     }
 
+    private fun getSerials() {
+        viewModelScope.launch(ioDispatcher) {
+            detailFilmRepository.getSerial(filmId)
+                .onSuccess { serials ->
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = uiState.filmDetailUiModel.copy(
+                                countSeason = serials.countSeasons,
+                                countEpisodes = serials.seasons.sumOf { seasonsModel ->
+                                    seasonsModel.episodes.count()
+                                },
+                            )
+                        ) ?: uiState
+                    }
+                }.onFailure {
+                    _uiStateFlow.update { uiState ->
+                        (uiState as? FilmDetailUiState.DetailFilm)?.copy(
+                            filmDetailUiModel = FilmDetailUiModel(
+                                isVisibleSeason = false,
+                            )
+                        ) ?: uiState
+                    }
+                }
+        }
+    }
+
     private fun getFilmDetail() {
         viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getFilmDetailModel(filmId)
@@ -40,6 +66,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                         FilmDetailUiState.DetailFilm(
                             filmDetailUiModel = FilmDetailUiModel(
                                 detailFilm = filmDetailModel,
+                                isVisibleSeason = filmDetailModel.isVisibleSeason
                             )
                         )
                     )
@@ -47,6 +74,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                     getGallery()
                     getSimilar()
                     getFilmViewed()
+                    getSerials()
                 }.onFailure {
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(

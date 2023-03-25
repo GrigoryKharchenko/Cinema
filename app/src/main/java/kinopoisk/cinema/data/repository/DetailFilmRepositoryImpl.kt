@@ -4,6 +4,7 @@ import kinopoisk.cinema.data.entity.FilmViewedEntity
 import kinopoisk.cinema.data.mapper.mapToDetailFilmModel
 import kinopoisk.cinema.data.mapper.mapToFilmViewedEntity
 import kinopoisk.cinema.data.mapper.mapToGalleryModel
+import kinopoisk.cinema.data.mapper.mapToSerialModel
 import kinopoisk.cinema.data.mapper.mapToSimilarsFilmsModel
 import kinopoisk.cinema.data.mapper.mapToStaffModel
 import kinopoisk.cinema.data.network.KinopoiskApi
@@ -12,6 +13,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.StaffModel
+import kinopoisk.cinema.presentation.screen.season.SerialModel
 import javax.inject.Inject
 
 class DetailFilmRepositoryImpl @Inject constructor(
@@ -41,5 +43,10 @@ class DetailFilmRepositoryImpl @Inject constructor(
     override suspend fun getFilmViewedEntity(id: Int): Result<FilmViewedEntity> =
         runCatching {
             kinopoiskApi.getDetailFilm(id).mapToFilmViewedEntity()
+        }
+
+    override suspend fun getSerial(id: Int): Result<SerialModel> =
+        runCatching {
+            kinopoiskApi.getSerial(id).mapToSerialModel()
         }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_36"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNumberSeries"
+        style="@style/Text.Black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/season_title_number_serial" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvReleaseDate"
+        style="@style/Text.HintGray.10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        tools:text="28 march 2020" />
+
+</LinearLayout>
