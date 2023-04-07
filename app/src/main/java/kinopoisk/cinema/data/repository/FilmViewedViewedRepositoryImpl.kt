@@ -18,4 +18,7 @@ class FilmViewedViewedRepositoryImpl @Inject constructor(
         filmViewedDao.insertOrUpdate(typeCardViewedUiModel.mapToFilmViewedEntity())
 
     override suspend fun deleteAllFilms() = filmViewedDao.deleteAll()
+
+    override suspend fun deleteFilm(filmId: Int) =
+        filmViewedDao.deleteFilm(filmId)
 }

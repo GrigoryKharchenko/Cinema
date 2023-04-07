@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentFilmDetailsBinding
+import kinopoisk.cinema.domain.enumeration.ViewedState
 import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
@@ -83,6 +85,17 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
+            var isViewed = INITIAL_IS_VIEWED
+            ivDontViewed.setOnClickListener {
+                if (isViewed) {
+                    ivDontViewed.setImageResource(ViewedState.VIEWED.viewedState)
+                    viewModel.insertFilmViewed()
+                } else {
+                    ivDontViewed.setImageResource(ViewedState.DONT_VIEWED.viewedState)
+                    viewModel.deleteFilm()
+                }
+                isViewed = !isViewed
+            }
             tvCountActor.setOnClickListener {
                 openStaff(
                     typeTitleStaff = TypeTitleStaff.createActor(filmId)
@@ -209,5 +222,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         const val KEY_PHOTO = "photoId"
         private const val MAX_LINE_COLLAPSED = 5
         private const val INITIAL_IS_COLLAPSED = true
+        private const val INITIAL_IS_VIEWED = true
     }
 }

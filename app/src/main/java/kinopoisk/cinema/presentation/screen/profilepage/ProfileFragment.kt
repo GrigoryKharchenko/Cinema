@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -16,6 +16,7 @@ import kinopoisk.cinema.databinding.FragmentProfileBinding
 import kinopoisk.cinema.di.ViewModelFactory
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.presentation.screen.profilepage.adapter.ProfileAdapter
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class ProfileFragment : Fragment(), HasAndroidInjector {
@@ -33,7 +34,8 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
         ViewModelProvider(this, defaultViewModelFactory)[ProfileViewModel::class.java]
     }
 
-    private val adapter = ProfileAdapter(onDelete = { viewModel.deleteAllFilm() })
+    private val viewedAdapter = ProfileAdapter(onDelete = { viewModel.deleteAllViewedFilm() })
+    private val interestingAdapter = ProfileAdapter(onDelete = { viewModel.deleteAllInterestingFilm() })
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
@@ -58,15 +60,31 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun initUi() {
-        binding.rvViewedFilm.adapter = adapter
+        with(binding) {
+            rvViewedFilm.adapter = viewedAdapter
+            rvInterestingFilm.adapter = interestingAdapter
+        }
     }
 
     private fun initViewModel() {
-        launchWhenStarted(viewModel.filmFlow, adapter::submitList)
+        with(viewModel) {
+            filmViewedFlow.onEach { viewedFilms ->
+                binding.tvCountViewedFilm.text = (viewedFilms.size - FOOTER_ELEMENT).toString()
+                viewedAdapter.submitList(viewedFilms)
+            }.launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
+            filmInterestingFlow.onEach { interestingFilms ->
+                binding.tvCountInterestingFilm.text = (interestingFilms.size - FOOTER_ELEMENT).toString()
+                interestingAdapter.submitList(interestingFilms)
+            }.launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val FOOTER_ELEMENT = 1
     }
 }

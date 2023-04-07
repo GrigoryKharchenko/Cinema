@@ -50,6 +50,10 @@
         <item name="android:background">@drawable/ripple_effect</item>
     </style>
 
+    <style name="RippleBackgroundTransparent">
+        <item name="android:background">@drawable/ripple_effect_background_transparent</item>
+    </style>
+
     <style name="Text" />
 
     <style name="Text.White">

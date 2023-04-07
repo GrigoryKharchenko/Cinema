@@ -15,7 +15,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:collapsedTitleTextAppearance="@style/WhiteTextCollapsingToolbar"
             app:contentScrim="@color/black"
             app:elevation="0dp"
@@ -59,10 +59,11 @@
 
                 <ImageView
                     android:id="@+id/ivLike"
+                    style="@style/RippleBackgroundTransparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_26"
                     android:layout_marginBottom="@dimen/dp_26"
+                    android:padding="@dimen/dp_10"
                     android:src="@drawable/ic_like"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/ivFavorites"
@@ -71,9 +72,10 @@
 
                 <ImageView
                     android:id="@+id/ivFavorites"
+                    style="@style/RippleBackgroundTransparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_26"
+                    android:padding="@dimen/dp_10"
                     android:src="@drawable/ic_favorites"
                     app:layout_constraintBottom_toBottomOf="@id/ivLike"
                     app:layout_constraintEnd_toStartOf="@id/ivDontViewed"
@@ -81,9 +83,10 @@
 
                 <ImageView
                     android:id="@+id/ivDontViewed"
+                    style="@style/RippleBackgroundTransparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_26"
+                    android:padding="@dimen/dp_10"
                     android:src="@drawable/ic_dont_viewed"
                     app:layout_constraintBottom_toBottomOf="@id/ivLike"
                     app:layout_constraintEnd_toStartOf="@id/ivShare"
@@ -91,9 +94,10 @@
 
                 <ImageView
                     android:id="@+id/ivShare"
+                    style="@style/RippleBackgroundTransparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_26"
+                    android:padding="@dimen/dp_10"
                     android:src="@drawable/ic_share"
                     app:layout_constraintBottom_toBottomOf="@id/ivLike"
                     app:layout_constraintEnd_toStartOf="@id/ivExtraMenu"
@@ -101,9 +105,11 @@
 
                 <ImageView
                     android:id="@+id/ivExtraMenu"
+                    style="@style/RippleBackgroundTransparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_26"
+                    android:padding="@dimen/dp_10"
                     android:src="@drawable/ic_extra_menu"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_16"
                     android:gravity="center"
-                    app:layout_constraintBottom_toTopOf="@id/ivDontViewed"
+                    app:layout_constraintBottom_toTopOf="@id/ivShare"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="6.4 Китобой" />
@@ -127,7 +133,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="wrap_content"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_arrow_left_white" />
 

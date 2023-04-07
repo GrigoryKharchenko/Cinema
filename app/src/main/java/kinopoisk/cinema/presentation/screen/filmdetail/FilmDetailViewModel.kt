@@ -1,14 +1,19 @@
 package kinopoisk.cinema.presentation.screen.filmdetail
 
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kinopoisk.cinema.R
+import kinopoisk.cinema.data.mapper.mapToFilmInteresting
 import kinopoisk.cinema.data.mapper.mapToFilmViewedModel
 import kinopoisk.cinema.di.IoDispatcher
+import kinopoisk.cinema.domain.enumeration.ViewedState
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
+import kinopoisk.cinema.domain.repository.FilmInterestingRepository
 import kinopoisk.cinema.domain.repository.FilmViewedRepository
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,7 +27,8 @@ class FilmDetailViewModel @AssistedInject constructor(
     private val detailFilmRepository: DetailFilmRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @Assisted private val filmId: Int,
-    private val filmViewedRepository: FilmViewedRepository
+    private val filmViewedRepository: FilmViewedRepository,
+    private val filmInterestingRepository: FilmInterestingRepository
 ) : ViewModel() {
 
     private val _uiStateFlow = MutableStateFlow<FilmDetailUiState>(FilmDetailUiState.Loading)
@@ -46,7 +52,7 @@ class FilmDetailViewModel @AssistedInject constructor(
                     getStaff()
                     getGallery()
                     getSimilar()
-                    getFilmViewed()
+                    insertFilmInteresting()
                 }.onFailure {
                     _uiStateFlow.emit(
                         FilmDetailUiState.DetailFilm(
@@ -142,10 +148,23 @@ class FilmDetailViewModel @AssistedInject constructor(
         }
     }
 
-    private fun getFilmViewed() {
+    fun insertFilmViewed() {
         viewModelScope.launch(ioDispatcher) {
-            detailFilmRepository.getFilmViewedEntity(filmId)
+            detailFilmRepository.getFilmViewed(filmId)
                 .onSuccess { filmViewedRepository.insertOrUpdate(it.mapToFilmViewedModel()) }
+        }
+    }
+
+    private fun insertFilmInteresting() {
+        viewModelScope.launch(ioDispatcher) {
+            detailFilmRepository.getFilmInteresting(filmId)
+                .onSuccess { filmInterestingRepository.insertOrUpdate(it.mapToFilmInteresting()) }
+        }
+    }
+
+    fun deleteFilm() {
+        viewModelScope.launch(ioDispatcher) {
+            filmViewedRepository.deleteFilm(filmId)
         }
     }
 

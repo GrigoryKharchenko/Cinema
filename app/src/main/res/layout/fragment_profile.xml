@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvAllBest"
+        android:id="@+id/tvCountViewedFilm"
         style="@style/Text.Blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +42,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleBest"
+        tools:listitem="@layout/item_certain_category" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitleInteresting"
+        style="@style/Text.Black.Bold.18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_26"
+        android:layout_marginTop="@dimen/dp_26"
+        android:text="@string/profile_interesting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvViewedFilm" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCountInterestingFilm"
+        style="@style/Text.Blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_26"
+        android:drawableEnd="@drawable/ic_next_arrow"
+        android:drawablePadding="@dimen/dp_8"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitleInteresting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitleInteresting"
+        tools:text="15" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInterestingFilm"
+        style="@style/HorizontalRecycler"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_26"
+        android:layout_marginBottom="@dimen/dp_26"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingEnd="@dimen/dp_16"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleInteresting"
         tools:listitem="@layout/item_certain_category" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
