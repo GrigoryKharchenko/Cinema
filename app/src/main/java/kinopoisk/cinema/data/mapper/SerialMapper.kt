@@ -30,27 +30,15 @@ fun SeasonsResponse.mapToEpisodes(): List<EpisodesModel> =
 fun EpisodesResponse.mapToEpisodeModel(): EpisodesModel =
     EpisodesModel(
         seasonNumber = seasonNumber,
-        episodeNumber = if (episodeNumber == "0") "1" else episodeNumber,
+        episodeNumber = episodeNumber,
         nameSeries = nameRu ?: nameEn ?: "",
         releaseDate = releaseDate
     )
 
-suspend fun SerialModel.mapToSeason(
-    numberSeason: String,
-    state: MutableStateFlow<SeasonUiState>,
-    isFirstSeason: Boolean
+fun SerialModel.mapToSeason(
+    numberSeason: Int
 ): SeasonsModel {
-    val season = seasons.first {
+    return seasons.first {
         it.numberSeason == numberSeason
     }
-    state.emit(
-        SeasonUiState.Success(
-            countSeason = this.countSeasons,
-            currentSeason = season.numberSeason,
-            countEpisodesInSeasons = season.episodes.size,
-            episodes = season.episodes,
-            isFirstSeason = isFirstSeason
-        )
-    )
-    return season
 }

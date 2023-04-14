@@ -8,9 +8,9 @@ sealed interface SeasonUiState {
 
     data class Success(
         val countSeason: Int,
-        val currentSeason: String,
+        val currentSeason: Int,
         val countEpisodesInSeasons: Int,
         val episodes: List<EpisodesModel>,
-        val isFirstSeason: Boolean,
+        val isFirstTimeDataLoaded: Boolean,
     ) : SeasonUiState
 }

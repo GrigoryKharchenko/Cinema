@@ -80,8 +80,12 @@ class SeasonFragment : Fragment(), HasAndroidInjector {
     private fun handleUiState(seasonUiState: SeasonUiState) {
         with(binding) {
             when (seasonUiState) {
-                SeasonUiState.Loading -> flProgress.isVisible = true
-                is SeasonUiState.Success -> successUiState(seasonUiState)
+                SeasonUiState.Loading -> {
+                    flProgress.isVisible = true
+                }
+                is SeasonUiState.Success -> {
+                    successUiState(seasonUiState)
+                }
                 SeasonUiState.Error -> {
                     flProgress.isVisible = false
                     tvError.isVisible = true
@@ -96,7 +100,7 @@ class SeasonFragment : Fragment(), HasAndroidInjector {
             flProgress.isVisible = false
             tvError.isVisible = false
             groupSuccess.isVisible = true
-            if (seasonUiState.isFirstSeason) {
+            if (seasonUiState.isFirstTimeDataLoaded) {
                 addChipGroup(requireContext(),
                     chipGroup,
                     seasonUiState.countSeason,

@@ -65,8 +65,8 @@
 
     <!-- SeasonFragment -->
     <string name="season_title_season">Сезон</string>
-    <string name="season_title_number_serial">%1$s серия. %2$s</string>
-    <string name="season_number_season">%s cезон,</string>
+    <string name="season_title_number_serial">%1$d серия. %2$s</string>
+    <string name="season_number_season">%d cезон,</string>
 
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>

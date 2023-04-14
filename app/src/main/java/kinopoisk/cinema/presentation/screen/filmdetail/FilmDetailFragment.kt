@@ -24,6 +24,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAd
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
 import kinopoisk.cinema.presentation.screen.season.SerialInfo
@@ -119,8 +120,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
                 val staff = staff
                 val detailFilm = detailFilm
                 val actor = actor
-                val countSeason = countSeason ?: 0
-                val countEpisodes = countEpisodes ?: 0
+                val countSeason = countSeason
+                val countEpisodes = countEpisodes
                 flProgress.isVisible = isVisibleProgress
                 tvError.isVisible = isVisibleTextError
                 nestedScroll.isVisible = isVisibleNestedScroll
@@ -129,7 +130,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
                 groupStaff.isVisible = isVisibleStaff
                 groupGallery.isVisible = isVisibleGallery
                 groupSimilar.isVisible = isVisibleSimilar
-                groupSerials.isVisible = isVisibleSeason
+                groupSerials.isVisible = isSerial
                 tvCountGallery.text = sizeGallery
                 tvCountSimilarFilm.text = sizeSimilar
                 tvCountStaff.text = sizeStuff
@@ -156,7 +157,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             binding.tvDescription.text = description
             binding.collapsingToolBar.title = name
             binding.tvAllSeason.setOnClickListener {
-                openSeason(SerialInfo.createFilmInfo(filmId, name))
+                openSeason(SerialInfo(name, filmId))
             }
             var isCollapsed = INITIAL_IS_COLLAPSED
             binding.tvDescription.setOnClickListener {

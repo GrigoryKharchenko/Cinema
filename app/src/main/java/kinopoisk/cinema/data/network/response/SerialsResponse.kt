@@ -8,13 +8,13 @@ class SerialsResponse(
 )
 
 class SeasonsResponse(
-    @SerializedName("number") val numberSeason: String,
+    @SerializedName("number") val numberSeason: Int,
     @SerializedName("episodes") val episodes: List<EpisodesResponse>
 )
 
 class EpisodesResponse(
-    @SerializedName("seasonNumber") val seasonNumber: String,
-    @SerializedName("episodeNumber") val episodeNumber: String,
+    @SerializedName("seasonNumber") val seasonNumber: Int,
+    @SerializedName("episodeNumber") val episodeNumber: Int,
     @SerializedName("nameRu") val nameRu: String?,
     @SerializedName("nameEn") val nameEn: String?,
     @SerializedName("releaseDate") val releaseDate: String,

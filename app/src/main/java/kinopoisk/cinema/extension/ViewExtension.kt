@@ -1,7 +1,6 @@
 package kinopoisk.cinema.extension
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,39 +11,36 @@ import kinopoisk.cinema.R
 
 private const val CHIP_STROKE_WIDTH = 1.0f
 private const val CHIP_PADDING_HORIZONTAL = 36.0f
+private const val FIRST_CHIP = 1
+private const val SECOND_CHIP = 2
 
 fun ViewGroup.inflate(layoutId: Int): View {
     return LayoutInflater.from(context).inflate(layoutId, this, false)
 }
 
-fun ChipGroup.addChip(context: Context, label: String, isFirst: Boolean, onClickChip: (String) -> Unit) {
+fun ChipGroup.addChip(context: Context, chipNumber: Int, isFirst: Boolean, onClickChip: (Int) -> Unit) {
     Chip(context).apply {
         id = View.generateViewId()
-        text = label
+        text = chipNumber.toString()
         setTextColor(resources.getColorStateList(R.color.chip_text, null))
         chipBackgroundColor = resources.getColorStateList(R.color.chip_background, null)
         chipStrokeWidth = CHIP_STROKE_WIDTH
         chipStrokeColor = resources.getColorStateList(R.color.chip_stroke, null)
-        isClickable = true
         isCheckable = true
         isChecked = isFirst
         chipStartPadding = CHIP_PADDING_HORIZONTAL
         chipEndPadding = CHIP_PADDING_HORIZONTAL
         isCheckedIconVisible = false
-        isFocusable = true
         addView(this)
         setOnClickListener {
-            onClickChip(label)
+            onClickChip(chipNumber)
         }
     }
 }
 
-fun Fragment.addChipGroup(context: Context, chipGroup: ChipGroup, countChip: Int, onClickChip: (String) -> Unit) {
-    for (i in 1..countChip) {
-        if (i == 1) {
-            chipGroup.addChip(context, i.toString(), true, onClickChip)
-        } else {
-            chipGroup.addChip(context, i.toString(), false, onClickChip)
-        }
+fun Fragment.addChipGroup(context: Context, chipGroup: ChipGroup, countChip: Int, onClickChip: (Int) -> Unit) {
+    chipGroup.addChip(context, FIRST_CHIP, true, onClickChip)
+    for (i in SECOND_CHIP..countChip) {
+        chipGroup.addChip(context, i, false, onClickChip)
     }
 }

@@ -6,13 +6,13 @@ data class SerialModel(
 )
 
 data class SeasonsModel(
-    val numberSeason: String,
+    val numberSeason: Int,
     val episodes: List<EpisodesModel>,
 )
 
 data class EpisodesModel(
-    val seasonNumber: String,
-    val episodeNumber: String,
+    val seasonNumber: Int,
+    val episodeNumber: Int,
     val nameSeries: String,
     val releaseDate: String
 )

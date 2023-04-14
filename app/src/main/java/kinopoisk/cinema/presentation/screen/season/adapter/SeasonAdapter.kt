@@ -8,8 +8,6 @@ import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.ItemEpisodesBinding
 import kinopoisk.cinema.extension.inflate
 import kinopoisk.cinema.presentation.screen.season.EpisodesModel
-import kinopoisk.cinema.presentation.screen.season.SeasonsModel
-import kinopoisk.cinema.presentation.screen.season.SerialModel
 
 class SeasonAdapter : ListAdapter<EpisodesModel, SeasonViewHolder>(SeasonDiffUtil()) {
 
@@ -22,14 +20,14 @@ class SeasonAdapter : ListAdapter<EpisodesModel, SeasonViewHolder>(SeasonDiffUti
 
 class SeasonViewHolder(private val binding: ItemEpisodesBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(serialModel: EpisodesModel) {
+    fun bind(episodesModel: EpisodesModel) {
         with(binding) {
             tvNumberSeries.text = itemView.context.getString(
                 R.string.season_title_number_serial,
-                serialModel.episodeNumber,
-                serialModel.nameSeries
+                episodesModel.episodeNumber,
+                episodesModel.nameSeries
             )
-            tvReleaseDate.text = serialModel.releaseDate
+            tvReleaseDate.text = episodesModel.releaseDate
         }
     }
 }

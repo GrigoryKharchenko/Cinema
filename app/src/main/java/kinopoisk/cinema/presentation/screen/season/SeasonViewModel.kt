@@ -29,23 +29,32 @@ class SeasonViewModel @AssistedInject constructor(
         getFirstSeason()
     }
 
+    fun getCurrentSeason(numberSeason: Int, isFirstTime: Boolean = false) {
+        val safeSerial = requireNotNull(serialModel)
+        viewModelScope.launch {
+            val season = safeSerial.mapToSeason(numberSeason)
+            _uiState.emit(
+                SeasonUiState.Success(
+                    countSeason = safeSerial.countSeasons,
+                    currentSeason = season.numberSeason,
+                    countEpisodesInSeasons = season.episodes.size,
+                    episodes = season.episodes,
+                    isFirstTimeDataLoaded = isFirstTime
+                )
+            )
+        }
+    }
+
     private fun getFirstSeason() {
         viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getSerial(serialInfo.filmId)
                 .onSuccess { serialModelResponse ->
                     serialModel = serialModelResponse
-                    serialModelResponse.mapToSeason(FIRST_SEASON, _uiState, true)
+                    getCurrentSeason(FIRST_SEASON, isFirstTime = true)
                 }
                 .onFailure {
                     _uiState.emit(SeasonUiState.Error)
                 }
-        }
-    }
-
-    fun getCurrentSeason(numberSeason: String) {
-        val safeSerial = requireNotNull(serialModel)
-        viewModelScope.launch {
-            safeSerial.mapToSeason(numberSeason, _uiState, false)
         }
     }
 
@@ -56,7 +65,7 @@ class SeasonViewModel @AssistedInject constructor(
 
     @Suppress("UNCHECKED_CAST")
     companion object {
-        private const val FIRST_SEASON = "1"
+        private const val FIRST_SEASON = 1
         fun provideFactory(
             assistedFactory: Factory,
             serialInfo: SerialInfo
