@@ -7,14 +7,10 @@ import kinopoisk.cinema.extension.firstCharToUpperCase
 import kinopoisk.cinema.presentation.screen.searchfilter.SearchFilterModel
 
 fun SearchFilterResponse.mapToCountriesFilters(): List<SearchFilterModel> =
-    this.countries.map(CountriesFilterResponse::mapToCountryFilter).filter {
-        it.countryOrGenre.isNotEmpty()
-    }
+    this.countries.filter { it.country.isNotEmpty() }.map(CountriesFilterResponse::mapToCountryFilter)
 
 fun SearchFilterResponse.mapToGenresFilters(): List<SearchFilterModel> =
-    this.genres.map(GenresFilterResponse::mapToGenreFilter).filter {
-        it.countryOrGenre.isNotEmpty()
-    }
+    this.genres.filter { it.genre.isNotEmpty() }.map(GenresFilterResponse::mapToGenreFilter)
 
 fun CountriesFilterResponse.mapToCountryFilter(): SearchFilterModel =
     SearchFilterModel(
