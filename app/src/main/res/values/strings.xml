@@ -67,8 +67,8 @@
     <!-- SearchFiltersFragment -->
     <string name="search_filter_enter_country">Введите страну</string>
     <string name="search_filter_enter_genre">Введите жанр</string>
-    <string name="search_filter_title_countries">Страна</string>
-    <string name="search_filter_title_genres">Жанр</string>
+    <string name="search_filter_title_country">Страна</string>
+    <string name="search_filter_title_genre">Жанр</string>
 
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>
