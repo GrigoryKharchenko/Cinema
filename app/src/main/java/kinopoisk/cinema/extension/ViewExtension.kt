@@ -40,7 +40,7 @@ fun ChipGroup.addChip(context: Context, chipNumber: Int, isFirst: Boolean, onCli
 
 fun Fragment.addChipGroup(context: Context, chipGroup: ChipGroup, countChip: Int, onClickChip: (Int) -> Unit) {
     chipGroup.addChip(context, FIRST_CHIP, true, onClickChip)
-    for (i in SECOND_CHIP..countChip) {
-        chipGroup.addChip(context, i, false, onClickChip)
+    (SECOND_CHIP..countChip).forEach {
+        chipGroup.addChip(context, it, false, onClickChip)
     }
 }
