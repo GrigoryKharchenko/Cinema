@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,7 +15,6 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentFilmDetailsBinding
-import kinopoisk.cinema.domain.enumeration.ViewedState
 import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.extension.loadCropImage
@@ -85,16 +83,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
-            var isViewed = INITIAL_IS_VIEWED
             ivDontViewed.setOnClickListener {
-                if (isViewed) {
-                    ivDontViewed.setImageResource(ViewedState.VIEWED.viewedState)
-                    viewModel.insertFilmViewed()
-                } else {
-                    ivDontViewed.setImageResource(ViewedState.DONT_VIEWED.viewedState)
-                    viewModel.deleteFilm()
-                }
-                isViewed = !isViewed
+                viewModel.checkViewedFilm(ivDontViewed)
             }
             tvCountActor.setOnClickListener {
                 openStaff(
@@ -161,14 +151,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             binding.tvShortDescription.isVisible = isVisibleShortDescription
             binding.tvDescription.text = description
             binding.collapsingToolBar.title = name
-            var isCollapsed = INITIAL_IS_COLLAPSED
             binding.tvDescription.setOnClickListener {
-                if (isCollapsed) {
-                    binding.tvDescription.maxLines = Int.MAX_VALUE
-                } else {
-                    binding.tvDescription.maxLines = MAX_LINE_COLLAPSED
-                }
-                isCollapsed = !isCollapsed
+                viewModel.checkCollapsed(binding.tvDescription)
                 binding.tvDescription.text = description
             }
         }
@@ -220,8 +204,5 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     companion object {
         const val KEY_FILM = "filmId"
         const val KEY_PHOTO = "photoId"
-        private const val MAX_LINE_COLLAPSED = 5
-        private const val INITIAL_IS_COLLAPSED = true
-        private const val INITIAL_IS_VIEWED = true
     }
 }

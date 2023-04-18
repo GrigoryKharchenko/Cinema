@@ -1,13 +1,13 @@
 package kinopoisk.cinema.presentation.screen.filmdetail
 
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kinopoisk.cinema.R
 import kinopoisk.cinema.data.mapper.mapToFilmInteresting
 import kinopoisk.cinema.data.mapper.mapToFilmViewedModel
 import kinopoisk.cinema.di.IoDispatcher
@@ -34,8 +34,31 @@ class FilmDetailViewModel @AssistedInject constructor(
     private val _uiStateFlow = MutableStateFlow<FilmDetailUiState>(FilmDetailUiState.Loading)
     val uiStateFlow = _uiStateFlow.asStateFlow()
 
+    private var isViewed = INITIAL_IS_VIEWED
+    private var isCollapsing = INITIAL_IS_COLLAPSED
+
     init {
         getFilmDetail()
+    }
+
+    fun checkViewedFilm(imageView: ImageView) {
+        if (isViewed) {
+            imageView.setImageResource(ViewedState.VIEWED.viewedState)
+            insertFilmViewed()
+        } else {
+            imageView.setImageResource(ViewedState.DONT_VIEWED.viewedState)
+            deleteFilm()
+        }
+        isViewed = !isViewed
+    }
+
+    fun checkCollapsed(textView: TextView) {
+        if (isCollapsing) {
+            textView.maxLines = Int.MAX_VALUE
+        } else {
+            textView.maxLines = MAX_LINE_COLLAPSED
+        }
+        isCollapsing = !isCollapsing
     }
 
     private fun getFilmDetail() {
@@ -148,10 +171,13 @@ class FilmDetailViewModel @AssistedInject constructor(
         }
     }
 
-    fun insertFilmViewed() {
+    private fun insertFilmViewed() {
         viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getFilmViewed(filmId)
                 .onSuccess { filmViewedRepository.insertOrUpdate(it.mapToFilmViewedModel()) }
+                .onFailure {
+                    // Ignore
+                }
         }
     }
 
@@ -159,10 +185,13 @@ class FilmDetailViewModel @AssistedInject constructor(
         viewModelScope.launch(ioDispatcher) {
             detailFilmRepository.getFilmInteresting(filmId)
                 .onSuccess { filmInterestingRepository.insertOrUpdate(it.mapToFilmInteresting()) }
+                .onFailure {
+                    // Ignore
+                }
         }
     }
 
-    fun deleteFilm() {
+    private fun deleteFilm() {
         viewModelScope.launch(ioDispatcher) {
             filmViewedRepository.deleteFilm(filmId)
         }
@@ -177,6 +206,9 @@ class FilmDetailViewModel @AssistedInject constructor(
     companion object {
         private const val MAX_ACTOR = 20
         private const val MAX_STAFF = 6
+        private const val INITIAL_IS_VIEWED = true
+        private const val INITIAL_IS_COLLAPSED = true
+        private const val MAX_LINE_COLLAPSED = 5
 
         fun provideFactory(
             assistedFactory: Factory,

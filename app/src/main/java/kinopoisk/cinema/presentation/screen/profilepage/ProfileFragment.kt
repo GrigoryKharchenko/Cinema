@@ -67,24 +67,20 @@ class ProfileFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun initViewModel() {
-        with(viewModel) {
-            filmViewedFlow.onEach { viewedFilms ->
-                binding.tvCountViewedFilm.text = (viewedFilms.size - FOOTER_ELEMENT).toString()
-                viewedAdapter.submitList(viewedFilms)
-            }.launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
-            filmInterestingFlow.onEach { interestingFilms ->
-                binding.tvCountInterestingFilm.text = (interestingFilms.size - FOOTER_ELEMENT).toString()
-                interestingAdapter.submitList(interestingFilms)
-            }.launchWhenStarted(lifecycleScope, viewLifecycleOwner.lifecycle)
+        launchWhenStarted(viewModel.profileUiState, ::handleUiState)
+    }
+
+    private fun handleUiState(profileUiState: ProfileUiState.Success) {
+        with(binding) {
+            tvCountViewedFilm.text = profileUiState.countViewedFilm
+            viewedAdapter.submitList(profileUiState.filmViewed)
+            tvCountInterestingFilm.text = profileUiState.countInterestingFilm
+            interestingAdapter.submitList(profileUiState.filmInteresting)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        private const val FOOTER_ELEMENT = 1
     }
 }

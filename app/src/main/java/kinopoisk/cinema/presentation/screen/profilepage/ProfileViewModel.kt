@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,11 +24,8 @@ class ProfileViewModel @Inject constructor(
     private val filmInterestingRepository: FilmInterestingRepository
 ) : ViewModel() {
 
-    private val _filmViewedFlow = MutableStateFlow<List<TypeCardCategoryUiModel>>(emptyList())
-    val filmViewedFlow = _filmViewedFlow.asStateFlow()
-
-    private val _filmInterestingFlow = MutableStateFlow<List<TypeCardCategoryUiModel>>(emptyList())
-    val filmInterestingFlow = _filmInterestingFlow.asStateFlow()
+    private val _profileUiState = MutableStateFlow(ProfileUiState.Success())
+    val profileUiState = _profileUiState.asStateFlow()
 
     init {
         subscribeViewedFilm()
@@ -50,15 +48,25 @@ class ProfileViewModel @Inject constructor(
         filmViewedRepository.subscribeToReceive().map { filmsEntity ->
             filmsEntity.mapToFilmsViewedModel()
         }.onEach { filmViewedUiModels ->
-            _filmViewedFlow.emit(filmViewedUiModels)
+            _profileUiState.update {
+                it.copy(
+                    filmViewed = filmViewedUiModels,
+                    countViewedFilm = (filmViewedUiModels.size - 1).toString()
+                )
+            }
         }.launchIn(viewModelScope)
     }
 
     private fun subscribeInterestingFilm() {
         filmInterestingRepository.subscribeToReceive().map { filmsEntity ->
             filmsEntity.mapToFilmInteresting()
-        }.onEach { filmViewedUiModels ->
-            _filmInterestingFlow.emit(filmViewedUiModels)
+        }.onEach { filmInterestingUiModels ->
+            _profileUiState.update {
+                it.copy(
+                    filmInteresting = filmInterestingUiModels,
+                    countInterestingFilm = (filmInterestingUiModels.size - 1).toString()
+                )
+            }
         }.launchIn(viewModelScope)
     }
 }
