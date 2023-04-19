@@ -15,7 +15,10 @@ import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentSearchSettingsBinding
 import kinopoisk.cinema.di.ViewModelFactory
+import kinopoisk.cinema.extension.addFragment
 import kinopoisk.cinema.extension.addFragmentWithArgs
+import kinopoisk.cinema.extension.launchWhenStarted
+import kinopoisk.cinema.presentation.screen.period.PeriodFragment
 import kinopoisk.cinema.presentation.screen.searchfilter.SearchFilterFragment
 import kinopoisk.cinema.presentation.screen.searchfilter.TypeFilterScreen
 import javax.inject.Inject
@@ -60,6 +63,8 @@ class SearchSettingsFragment : Fragment(), HasAndroidInjector {
             toolBar.setNavigationOnClickListener { goBack() }
             tvChosenCountry.setOnClickListener { openSearchFilter(TypeFilterScreen.createCountry()) }
             tvChosenGenre.setOnClickListener { openSearchFilter(TypeFilterScreen.createGenre()) }
+            tvChosenYear.setOnClickListener { openPeriod() }
+            getPeriodYear()
         }
     }
 
@@ -72,6 +77,25 @@ class SearchSettingsFragment : Fragment(), HasAndroidInjector {
 
     private fun goBack() {
         parentFragmentManager.popBackStack()
+        initUi()
+    }
+
+    private fun openPeriod() {
+        addFragment<PeriodFragment>(
+            containerId = R.id.fragmentContainer
+        )
+    }
+
+    private fun getPeriodYear() {
+        launchWhenStarted(viewModel.yearFlow, ::handleUiState)
+    }
+
+    private fun handleUiState(uiState: SearchSettingsUiState) {
+        when (uiState) {
+            is SearchSettingsUiState.Init -> binding.tvChosenYear.text = getString(uiState.period)
+            is SearchSettingsUiState.Initialized -> binding.tvChosenYear.text =
+                getString(R.string.search_setting_year_period, uiState.period.startPeriod, uiState.period.endPeriod)
+        }
     }
 
     override fun onDestroyView() {
