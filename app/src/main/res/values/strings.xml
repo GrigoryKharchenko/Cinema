@@ -61,6 +61,14 @@
     <string name="search_setting_popular">Популярность</string>
     <string name="search_setting_rating">Рейтинг</string>
     <string name="search_setting_not_viewed">Не просмотрен</string>
+    <string name="search_setting_min_rating">1</string>
+    <string name="search_setting_max_rating">10</string>
+
+    <!-- SearchFiltersFragment -->
+    <string name="search_filter_enter_country">Введите страну</string>
+    <string name="search_filter_enter_genre">Введите жанр</string>
+    <string name="search_filter_title_country">Страна</string>
+    <string name="search_filter_title_genre">Жанр</string>
 
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>
