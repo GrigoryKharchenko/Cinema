@@ -31,6 +31,7 @@ import kinopoisk.cinema.presentation.screen.season.SerialInfo
 import kinopoisk.cinema.presentation.screen.season.SeasonFragment
 import kinopoisk.cinema.presentation.screen.staff.StaffFragment
 import kinopoisk.cinema.presentation.screen.staff.TypeTitleStaff
+import kinopoisk.cinema.presentation.screen.gallery.GalleryFragment
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -86,6 +87,9 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
+            tvCountGallery.setOnClickListener {
+                openGalleryFragment(filmId)
+            }
             tvCountActor.setOnClickListener {
                 openStaff(
                     typeTitleStaff = TypeTitleStaff.createActor(filmId)
@@ -204,6 +208,13 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         addFragmentWithArgs<SeasonFragment>(
             containerId = R.id.fragmentContainer,
             args = bundleOf(KEY_SEASON to serialInfo)
+        )
+    }
+
+    private fun openGalleryFragment(filmId: Int) {
+        addFragmentWithArgs<GalleryFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_FILM to filmId)
         )
     }
 

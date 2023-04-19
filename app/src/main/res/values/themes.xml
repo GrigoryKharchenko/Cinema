@@ -240,6 +240,18 @@
         <item name="backgroundTint">@color/blue_text_color</item>
     </style>
 
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+    </style>
+
+    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="chipStrokeColor">@color/chip_stroke</item>
+        <item name="chipStrokeWidth">@dimen/dp_1</item>
+    </style>
+
     <style name="HorizontalRecycler">
         <item name="android:clipToPadding">false</item>
         <item name="android:nestedScrollingEnabled">false</item>

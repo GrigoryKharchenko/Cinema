@@ -341,8 +341,8 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCountGallery"
                 style="@style/Text.Blue.Ripple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
                 android:layout_marginEnd="@dimen/dp_26"
                 android:drawableEnd="@drawable/ic_next_arrow"
                 android:drawablePadding="@dimen/dp_8"
