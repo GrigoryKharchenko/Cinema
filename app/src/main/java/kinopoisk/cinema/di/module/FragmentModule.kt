@@ -12,6 +12,7 @@ import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
 import kinopoisk.cinema.presentation.screen.searchfilter.SearchFilterFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
 import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsFragment
+import kinopoisk.cinema.presentation.screen.season.SeasonFragment
 import kinopoisk.cinema.presentation.screen.staff.StaffFragment
 import kinopoisk.cinema.presentation.screen.welcome.WelcomeFragment
 
@@ -53,4 +54,7 @@ interface FragmentModule {
 
     @ContributesAndroidInjector
     fun bindSearchFiltersFragment(): SearchFilterFragment
+
+    @ContributesAndroidInjector
+    fun bindSeasonFragmentFragment(): SeasonFragment
 }

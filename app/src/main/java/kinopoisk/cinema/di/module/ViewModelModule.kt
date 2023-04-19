@@ -10,6 +10,7 @@ import kinopoisk.cinema.presentation.screen.homepage.HomeViewModel
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileViewModel
 import kinopoisk.cinema.presentation.screen.searchpage.SearchViewModel
 import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsViewModel
+import kinopoisk.cinema.presentation.screen.season.SeasonViewModel
 
 @Module
 interface ViewModelModule {

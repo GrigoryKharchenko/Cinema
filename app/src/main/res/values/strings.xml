@@ -28,6 +28,7 @@
     <string name="film_detail_film_worked">Над фильмом работали</string>
     <string name="film_detail_gallery">Галерея</string>
     <string name="film_detail_similar_film">Похожие фильмы</string>
+    <string name="film_detail_season">Сезоны и серии</string>
 
     <!-- ActorFragment -->
     <string name="actor_title_best">Лучшее</string>
@@ -70,6 +71,11 @@
     <string name="search_filter_title_country">Страна</string>
     <string name="search_filter_title_genre">Жанр</string>
 
+    <!-- SeasonFragment -->
+    <string name="season_title_season">Сезон</string>
+    <string name="season_title_number_serial">%1$d серия. %2$s</string>
+    <string name="season_number_season">%d cезон,</string>
+
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>
         <item quantity="one">%d фильм</item>
@@ -77,5 +83,23 @@
         <item quantity="few">%d фильма</item>
         <item quantity="many">%d фильмов</item>
         <item quantity="other">%d фильмов</item>
+    </plurals>
+
+    <plurals name="plurals_season">
+        <item quantity="zero">нет сезонов,</item>
+        <item quantity="one">%d сезон,</item>
+        <item quantity="two">%d сезона,</item>
+        <item quantity="few">%d сезона,</item>
+        <item quantity="many">%d сезонов,</item>
+        <item quantity="other">%d сезонов,</item>
+    </plurals>
+
+    <plurals name="plurals_series">
+        <item quantity="zero">нет серий</item>
+        <item quantity="one">%d серия</item>
+        <item quantity="two">%d серии</item>
+        <item quantity="few">%d серии</item>
+        <item quantity="many">%d серий</item>
+        <item quantity="other">%d серии</item>
     </plurals>
 </resources>
