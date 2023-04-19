@@ -93,7 +93,15 @@
         <item name="android:textColor">@color/blue_text_color</item>
     </style>
 
+    <style name="Text.Blue.16">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
     <style name="Text.Blue.Ripple">
+        <item name="android:background">@drawable/ripple_effect</item>
+    </style>
+
+    <style name="Text.Blue.16.Ripple">
         <item name="android:background">@drawable/ripple_effect</item>
     </style>
 
@@ -123,6 +131,10 @@
 
     <style name="Text.HintGray">
         <item name="android:textColor">@color/hint_text_color</item>
+    </style>
+
+    <style name="Text.HintGray.10">
+        <item name="android:textSize">@dimen/sp_10</item>
     </style>
 
     <style name="Text.HintGray.12">

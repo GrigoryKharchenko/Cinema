@@ -10,6 +10,7 @@ import kinopoisk.cinema.data.repository.FilmsRepositoryImpl
 import kinopoisk.cinema.data.repository.GalleryRepositoryImpl
 import kinopoisk.cinema.data.repository.StaffRepositoryImpl
 import kinopoisk.cinema.data.repository.SearchFilmRepositoryImpl
+import kinopoisk.cinema.data.repository.SearchFilterRepositoryImpl
 import kinopoisk.cinema.domain.repository.ActorRepository
 import kinopoisk.cinema.domain.repository.CategoryRepository
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
@@ -18,6 +19,7 @@ import kinopoisk.cinema.domain.repository.FilmsRepository
 import kinopoisk.cinema.domain.repository.GalleryRepository
 import kinopoisk.cinema.domain.repository.StaffRepository
 import kinopoisk.cinema.domain.repository.SearchFilmRepository
+import kinopoisk.cinema.domain.repository.SearchFilterRepository
 
 @Module
 interface RepositoryModule {
@@ -45,4 +47,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindSearchFilmRepository(repositoryImpl: SearchFilmRepositoryImpl): SearchFilmRepository
+
+    @Binds
+    fun bindSearchFilterRepository(repositoryImpl: SearchFilterRepositoryImpl): SearchFilterRepository
 }

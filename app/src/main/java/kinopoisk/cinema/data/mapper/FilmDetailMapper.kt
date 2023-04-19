@@ -1,6 +1,8 @@
 package kinopoisk.cinema.data.mapper
 
 import kinopoisk.cinema.data.entity.FilmViewedEntity
+import kinopoisk.cinema.data.network.ApiConstants
+import kinopoisk.cinema.data.network.KinopoiskApi
 import kinopoisk.cinema.data.network.response.DetailFilmResponse
 import kinopoisk.cinema.data.network.response.GalleryResponse
 import kinopoisk.cinema.data.network.response.ImageResponse
@@ -53,6 +55,7 @@ fun DetailFilmResponse.mapToDetailFilmModel(): FilmDetailModel =
         detailFilm = mapToDetailFilm(),
         isVisibleShortDescription = shortDescription != null,
         name = nameRu ?: nameEn ?: nameOriginal,
+        isVisibleSeason = type == ApiConstants.TV_SERIES
     )
 
 fun DetailFilmResponse.mapToFilmViewedEntity(): FilmViewedEntity =

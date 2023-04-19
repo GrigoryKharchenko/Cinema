@@ -18,4 +18,7 @@ data class FilmDetailUiModel(
     val sizeStuff: String? = null,
     val sizeGallery: String? = null,
     val sizeSimilar: String? = null,
+    val isSerial: Boolean = false,
+    val countSeason:Int = 0,
+    val countEpisodes:Int = 0
 )
