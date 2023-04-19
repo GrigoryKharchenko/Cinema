@@ -9,6 +9,7 @@ import kinopoisk.cinema.presentation.screen.films.FilmsFragment
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
 import kinopoisk.cinema.presentation.screen.homepage.HomeFragment
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileFragment
+import kinopoisk.cinema.presentation.screen.searchfilter.SearchFilterFragment
 import kinopoisk.cinema.presentation.screen.searchpage.SearchFragment
 import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsFragment
 import kinopoisk.cinema.presentation.screen.season.SeasonFragment
@@ -50,6 +51,9 @@ interface FragmentModule {
 
     @ContributesAndroidInjector
     fun bindSearchSettingsFragment(): SearchSettingsFragment
+
+    @ContributesAndroidInjector
+    fun bindSearchFiltersFragment(): SearchFilterFragment
 
     @ContributesAndroidInjector
     fun bindSeasonFragmentFragment(): SeasonFragment

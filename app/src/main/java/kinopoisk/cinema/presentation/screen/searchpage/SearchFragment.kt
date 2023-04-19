@@ -18,10 +18,12 @@ import dagger.android.support.AndroidSupportInjection
 import kinopoisk.cinema.R
 import kinopoisk.cinema.databinding.FragmentSearchBinding
 import kinopoisk.cinema.di.ViewModelFactory
+import kinopoisk.cinema.extension.addFragment
 import kinopoisk.cinema.extension.addFragmentWithArgs
 import kinopoisk.cinema.extension.launchWhenStarted
 import kinopoisk.cinema.presentation.screen.filmdetail.FilmDetailFragment
 import kinopoisk.cinema.presentation.screen.searchpage.adapter.SearchAdapter
+import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsFragment
 import javax.inject.Inject
 
 class SearchFragment : Fragment(), HasAndroidInjector {
@@ -75,6 +77,7 @@ class SearchFragment : Fragment(), HasAndroidInjector {
                 rvFilms.isVisible = state.refresh != LoadState.Loading
                 flProgress.isVisible = state.refresh == LoadState.Loading
             }
+            tilSearchFilm.setEndIconOnClickListener { openSearchSettings() }
         }
     }
 
@@ -97,6 +100,12 @@ class SearchFragment : Fragment(), HasAndroidInjector {
         addFragmentWithArgs<FilmDetailFragment>(
             containerId = R.id.fragmentContainer,
             args = bundleOf(FilmDetailFragment.KEY_FILM to filmId)
+        )
+    }
+
+    private fun openSearchSettings() {
+        addFragment<SearchSettingsFragment>(
+            containerId = R.id.fragmentContainer
         )
     }
 
