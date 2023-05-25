@@ -19,14 +19,3 @@ fun <T> Flow<T>.launchWhenStarted(
         }
     }
 }
-
-fun <T> Flow<T>.launchWhenStarted(
-    lifecycleCoroutineScope: LifecycleCoroutineScope,
-    lifecycle: Lifecycle,
-) {
-    lifecycleCoroutineScope.launchWhenStarted {
-        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            this@launchWhenStarted.collect()
-        }
-    }
-}

@@ -6,6 +6,7 @@ import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.SimilarFilmModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.StaffModel
+import kinopoisk.cinema.presentation.screen.season.SerialModel
 
 interface DetailFilmRepository {
 
@@ -20,4 +21,6 @@ interface DetailFilmRepository {
     suspend fun getFilmViewed(id: Int): Result<FilmViewedEntity>
 
     suspend fun getFilmInteresting(id: Int): Result<FilmInterestingEntity>
+
+    suspend fun getSerial(id: Int): Result<SerialModel>
 }

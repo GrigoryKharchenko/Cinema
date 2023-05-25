@@ -24,10 +24,14 @@ import kinopoisk.cinema.presentation.screen.filmdetail.adpters.gallery.GalleryAd
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.similar.SimilarFilmAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.adpters.staff.StaffAdapter
 import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailModel
+import kinopoisk.cinema.presentation.screen.filmdetail.model.FilmDetailUiModel
 import kinopoisk.cinema.presentation.screen.filmdetail.model.GalleryModel
 import kinopoisk.cinema.presentation.screen.fullscreenphoto.FullScreenPhotoFragment
+import kinopoisk.cinema.presentation.screen.season.SerialInfo
+import kinopoisk.cinema.presentation.screen.season.SeasonFragment
 import kinopoisk.cinema.presentation.screen.staff.StaffFragment
 import kinopoisk.cinema.presentation.screen.staff.TypeTitleStaff
+import kinopoisk.cinema.presentation.screen.gallery.GalleryFragment
 import javax.inject.Inject
 
 class FilmDetailFragment : Fragment(), HasAndroidInjector {
@@ -86,6 +90,9 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             ivDontViewed.setOnClickListener {
                 viewModel.checkViewedFilm(ivDontViewed)
             }
+            tvCountGallery.setOnClickListener {
+                openGalleryFragment(filmId)
+            }
             tvCountActor.setOnClickListener {
                 openStaff(
                     typeTitleStaff = TypeTitleStaff.createActor(filmId)
@@ -120,6 +127,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
                 val staff = staff
                 val detailFilm = detailFilm
                 val actor = actor
+                val countSeason = countSeason
+                val countEpisodes = countEpisodes
                 flProgress.isVisible = isVisibleProgress
                 tvError.isVisible = isVisibleTextError
                 nestedScroll.isVisible = isVisibleNestedScroll
@@ -128,6 +137,7 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
                 groupStaff.isVisible = isVisibleStaff
                 groupGallery.isVisible = isVisibleGallery
                 groupSimilar.isVisible = isVisibleSimilar
+                groupSerials.isVisible = isSerial
                 tvCountGallery.text = sizeGallery
                 tvCountSimilarFilm.text = sizeSimilar
                 tvCountStaff.text = sizeStuff
@@ -137,6 +147,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
                 galleryAdapter.submitList(gallery)
                 similarFilmAdapter.submitList(similar)
                 staffAdapter.submitList(staff)
+                tvCountSeasons.text = resources.getQuantityString(R.plurals.plurals_season, countSeason, countSeason)
+                tvCountSeries.text = resources.getQuantityString(R.plurals.plurals_series, countEpisodes, countEpisodes)
             }
         }
     }
@@ -151,6 +163,9 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             binding.tvShortDescription.isVisible = isVisibleShortDescription
             binding.tvDescription.text = description
             binding.collapsingToolBar.title = name
+            binding.tvAllSeason.setOnClickListener {
+                openSeason(SerialInfo(name, filmId))
+            }
             binding.tvDescription.setOnClickListener {
                 viewModel.checkCollapsed(binding.tvDescription)
                 binding.tvDescription.text = description
@@ -186,6 +201,20 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
         )
     }
 
+    private fun openSeason(serialInfo: SerialInfo) {
+        addFragmentWithArgs<SeasonFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_SEASON to serialInfo)
+        )
+    }
+
+    private fun openGalleryFragment(filmId: Int) {
+        addFragmentWithArgs<GalleryFragment>(
+            containerId = R.id.fragmentContainer,
+            args = bundleOf(KEY_FILM to filmId)
+        )
+    }
+
     private fun goBack() {
         parentFragmentManager.popBackStack()
     }
@@ -204,5 +233,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     companion object {
         const val KEY_FILM = "filmId"
         const val KEY_PHOTO = "photoId"
+        const val KEY_SEASON = "serialInfo"
     }
 }

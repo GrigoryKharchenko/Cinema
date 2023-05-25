@@ -7,7 +7,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import kinopoisk.cinema.R
 
-fun ImageView.loadCropImage(image: String, @DrawableRes placeholder: Int = R.drawable.preview_background) {
+fun ImageView.loadCropImage(image: String?, @DrawableRes placeholder: Int = R.drawable.preview_background) {
     Glide.with(this)
         .load(image)
         .placeholder(placeholder)
@@ -15,7 +15,7 @@ fun ImageView.loadCropImage(image: String, @DrawableRes placeholder: Int = R.dra
         .into(this)
 }
 
-fun ImageView.loadImage(image: String, @DrawableRes placeholder: Int = R.drawable.preview_background) {
+fun ImageView.loadImage(image: String?, @DrawableRes placeholder: Int = R.drawable.preview_background) {
     Glide.with(this)
         .load(image)
         .placeholder(placeholder)

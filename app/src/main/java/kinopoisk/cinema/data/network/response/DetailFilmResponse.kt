@@ -18,6 +18,7 @@ class DetailFilmResponse(
     @SerializedName("ratingAgeLimits") val ratingAgeLimits: String?,
     @SerializedName("shortDescription") val shortDescription: String?,
     @SerializedName("description") val description: String,
+    @SerializedName("type") val type: String,
 )
 
 class CountryResponse(

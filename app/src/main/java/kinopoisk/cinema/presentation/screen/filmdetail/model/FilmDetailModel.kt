@@ -9,4 +9,5 @@ data class FilmDetailModel(
     val shortDescription: String,
     val description: String,
     val isVisibleShortDescription: Boolean,
+    val isVisibleSeason: Boolean,
 )

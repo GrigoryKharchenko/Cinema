@@ -202,6 +202,57 @@
                 app:layout_constraintTop_toBottomOf="@id/tvShortDescription"
                 tools:text="@tools:sample/lorem/random" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupSerials"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="tvTitleSeason,tvAllSeason,tvCountSeasons,tvCountSeries" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitleSeason"
+                style="@style/Text.Black.Bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_26"
+                android:layout_marginTop="@dimen/dp_26"
+                android:text="@string/film_detail_season"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAllSeason"
+                style="@style/Text.Blue.16.Ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_26"
+                android:padding="@dimen/dp_6"
+                android:text="@string/home_all"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitleSeason"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTitleSeason" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCountSeasons"
+                style="@style/Text.HintGray.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="@id/tvTitleSeason"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleSeason"
+                tools:text="1 season," />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCountSeries"
+                style="@style/Text.HintGray.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_4"
+                app:layout_constraintStart_toEndOf="@id/tvCountSeasons"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleSeason"
+                tools:text=" 7 series" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvTitleActor"
                 style="@style/Text.Black.Bold.18"
@@ -211,7 +262,7 @@
                 android:layout_marginTop="@dimen/dp_26"
                 android:text="@string/film_detail_filmed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+                app:layout_constraintTop_toBottomOf="@id/tvCountSeasons" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCountActor"
@@ -296,8 +347,8 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvCountGallery"
                 style="@style/Text.Blue.Ripple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
                 android:layout_marginEnd="@dimen/dp_26"
                 android:drawableEnd="@drawable/ic_next_arrow"
                 android:drawablePadding="@dimen/dp_8"
