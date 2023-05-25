@@ -7,6 +7,7 @@ import dagger.multibindings.IntoMap
 import kinopoisk.cinema.di.ViewModelKey
 import kinopoisk.cinema.presentation.screen.gallery.GalleryViewModel
 import kinopoisk.cinema.presentation.screen.homepage.HomeViewModel
+import kinopoisk.cinema.presentation.screen.period.PeriodViewModel
 import kinopoisk.cinema.presentation.screen.profilepage.ProfileViewModel
 import kinopoisk.cinema.presentation.screen.searchpage.SearchViewModel
 import kinopoisk.cinema.presentation.screen.searchsettings.SearchSettingsViewModel
@@ -39,4 +40,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(GalleryViewModel::class)
     fun bindGalleryViewModel(viewModel: GalleryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PeriodViewModel::class)
+    fun bindPeriodViewModel(viewModel: PeriodViewModel): ViewModel
 }

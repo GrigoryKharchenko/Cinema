@@ -129,6 +129,10 @@
         <item name="android:textColor">@color/gray_text_color</item>
     </style>
 
+    <style name="Text.Gray.Ripple">
+        <item name="android:background">@drawable/ripple_effect</item>
+    </style>
+
     <style name="Text.Gray.12">
         <item name="android:textSize">@dimen/sp_12</item>
     </style>
@@ -260,5 +264,14 @@
         <item name="android:clipToPadding">false</item>
         <item name="android:nestedScrollingEnabled">false</item>
         <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ButtonChoose" parent="Widget.MaterialComponents.Button">
+        <item name="fontFamily">cursive</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="backgroundTint">@color/blue_text_color</item>
+        <item name="textAllCaps">false</item>
+        <item name="cornerRadius">@dimen/dp_24</item>
     </style>
 </resources>

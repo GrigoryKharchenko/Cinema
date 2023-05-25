@@ -65,6 +65,7 @@
     <string name="search_setting_not_viewed">Не просмотрен</string>
     <string name="search_setting_min_rating">1</string>
     <string name="search_setting_max_rating">10</string>
+    <string name="search_setting_year_period">с %1$d до %2$d</string>
 
     <!-- SearchFiltersFragment -->
     <string name="search_filter_enter_country">Введите страну</string>
@@ -76,6 +77,13 @@
     <string name="season_title_season">Сезон</string>
     <string name="season_title_number_serial">%1$d серия. %2$s</string>
     <string name="season_number_season">%d cезон,</string>
+
+    <!-- PeriodFragment -->
+    <string name="period_start_end">%1$d - %2$d</string>
+    <string name="period_title">Период</string>
+    <string name="period_title_start">Искать в период с</string>
+    <string name="period_title_end">Искать в период до</string>
+    <string name="period_choose">Выбрать</string>
 
     <plurals name="plurals_film">
         <item quantity="zero">нет фильмов</item>
