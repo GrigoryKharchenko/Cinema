@@ -16,4 +16,7 @@ object DatabaseModule {
 
     @Provides
     fun provideFilmDao(appDatabase: AppDatabase) = appDatabase.filmViewedDao()
+
+    @Provides
+    fun provideFilmInterestingDao(appDatabase: AppDatabase) = appDatabase.filmInteresting()
 }

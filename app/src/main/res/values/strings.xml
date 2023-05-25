@@ -42,6 +42,7 @@
     <!-- ProfileFragment -->
     <string name="profile_title_viewed">Просмотрено</string>
     <string name="profile_delete_history">Очистить\nисторию</string>
+    <string name="profile_interesting">Вам было интересно</string>
 
     <!-- SearchSettingsFragment -->
     <string name="search_setting_title">Настройки поиска</string>

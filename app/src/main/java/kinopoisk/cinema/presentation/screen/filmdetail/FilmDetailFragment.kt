@@ -87,6 +87,9 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             rvGallery.adapter = galleryAdapter
             rvSimilarFilm.adapter = similarFilmAdapter
             rvActors.adapter = actorAdapter
+            ivDontViewed.setOnClickListener {
+                viewModel.checkViewedFilm(ivDontViewed)
+            }
             tvCountGallery.setOnClickListener {
                 openGalleryFragment(filmId)
             }
@@ -163,14 +166,8 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
             binding.tvAllSeason.setOnClickListener {
                 openSeason(SerialInfo(name, filmId))
             }
-            var isCollapsed = INITIAL_IS_COLLAPSED
             binding.tvDescription.setOnClickListener {
-                if (isCollapsed) {
-                    binding.tvDescription.maxLines = Int.MAX_VALUE
-                } else {
-                    binding.tvDescription.maxLines = MAX_LINE_COLLAPSED
-                }
-                isCollapsed = !isCollapsed
+                viewModel.checkCollapsed(binding.tvDescription)
                 binding.tvDescription.text = description
             }
         }
@@ -236,8 +233,6 @@ class FilmDetailFragment : Fragment(), HasAndroidInjector {
     companion object {
         const val KEY_FILM = "filmId"
         const val KEY_PHOTO = "photoId"
-        const val KEY_SEASON = "seasonId"
-        private const val MAX_LINE_COLLAPSED = 5
-        private const val INITIAL_IS_COLLAPSED = true
+        const val KEY_SEASON = "serialInfo"
     }
 }

@@ -5,6 +5,7 @@ import dagger.Module
 import kinopoisk.cinema.data.repository.ActorRepositoryImpl
 import kinopoisk.cinema.data.repository.CategoryRepositoryImpl
 import kinopoisk.cinema.data.repository.DetailFilmRepositoryImpl
+import kinopoisk.cinema.data.repository.FilmInterestingRepositoryImpl
 import kinopoisk.cinema.data.repository.FilmViewedViewedRepositoryImpl
 import kinopoisk.cinema.data.repository.FilmsRepositoryImpl
 import kinopoisk.cinema.data.repository.GalleryRepositoryImpl
@@ -14,6 +15,7 @@ import kinopoisk.cinema.data.repository.SearchFilterRepositoryImpl
 import kinopoisk.cinema.domain.repository.ActorRepository
 import kinopoisk.cinema.domain.repository.CategoryRepository
 import kinopoisk.cinema.domain.repository.DetailFilmRepository
+import kinopoisk.cinema.domain.repository.FilmInterestingRepository
 import kinopoisk.cinema.domain.repository.FilmViewedRepository
 import kinopoisk.cinema.domain.repository.FilmsRepository
 import kinopoisk.cinema.domain.repository.GalleryRepository
@@ -50,4 +52,7 @@ interface RepositoryModule {
 
     @Binds
     fun bindSearchFilterRepository(repositoryImpl: SearchFilterRepositoryImpl): SearchFilterRepository
+
+    @Binds
+    fun bindFilmInterestingRepository(repositoryImpl: FilmInterestingRepositoryImpl): FilmInterestingRepository
 }
